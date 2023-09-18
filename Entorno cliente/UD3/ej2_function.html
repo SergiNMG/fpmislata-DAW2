@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla mult2</title>
+</head>
+
+<body>
+    <div id="contenedor"></div>
+    <div id="tabla">
+        <button onclick="showTable(num)">Crear tabla</button>
+        <button onclick="selectNum()">Crear otra tabla</button>
+    </div>
+</body>
+
+<script>
+    "use strict"
+
+    function selectNum() {
+        let num = prompt("Dime un numero")
+        let txt = "<b> Tabla de multiplicar del " + num + "</b>"
+        document.getElementById("contenedor").innerHTML = txt
+        return num
+    }
+
+    function showTable(num) {
+        let tableM = "<table border = 1>"
+
+
+        for (let i = 0; i <= 10; i++) {
+            tableM += `<tr>
+            <td> ${num} </td>
+            <td> x </td>
+            <td> ${i} </td>
+            <td> = </td>
+            <td> ${num * i} </td>
+            <tr>`
+        }
+
+        tableM += "</table>"
+        document.getElementById("tabla").innerHTML = tableM
+    }
+
+    let num = selectNum();
+    //showTable(num);
+
+</script>
+
+</html>

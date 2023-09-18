@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla mult</title>
+</head>
+<body>
+    <div id="contenedor"></div>
+    <div id="tabla"></div>
+</body>
+
+<script>
+    "use strict"
+    let num = prompt("Dime un numero")
+    let txt = "<b> Tabla de multiplicar del " + num + "</b>"
+    document.getElementById("contenedor").innerHTML = txt
+
+    let tableM = "<table border=1>"
+
+
+    for (let i = 0; i<10; i++){
+        tableM += "<tr><td>" + num + "</td><td>" + "x" + "</td><td>" + i + "</td><td>" + "=" + "</td><td>" + (num * i) + "</td></tr>"
+    }
+
+    tableM += "</table>"
+    document.getElementById("tabla").innerHTML = tableM
+</script>
+
+</div>
+</html>
