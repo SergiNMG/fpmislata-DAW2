@@ -1,0 +1,67 @@
+table {
+    border: 1px solid lightgray;
+    color: black;
+    border-collapse: collapse;
+}
+
+th, td {
+    text-align: left;
+    vertical-align: top;
+    border: 1px solid lightgray;
+    padding: 12px;
+}
+
+button{
+    border-radius: 5px;
+    padding: 12px;
+}
+
+.btn-normal1{
+    background-color: blue;
+    color: white;
+    border-style: none;
+}
+
+.btn-normal2{
+    color: blue;
+    border: 1px solid blue;
+}
+
+.btn-normal3{
+    color: blue;
+    border: none;
+}
+
+.btn-alt1{
+    background-color: orange;
+    color: white;
+    border-style: none;
+}
+
+.btn-alt2{
+    color: orange;
+    border: 1px solid orange ;
+}
+
+.btn-alt3{
+    color: orange;
+    border: none;
+}
+
+.btn-danger1{
+    background-color: red;
+    color: white;
+    border-style: none;
+}
+
+.btn-danger2{
+    color: red;
+    border: 1px solid red;
+}
+
+.btn-danger3{
+    color: red;
+    border: none;
+}
+
+

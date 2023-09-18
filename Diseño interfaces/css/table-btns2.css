@@ -1,0 +1,51 @@
+table {
+    border: 1px solid lightgray;
+    color: black;
+    border-collapse: collapse;
+}
+
+th, td {
+    text-align: center;
+    vertical-align: top;
+    border: 1px solid lightgray;
+    padding: 12px;
+}
+
+button{
+    border-radius: 5px;
+    padding: 12px;
+}
+
+button:hover{
+    cursor: pointer;
+}
+
+.normal{
+    color: blue;
+    background-color: blue;
+}
+
+.alt {
+    color: orange;
+    background-color: orange;
+}
+
+.danger{
+    color: red;
+    background-color: red;
+}
+
+.first{
+    color: white;
+    border-style: none;
+}
+
+.second{
+    border: 1px solid;
+    background-color: white;
+}
+
+.third{
+    border: none;
+    background-color: white;
+}
