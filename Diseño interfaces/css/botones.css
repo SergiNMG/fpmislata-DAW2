@@ -1,0 +1,73 @@
+:root {
+    --color-normal: #0056b8;
+    --color-alternativo: #ed8936;
+    --color-peligroso: #c53030;
+    --color-blanco: #ffffff;
+    --color-ecologico: #2efe3f;
+}
+
+.c-button {
+    --c-button-strong-color: var(--color-normal);
+    --c-button-weak-color: var(--color-blanco);
+
+
+    font-family: sans-serif;
+    font-size: 16px;
+    padding: 12px;
+
+    border-radius: 6px;
+    border-width: 1px;
+    border-style: solid;
+
+    display: inline-block;
+    cursor: pointer;
+    text-decoration: none;
+
+
+    border-color: var(--c-button-strong-color);
+    background-color: var(--c-button-strong-color);
+    color: var(--c-button-weak-color);
+}
+
+.c-button--alternativo {
+    --c-button-strong-color: var(--color-alternativo);
+}
+
+.c-button--peligroso {
+    --c-button-strong-color: var(--color-peligroso);
+}
+
+.c-button--ecologico {
+    --c-button-strong-color: var(--color-ecologico);
+}
+
+.c-button--secundario {
+    border-color: var(--c-button-strong-color);
+    background-color: var(--c-button-weak-color);
+    color: var(--c-button-strong-color);
+}
+
+.c-button--terciario {
+    border-color: transparent;
+    background-color: transparent;
+    color: var(--c-button-strong-color);
+
+}
+
+.c-button--bigger{
+    padding: 24px;
+    font-size: 24px;
+}
+
+.c-button--smaller{
+    padding: 6px;
+    font-size: 6px;
+}
+
+td {
+    padding: 10px;
+}
+
+table {
+    background-color: #f5f5f5;
+}

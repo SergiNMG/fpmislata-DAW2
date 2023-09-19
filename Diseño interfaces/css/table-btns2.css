@@ -4,6 +4,10 @@ table {
     border-collapse: collapse;
 }
 
+tr{
+    align-items: center;
+}
+
 th, td {
     text-align: center;
     vertical-align: top;

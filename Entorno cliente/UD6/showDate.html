@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="contenedor"></div>
+</body>
+
+<script>
+    "use strict"
+
+    let date = new Date();
+    let months = ['Enereo', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+    let days = ['Domingo','Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo']
+
+    let texto = `Hoy es ${days[date.getDay()]}
+                día ${date.getDate()}
+                de ${months[date.getMonth()]}
+                de ${date.getFullYear()}`
+
+    document.getElementById("contenedor").innerHTML = texto;
+    
+</script>
+</html>
