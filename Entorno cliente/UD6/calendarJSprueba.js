@@ -19,14 +19,15 @@ function createCalendar() {
     });
     calendar.appendChild(rowHeader);
 
-    let numWeeks = Math.ceil((lastDay.getDay() + firstDay.getDay() / 7));
+    //let numWeeks = Math.ceil((lastDay.getDay() + firstDay.getDay() / 7));
 
+    let numWeeks = 5;
     let dayCont = 1;
 
-    for (let i = 0; i < numWeeks - 2 ; i++) {
+    for (let i = 0; i < numWeeks ; i++) {
         let week = document.createElement('tr');
 
-        for (let j = 0; j < 7; j++) {
+        for (let j = 1; j < 8; j++) {
             let dayCell = document.createElement('td');
 
             if (i === 0 && j < firstDay.getDay()) {
