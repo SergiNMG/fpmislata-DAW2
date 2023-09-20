@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/calendar.css"> 
+    <title>Calendario</title>
+</head>
+
+<body>
+    <table id="calendar">
+        <tr>
+            <th>L</th>
+            <th>M</th>
+            <th>X</th>
+            <th>J</th>
+            <th>V</th>
+            <th>S</th>
+            <th>D</th>
+        </tr>
+    </table>
+</body>
+
+<script>
+    "use strict"
+
+    function createCalendar() {
+
+        let date = new Date();
+        let actualMonth = date.getMonth();
+        let actualYear = date.getFullYear();
+
+        let firstDay = new Date(actualYear, actualMonth, 1);
+        let lastDay = new Date(actualYear, actualMonth + 1, 0);
+
+        let numWeeks = Math.ceil((lastDay.getDate() + firstDay.getDay() / 7));
+
+        let dayCont = 1;
+
+        for (let i = 0; i < numWeeks; i++) {
+            let week = document.createElement('tr');
+
+            for (let j = 0; j < 7; j++) {
+                let dayCell = document.createElement('td');
+
+                if (i === 0 && j < firstDay.getDay()) {
+                    dayCell.textContent = '';
+                }
+                else if (dayCont <= lastDay.getDate()) {
+                    dayCell.textContent = dayCont;
+                    dayCont++;
+                }
+
+                week.appendChild(dayCell);
+            }
+
+            document.getElementById('calendar').appendChild(week);
+        }
+  
+    }
+
+    createCalendar();
+
+</script>
+
+</html>
