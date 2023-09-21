@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array</title>
+</head>
+
+<body>
+    <section>
+        <h1>Array:</h1>
+        <div id="array"></div>
+        <br>
+    </section>
+    <section>
+        <h1>Agregar elemento:</h1>
+        <div id="arrayPush"></div>
+        <br>
+    </section>
+    
+
+</body>
+<script>
+    "use strict"
+    function generarArray() {
+        let deportes = ["futbol", "tenis", "cricket", "badminton"];
+        document.getElementById("array").innerHTML = deportes;
+
+        let deportes2 = deportes;
+        deportes2.unshift("hockey sobre hielo");
+        document.getElementById("arrayPush").innerHTML = deportes2;
+    }
+
+    generarArray();
+</script>
+
+</html>

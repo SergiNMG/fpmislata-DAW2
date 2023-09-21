@@ -12,9 +12,9 @@ function createCalendar() {
 
     let rowHeader = document.createElement('tr');
     let daysWeek = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
-    daysWeek.forEach(dia => {
+    daysWeek.forEach(day => {
         let cellHeader = document.createElement('th');
-        cellHeader.textContent = dia;
+        cellHeader.textContent = day;
         rowHeader.appendChild(cellHeader);
     });
     calendar.appendChild(rowHeader);
