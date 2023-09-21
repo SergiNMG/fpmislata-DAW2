@@ -10,7 +10,7 @@ import java.util.List;
 @Component
 public class DBUtil {
 
-    private static final String URL_CONNECTION = "jdbc:mariadb://localhost:3306/movies";
+    private static final String URL_CONNECTION = "jdbc:mariadb://localhost:8080/movies";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "root";
 
