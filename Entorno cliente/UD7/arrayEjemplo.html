@@ -9,27 +9,63 @@
 
 <body>
     <section>
-        <h1>Array:</h1>
+        <h1>Arrays:</h1>
         <div id="array"></div>
+        <br>
+        <div id="arrayNums"></div>
         <br>
     </section>
     <section>
-        <h1>Agregar elemento:</h1>
+        <h1>Agregar elemento (unshift):</h1>
         <div id="arrayPush"></div>
         <br>
     </section>
-    
+    <section>
+        <h1>Suma de elementos (forEach):</h1>
+        <div id="suma"></div>
+        <br>
+    </section>
+    <section>
+        <h1>Agregar elemento (push):</h1>
+        <div id="numPush"></div>
+        <br>
+    </section>
+    <section>
+        <h1>Eliminar duplicados (Set):</h1>
+        <div id="delete"></div>
+        <br>
+    </section>
 
 </body>
 <script>
     "use strict"
     function generarArray() {
         let deportes = ["futbol", "tenis", "cricket", "badminton"];
+        let numeros = [11, 5, 92];
+
+        document.getElementById("arrayNums").innerHTML = numeros;
         document.getElementById("array").innerHTML = deportes;
 
         let deportes2 = deportes;
         deportes2.unshift("hockey sobre hielo");
         document.getElementById("arrayPush").innerHTML = deportes2;
+
+        let sum = 0;
+        numeros.forEach(suma)
+
+        function suma(numeros){
+            sum += numeros;
+        }
+
+        document.getElementById("suma").innerHTML = sum;
+
+        numeros.push(20, 7, 5, 92);
+        document.getElementById("numPush").innerHTML = numeros;
+
+        let numerosUnique = new Set(numeros);
+        const result = [...numerosUnique];
+        document.getElementById("delete").innerHTML = result;
+
     }
 
     generarArray();
