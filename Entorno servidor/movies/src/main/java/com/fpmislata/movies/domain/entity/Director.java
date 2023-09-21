@@ -14,6 +14,12 @@ public class Director {
         this.deathYear = deathYear;
     }
 
+    public Director(String name, int birthYear, int deathYear) {
+        this.name = name;
+        this.birthYear = birthYear;
+        this.deathYear = deathYear;
+    }
+
     public int getId() {
         return id;
     }

@@ -8,6 +8,10 @@ th{
     background-color: rgba(159, 43, 226, 0.459);
 }
 
+td{
+    background-color: rgba(159, 43, 226, 0.151);
+}
+
 th,td{
     padding: 20px;
 }
