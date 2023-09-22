@@ -1,4 +1,4 @@
-package com.fpmislata.movies.domain.service.impl;
+package com.fpmislata.movies.domain.service;
 
 public interface ActorService {
 }

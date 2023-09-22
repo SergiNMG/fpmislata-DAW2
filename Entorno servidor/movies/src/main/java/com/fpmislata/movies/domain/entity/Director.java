@@ -5,16 +5,16 @@ public class Director {
     private int id;
     private String name;
     private int birthYear;
-    private int deathYear;
+    private Integer deathYear;
 
-    public Director(int id, String name, int birthYear, int deathYear) {
+    public Director(int id, String name, int birthYear, Integer deathYear) {
         this.id = id;
         this.name = name;
         this.birthYear = birthYear;
         this.deathYear = deathYear;
     }
 
-    public Director(String name, int birthYear, int deathYear) {
+    public Director(String name, int birthYear, Integer deathYear) {
         this.name = name;
         this.birthYear = birthYear;
         this.deathYear = deathYear;
@@ -44,11 +44,11 @@ public class Director {
         this.birthYear = birthYear;
     }
 
-    public int getDeathYear() {
+    public Integer getDeathYear() {
         return deathYear;
     }
 
-    public void setDeathYear(int deathYear) {
+    public void setDeathYear(Integer deathYear) {
         this.deathYear = deathYear;
     }
 

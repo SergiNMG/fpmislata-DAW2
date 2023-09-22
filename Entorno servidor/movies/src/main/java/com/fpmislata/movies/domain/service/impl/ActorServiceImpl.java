@@ -1,4 +1,8 @@
 package com.fpmislata.movies.domain.service.impl;
+import com.fpmislata.movies.domain.service.ActorService;
 
-public class ActorServiceImpl {
+import org.springframework.stereotype.Service;
+
+@Service
+public class ActorServiceImpl implements ActorService {
 }

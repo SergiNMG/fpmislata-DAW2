@@ -28,8 +28,8 @@ public class DirectorRepositoryImpl implements DirectorRepository {
             DBUtil.close(connection);
         }catch (DBConnectionException e){
             throw e;
-        }catch (SQLException e){
-            throw new SQLStatmentException("SQL: " + SQL);
+        }catch (SQLStatmentException e){
+            throw e;
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
