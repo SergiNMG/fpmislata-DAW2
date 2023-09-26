@@ -34,6 +34,12 @@
         <h1>Eliminar duplicados (Set):</h1>
         <div id="delete"></div>
         <br>
+        <h1>Eliminar duplicados (filter):</h1>
+        <div id="delete2"></div>
+        <br>
+        <h1>Eliminar duplicados (filter/forEach):</h1>
+        <div id="delete3"></div>
+        <br>
     </section>
 
 </body>
@@ -41,7 +47,7 @@
     "use strict"
     function generarArray() {
         let deportes = ["futbol", "tenis", "cricket", "badminton"];
-        let numeros = [11, 5, 92];
+        let numeros = [5, 2, 11, 80, 5, 92, 2];
 
         document.getElementById("arrayNums").innerHTML = numeros;
         document.getElementById("array").innerHTML = deportes;
@@ -59,13 +65,21 @@
 
         document.getElementById("suma").innerHTML = sum;
 
-        numeros.push(20, 7, 5, 92);
+        numeros.push(20, 7, 5, 92, 5, 2, 80);
         document.getElementById("numPush").innerHTML = numeros;
 
         let numerosUnique = new Set(numeros);
         const result = [...numerosUnique];
         document.getElementById("delete").innerHTML = result;
+        
+        let uniques = numeros.filter(n => { 
+            console.log(n)
+            console.log(numeros[n])
+            return n != numeros[n]});
+        document.getElementById("delete2").innerHTML = result;
 
+        let numsUniques = numeros.filter((n, index) => numeros.indexOf(n) === index);
+        document.getElementById("delete3").innerHTML = numsUniques;
     }
 
     generarArray();
