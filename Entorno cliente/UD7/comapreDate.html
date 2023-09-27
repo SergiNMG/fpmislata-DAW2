@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare dates</title>
+</head>
+<body>
+    <h1 id="date1"></h1>
+    <h1 id="date2"></h1>
+
+    <h2 id="date3">La fecha mayor es: </h2>
+
+    <script>
+
+        let date1 = "12-10-2010";
+        let date2 = "06-12-2004";
+
+        let date1_int = date1.split("-").reverse().join("");
+        let date2_int = date2.split("-").reverse().join("");
+
+        function compareDate (date1,date2){
+            return date1_int > date2_int;
+        }
+
+
+
+        document.getElementById("date1").innerHTML = date1_int;
+        document.getElementById("date2").innerHTML = date2_int;
+        document.getElementById("date3").compareDate;
+
+        
+
+    </script>
+</body>
+</html>
