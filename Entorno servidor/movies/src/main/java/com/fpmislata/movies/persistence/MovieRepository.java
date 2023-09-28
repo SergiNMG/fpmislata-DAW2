@@ -8,4 +8,6 @@ public interface MovieRepository {
 
     List<Movie> getAll();
     Movie findById(int id);
+
+    int getTotalNumberOfRecords();
 }

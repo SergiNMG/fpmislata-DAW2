@@ -6,6 +6,7 @@ import com.fpmislata.movies.exception.DBConnectionException;
 import com.fpmislata.movies.exception.ResourceNotFoundException;
 import com.fpmislata.movies.exception.SQLStatmentException;
 import com.fpmislata.movies.persistence.MovieRepository;
+import org.springframework.boot.autoconfigure.amqp.RabbitProperties;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
@@ -66,4 +67,20 @@ public class MovieReposirotyImpl implements MovieRepository {
         }
     }
 
+    @Override
+    public int getTotalNumberOfRecords() {
+        final String SQL = "SELECT COUNT(*) FROM movies";
+        try(Connection connection = DBUtil.open()){
+            ResultSet resultSet = DBUtil.select(connection, SQL, null);
+            DBUtil.close(connection);
+            resultSet.next();
+            return (int) resultSet.getInt(1);
+            } catch (SQLException e){
+            throw new RuntimeException("SQL: " + SQL);
+        }
+    }
 }
+
+
+
+

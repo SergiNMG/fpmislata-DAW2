@@ -24,4 +24,7 @@ public class MovieServiceImpl implements MovieService {
         return movieRepository.findById(id);
     }
 
+    @Override
+    public int getTotalNumberOfRecords(){ return movieRepository.getTotalNumberOfRecords();}
+
 }
