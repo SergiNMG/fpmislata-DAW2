@@ -18,6 +18,7 @@ public class MovieController {
 
     @Autowired
     MovieService movieService;
+    final int LIMIT = 10;
 
     /*@ResponseStatus(HttpStatus.OK)
     @GetMapping("")

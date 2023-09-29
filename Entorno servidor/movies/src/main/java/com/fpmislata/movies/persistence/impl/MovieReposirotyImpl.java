@@ -9,16 +9,20 @@ import com.fpmislata.movies.persistence.MovieRepository;
 import org.springframework.boot.autoconfigure.amqp.RabbitProperties;
 import org.springframework.stereotype.Repository;
 
+import javax.swing.text.html.Option;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class MovieReposirotyImpl implements MovieRepository {
 
-    public List<Movie> getAll(){
+    private final int LIMIT = 10;
+    @Override
+    public List<Movie> getAll(Optional<Integer> page){
         final String SQL = "SELECT * FROM movies";
         List<Movie> movies = new ArrayList<>();
 

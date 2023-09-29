@@ -1,0 +1,22 @@
+$color-primario: #3498db;
+$color-secundario: #e74c3c;
+
+header {
+  background-color: $color-primario;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 24px;
+}
+
+a {
+  color: $color-secundario;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
