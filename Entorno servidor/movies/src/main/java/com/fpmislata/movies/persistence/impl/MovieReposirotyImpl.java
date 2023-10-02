@@ -23,7 +23,12 @@ public class MovieReposirotyImpl implements MovieRepository {
     private final int LIMIT = 10;
     @Override
     public List<Movie> getAll(Optional<Integer> page){
-        final String SQL = "SELECT * FROM movies";
+        String SQL = "SELECT * FROM movies";
+        if(page.isPresent()){
+            int offset = (page.get() - 1) * LIMIT;
+            SQL += String.format(" LIMIT %d, %d", offset, LIMIT);
+        }
+
         List<Movie> movies = new ArrayList<>();
 
         try(Connection connection = DBUtil.open()){
@@ -83,6 +88,7 @@ public class MovieReposirotyImpl implements MovieRepository {
             throw new RuntimeException("SQL: " + SQL);
         }
     }
+
 }
 
 

@@ -10,7 +10,7 @@ import java.util.Optional;
 public class Response {
 
     private Object data;
-    private Integer totalRecords;
+    private Integer total_records;
     private Integer page;
     private Integer page_size;
     private Integer total_pages;
@@ -18,18 +18,18 @@ public class Response {
     private String previous;
 
 
-    public Response(Object data, int totalRecords, Optional<Integer> page, int page_size) {
+    public Response(Object data, int total_records, Optional<Integer> page, int page_size) {
         this.data = data;
-        this.totalRecords = totalRecords;
+        this.total_records = total_records;
         if(page.isPresent()){
-            buildPaginationMetaData(totalRecords, page_size, page.get());
+            buildPaginationMetaData(total_records, page_size, page.get());
         }
     }
 
-    private void buildPaginationMetaData(int totalRecords, int page_size, int page){
+    private void buildPaginationMetaData(int total_records, int page_size, int page){
         this.page = page;
         this.page_size = page_size;
-        int total_Pages = (int) (Math.ceil((double) totalRecords / page_size));
+        int total_pages = (int) (Math.ceil((double) total_records / page_size));
         this.total_pages = total_pages;
 
         if(page > 1 && total_pages > 1){
