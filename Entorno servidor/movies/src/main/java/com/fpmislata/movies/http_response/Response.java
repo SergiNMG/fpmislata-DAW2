@@ -1,8 +1,10 @@
 package com.fpmislata.movies.http_response;
 
+import com.fpmislata.movies.domain.entity.Movie;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Optional;
 
 @Getter
@@ -18,6 +20,8 @@ public class Response {
     private String previous;
 
 
+
+
     public Response(Object data, int total_records, Optional<Integer> page, int page_size) {
         this.data = data;
         this.total_records = total_records;
@@ -27,6 +31,7 @@ public class Response {
     }
 
     private void buildPaginationMetaData(int total_records, int page_size, int page){
+
         this.page = page;
         this.page_size = page_size;
         int total_pages = (int) (Math.ceil((double) total_records / page_size));

@@ -2,6 +2,7 @@ package com.fpmislata.movies.controller;
 
 import com.fpmislata.movies.domain.entity.Movie;
 import com.fpmislata.movies.domain.service.MovieService;
+import com.fpmislata.movies.http_response.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -20,12 +21,12 @@ public class MovieController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("")
-    public Map<String, Object> getAll(@RequestParam Optional<Integer> page){
-        Map<String,Object> response = new HashMap<>();
-        response.put("data", movieService.getAll(page));
+    public Response getAll(@RequestParam Optional<Integer> page){
+        //Map<String,Object> response = new HashMap<>();
+        //response.put("data", movieService.getAll(page));
         int total_records = movieService.getTotalNumberOfRecords();
-        response.put("total records", total_records);
-        return response;
+
+        return new Response(movieService.getAll(page), total_records, page, LIMIT);
     }
 
     @GetMapping("/{id}")
