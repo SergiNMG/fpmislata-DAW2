@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare Objects</title>
+</head>
+<body>
+    <h2>Comparador de objectos</h2>
+</body>
+<script>
+
+    let coche = {'marca':'nissan', 'modelo':'qashqai'}
+    let coche2 = {'marca':'ford', 'modelo':'mustang'}
+    let coche3 = {'modelo':'mustang', 'marca':'ford'}
+    let coche4 = coche2;
+
+    function compareObjects(object1, object2){
+        for (let key1 in object1){
+            for (let key2 in object2){
+                if (key1===key2 && object1[key1]===object2[key2]){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    function compareObjects2(object1, object2){
+        let keys1 = Object.keys(object1);
+        let keys2 = Object.keys(object2);
+
+        if (keys1.length !== keys2.length){
+            return false;
+        }
+
+        for (let key of keys1){
+            if (object1[key] !== object2[key]){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    console.log(compareObjects(coche,coche2));
+    console.log(compareObjects(coche2,coche3));
+    console.log(compareObjects(coche2,coche4));
+
+    console.log(compareObjects2(coche,coche2));
+    console.log(compareObjects2(coche2,coche3));
+    console.log(compareObjects2(coche2,coche4));
+
+</script>
+</html>
