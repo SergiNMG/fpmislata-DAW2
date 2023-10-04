@@ -1,14 +1,16 @@
 package com.fpmislata.movies.http_response;
 
-import com.fpmislata.movies.domain.entity.Movie;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
 import java.util.Optional;
 
 @Getter
 @Setter
+@JsonPropertyOrder({"total_records", "page", "page_size", "total_pages", "next", "previous", "data"})
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Response {
 
     private Object data;
@@ -20,13 +22,14 @@ public class Response {
     private String previous;
 
 
-
-
     public Response(Object data, int total_records, Optional<Integer> page, int page_size) {
         this.data = data;
         this.total_records = total_records;
         if(page.isPresent()){
             buildPaginationMetaData(total_records, page_size, page.get());
+        }
+        else{
+            this.total_records = total_records;
         }
     }
 

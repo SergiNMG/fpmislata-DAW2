@@ -25,7 +25,6 @@ public class MovieController {
         //Map<String,Object> response = new HashMap<>();
         //response.put("data", movieService.getAll(page));
         int total_records = movieService.getTotalNumberOfRecords();
-
         return new Response(movieService.getAll(page), total_records, page, LIMIT);
     }
 
