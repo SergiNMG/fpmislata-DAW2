@@ -6,6 +6,7 @@ import com.fpmislata.movies.exception.DBConnectionException;
 import com.fpmislata.movies.exception.ResourceNotFoundException;
 import com.fpmislata.movies.exception.SQLStatmentException;
 import com.fpmislata.movies.persistence.MovieRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.amqp.RabbitProperties;
 import org.springframework.stereotype.Repository;
 
@@ -20,13 +21,18 @@ import java.util.Optional;
 @Repository
 public class MovieReposirotyImpl implements MovieRepository {
 
-    private final int LIMIT = 10;
+    @Value("${buildPagination.defaultPageSize}")
+    private int page_size_default;
     @Override
-    public List<Movie> getAll(Optional<Integer> page){
+    public List<Movie> getAll(Optional<Integer> page, Optional<Integer> page_size){
         String SQL = "SELECT * FROM movies";
-        if(page.isPresent()){
-            int offset = (page.get() - 1) * LIMIT;
-            SQL += String.format(" LIMIT %d, %d", offset, LIMIT);
+        if(page.isPresent() && page_size.isPresent()){
+            int offset = (page.get() - 1) * page_size.get();
+            SQL += String.format(" LIMIT %d, %d", offset, page_size.get());
+        }
+        else{
+            int offset = (page.get() - 1) * page_size_default;
+            SQL += String.format(" LIMIT %d, %d", offset, page_size_default);
         }
 
         List<Movie> movies = new ArrayList<>();

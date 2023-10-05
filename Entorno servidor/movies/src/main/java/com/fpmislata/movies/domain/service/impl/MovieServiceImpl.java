@@ -16,8 +16,8 @@ public class MovieServiceImpl implements MovieService {
     private MovieRepository movieRepository;
 
     @Override
-    public List<Movie> getAll(Optional<Integer> page){
-        return movieRepository.getAll(page);
+    public List<Movie> getAll(Optional<Integer> page, Optional<Integer> page_size){
+        return movieRepository.getAll(page, page_size);
     }
 
     @Override
