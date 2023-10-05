@@ -82,6 +82,32 @@ function notasAlumno(){
 
 	console.log(notas);
 }
+
+function subeUnPunto(){
+	alumnos.forEach(a => a.calificaciones.forEach(n => n.nota++))
+	alumnos.forEach (a => console.log(a.calificaciones))
+}
+
+function alumnosCiudad(){
+	let ciudad = prompt("Introduce una ciudad: ")
+	let alumnoCiudad = alumnos.filter(a => a.ciudad === ciudad)
+
+	if(alumnoCiudad.length>0){
+		alumnoCiudad.forEach(a => console.log(a.nombre))
+	}
+	else{
+		console.log("No existen alumnos en esta ciudad")
+	}
+}
+
+function alumnosCurso(){
+	//let curso = prompt("Introduce un curso: ")
+	let codigo =[""]
+	alumnos.forEach(a => codigo.push(a.codigo))
+	let cursoAlumno = codigo[2].split("-")
+
+	alumnos.forEach(a => )
+}
 </script>
 
 </html>
