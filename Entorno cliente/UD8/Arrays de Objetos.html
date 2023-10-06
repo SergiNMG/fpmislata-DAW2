@@ -101,12 +101,28 @@ function alumnosCiudad(){
 }
 
 function alumnosCurso(){
-	//let curso = prompt("Introduce un curso: ")
-	let codigo =[""]
-	alumnos.forEach(a => codigo.push(a.codigo))
-	let cursoAlumno = codigo[2].split("-")
+	let curso = prompt("Introduce un curso: ")
 
-	alumnos.forEach(a => )
+	let cursoAlumnos = alumnos.filter(a => a.codigo.includes(`-${curso}-`))
+	
+	if (cursoAlumnos.length > 0){
+		cursoAlumnos.forEach(a => console.log(a.nombre))
+	}
+	else{
+		console.log("No se encontró ningun alumno")
+	}
+
+	/*let cursoAlumnos = alumnos.filter(a => console.log(a.codigo.split("-")[1] == curso))
+	if (cursoAlumnos.length > 0){
+		cursoAlumnos.forEach(a => console.log(a.nombre))
+	}
+	else{
+		console.log("No se encontró ningun alumno")
+	}*/
+}
+
+function ordenaEdad(){
+	alumnos.forEach(a => console.log(a.edad))
 }
 </script>
 
