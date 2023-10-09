@@ -160,6 +160,24 @@
 		}
 	}
 
+	function nuevoAlumno(){
+		let nuevoCodigo = prompt("Introduce un codigo (GGG-A-FFFF)")
+		let nuevoNombre = prompt("Introduce un nombre")
+		let nuevaCiudad = prompt("Introduce una ciudad")
+		let nuevaEdad = prompt("Introduce una edad")
+
+		let alumno = {
+		'codigo': nuevoCodigo,
+		'nombre': nuevoNombre,
+		'ciudad': nuevaCiudad,
+		'calificaciones': [{ }],
+		'edad': nuevaEdad 
+		}
+
+		alumnos.push(alumno)
+		console.log(alumnos)
+
+	}
 </script>
 
 </html>
