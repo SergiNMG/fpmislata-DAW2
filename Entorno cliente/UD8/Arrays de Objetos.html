@@ -182,24 +182,24 @@
 	function nuevaAsignatura(){
 		let nombreAlumno = prompt("Introduce un nombre")
 
-		if (alumnos.find(a => a.nombre.includes(`${nombreAlumno}`))){
+		if (alumnos.some(a => a.nombre === nombreAlumno)){
 			let nuevaAsignatura = prompt("Introduce el nombre de la asignatura")
 			let nuevaNota = prompt("Introduce la nota")
 
-			if (alumnos.find(a => a.calificaciones.asignatura == nuevaAsignatura)){
-				alumnos.calificaciones.nota = nuevaNota
-				console.log(alumnos.calificaciones)
+			let alumno = alumnos.find(a => a.nombre === nombreAlumno)
+	
+			if (alumno.calificaciones.some(c => c.asignatura === nuevaAsignatura)){
+				let calificacion = alumno.calificaciones.find(c => c.asignatura === nuevaAsignatura)
+				calificacion.nota = parseInt(nuevaNota)
+				console.log(alumno.calificaciones)
 			}
 			else{
 				let nuevasCalificaciones = {
-					'asignatura' : nuevaAsignatura, 'nota' : nuevaNota
+					'asignatura' : nuevaAsignatura, 'nota' : parseInt(nuevaNota)
 				}
-				alumnos.calificaciones.push(nuevasCalificaciones)
-				console.log(alumnos.calificaciones)
+				alumno.calificaciones.push(nuevasCalificaciones)
+				console.log(alumno.calificaciones)
 				
-				/*calificaciones2.asignatura = nuevaAsignatura
-				calificaciones2.nota = nuevaNota
-				console.log(alumnos.calificaciones.push(calificaciones2))*/
 			}
 		}	
 		else{
