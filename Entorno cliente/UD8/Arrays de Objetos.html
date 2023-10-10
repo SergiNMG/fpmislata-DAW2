@@ -178,6 +178,35 @@
 		console.log(alumnos)
 
 	}
+
+	function nuevaAsignatura(){
+		let nombreAlumno = prompt("Introduce un nombre")
+
+		if (alumnos.find(a => a.nombre.includes(`${nombreAlumno}`))){
+			let nuevaAsignatura = prompt("Introduce el nombre de la asignatura")
+			let nuevaNota = prompt("Introduce la nota")
+
+			if (alumnos.find(a => a.calificaciones.asignatura == nuevaAsignatura)){
+				alumnos.calificaciones.nota = nuevaNota
+				console.log(alumnos.calificaciones)
+			}
+			else{
+				let nuevasCalificaciones = {
+					'asignatura' : nuevaAsignatura, 'nota' : nuevaNota
+				}
+				alumnos.calificaciones.push(nuevasCalificaciones)
+				console.log(alumnos.calificaciones)
+				
+				/*calificaciones2.asignatura = nuevaAsignatura
+				calificaciones2.nota = nuevaNota
+				console.log(alumnos.calificaciones.push(calificaciones2))*/
+			}
+		}	
+		else{
+			console.log("No existe el alumno")
+		}
+	}
+
 </script>
 
 </html>
