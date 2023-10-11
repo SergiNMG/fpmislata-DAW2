@@ -9,7 +9,7 @@
     <script src="datos.js"></script>
 
     <section id="main">
-        
+        <button onclick="newCharacter()">Crear Personaje</button>
     </section>
 </body>
 <script>
@@ -17,5 +17,21 @@
 
     let page = document.getElementById("main")
     
+    function newCharacter(){
+        let img = document.createElement("img")
+        img.src = "https://rickandmortyapi.com/api/character/avatar/1.jpeg"
+        page.appendChild(img)
+
+        let name = document.createElement("h3")
+        name.className = "name"
+        name.innerHTML = "Rick Sanchez"
+        page.appendChild(name)
+
+        let specie = document.createElement("p")
+        specie.className = "specie"
+        specie.innerHTML = "Human"
+        page.appendChild(specie)
+    } 
+
 </script>
 </html>
