@@ -7,9 +7,11 @@
 </head>
 <body>
     <script src="datos.js"></script>
-
-    <section id="main">
+    <section>
         <button onclick="newCharacter()">Crear Personaje</button>
+    </section>
+    <section id="main">
+        
     </section>
 </body>
 <script>
@@ -17,20 +19,26 @@
 
     let page = document.getElementById("main")
     
+    
     function newCharacter(){
+        let idPersonaje= prompt("Introduce una id para generar un personaje")
         let img = document.createElement("img")
-        img.src = "https://rickandmortyapi.com/api/character/avatar/1.jpeg"
+
+        let id = personajes.results.find(p => p.id == idPersonaje)
+        console.log(id)
+
+        img.src = id.image
         page.appendChild(img)
 
         let name = document.createElement("h3")
         name.className = "name"
-        name.innerHTML = "Rick Sanchez"
+        name.innerHTML = id.name
         page.appendChild(name)
 
-        let specie = document.createElement("p")
-        specie.className = "specie"
-        specie.innerHTML = "Human"
-        page.appendChild(specie)
+        let species = document.createElement("p")
+        species.className = "specie"
+        species.innerHTML = id.species
+        page.appendChild(species)
     } 
 
 </script>
