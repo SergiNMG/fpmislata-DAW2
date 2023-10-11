@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM</title>
+</head>
+
+<body>
+
+
+    <div id="main">
+        <button onclick="creaP()">Crear Tecto</button>
+        <button onclick="creaImg()">Crear Imagen</button>
+        <button onclick="seleccionar()">Seleccionar texto</button>
+        <button onclick="seleccionarCapas()">Seleccionar capa</button>
+        <button onclick="seleccionarClase()">Seleccionar clase</button>
+        <button onclick="crearBoton()">Crear boton</button>
+
+    </div>
+
+    <h1 class="main-class">DOM</h1>
+    <div id="c1">
+        <p>Parrafo 1 en c1</p>
+        <p>Parrafo 2 en c1</p>
+        <p class="main-class">Parrafo 3 en c1</p>
+    </div>
+    <div id="c2">
+        <p>Parrafo 1 en c2</p>
+        <p class="main-class">Parrafo 2 en c2</p>
+        <p>Parrafo 3 en c2</p>
+    </div>
+    
+
+</body>
+<script>
+    "use strict"
+
+    let page = document.getElementById("main")
+
+    function creaP(txt) {
+        let p1 = document.createElement("p")
+        p1.innerHTML = txt
+        page.appendChild(p1)
+    }
+
+    function creaImg() {
+        let img1 = document.createElement("img")
+        img1.src="https://media.giphy.com/media/KmGnZGXkEK34dsIl6X/giphy.gif" 
+        page.appendChild(img1)
+    }
+
+    function seleccionar(){
+        let parrafos = document.getElementsByTagName("p")
+        console.log(parrafos)
+        Array.from(parrafos).forEach(p => console.log(p.innerHTML))
+    }
+
+    function seleccionarCapas(){
+        let capaUsuario = prompt("Introduce una capa: c1 o c2")
+        let c = document.getElementById(capaUsuario)
+        let parrafos = c.getElementsByTagName("p")
+        console.log(parrafos)
+        Array.from(parrafos).forEach(p => console.log(p.innerHTML))
+
+        console.log(c)
+    }
+
+    function seleccionarClase(){
+        let clases = document.getElementsByClassName("main-class")
+        console.log(clases)
+        Array.from(clases).forEach(p => console.log(p.innerHTML))
+
+    }   
+
+    function crearBoton(){
+        let btn1 = document.createElement("button")
+        btn1.innerHTML = "Crear boton?"
+        main.appendChild(btn1)
+
+        btn1.onclick = ()=>creaP("Texto creado con FatA")
+    }
+</script>
+
+</html>
