@@ -1,27 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rick y Morty</title>
 </head>
+
 <body>
     <script src="datos.js"></script>
     <section>
         <button onclick="newCharacter()">Crear Personaje</button>
+        <button onclick="allCharacters2()">Crear todos los personajes</button>
     </section>
     <section id="main">
-        
+
     </section>
 </body>
 <script>
     "use strict"
 
     let page = document.getElementById("main")
-    
-    
-    function newCharacter(){
-        let idPersonaje= prompt("Introduce una id para generar un personaje")
+
+
+    function newCharacter() {
+        let idPersonaje = prompt("Introduce una id para generar un personaje")
         let img = document.createElement("img")
 
         let id = personajes.results.find(p => p.id == idPersonaje)
@@ -39,7 +42,50 @@
         species.className = "specie"
         species.innerHTML = id.species
         page.appendChild(species)
-    } 
+    }
+
+    function allCharacters() {
+        let count = 1
+
+        while (count < personajes.results.length) {
+            let img = document.createElement("img")
+            let name = document.createElement("h3")
+            let species = document.createElement("p")
+
+            let id = personajes.results.find(p => p.id == count)
+
+            img.src = id.image
+            page.appendChild(img)
+
+            name.innerHTML = id.name
+            page.appendChild(name)
+
+            species.innerHTML = id.species
+            page.appendChild(species)
+
+            count ++
+        }
+    }
+
+    function allCharacters2() {
+
+    personajes.results.forEach((character, i) => {
+        let img = document.createElement("img")
+        let name = document.createElement("h3")
+        let species = document.createElement("p")
+
+        img.src = character.image
+        page.appendChild(img)
+
+        name.innerHTML = character.name
+        page.appendChild(name)
+
+        species.innerHTML = character.species
+        page.appendChild(species)
+    });
+}
+
 
 </script>
+
 </html>
