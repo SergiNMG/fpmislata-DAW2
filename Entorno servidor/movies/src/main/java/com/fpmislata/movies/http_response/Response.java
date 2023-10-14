@@ -31,18 +31,23 @@ public class Response {
     @JsonIgnore
     private String url = "http://localhost:3010/movies";
 
+    @Value("${buildPagination.defaultPageSize}")
+    private Integer page_size_default;
+
 
     public Response(Object data, int total_records, Optional<Integer> page, Optional<Integer> page_size) {
         this.data = data;
         this.total_records = total_records;
-        buildPaginationMetaData(total_records, page_size.get(), page.get());
+        //buildPaginationMetaData(total_records, page_size.get(), page.get());
         /*if(page.isPresent() && page_size.isPresent()){
             buildPaginationMetaData(total_records, page_size.get(), page.get());
         }
         else{
             buildPaginationMetaData(total_records, page_size_default, page.get());
-            this.total_records = total_records;
         }*/
+        if (page.isPresent()){
+            buildPaginationMetaData(total_records, page_size.get(), page.get());
+        }
 
     }
 

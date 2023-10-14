@@ -27,15 +27,11 @@ public class MovieController {
     public Response getAll(@RequestParam Optional<Integer> page, Optional<Integer> page_size){
         //Map<String,Object> response = new HashMap<>();
         //response.put("data", movieService.getAll(page));
-        if (page_size.isPresent()){
-            int total_records = movieService.getTotalNumberOfRecords();
-            return new Response(movieService.getAll(page, page_size), total_records, page, page_size);
-        }
-        else{
+        int total_records = movieService.getTotalNumberOfRecords();
+        if (page_size.isEmpty()) {
             page_size = page_size_default.describeConstable();
-            int total_records = movieService.getTotalNumberOfRecords();
-            return new Response(movieService.getAll(page, page_size), total_records, page, page_size);
         }
+        return new Response(movieService.getAll(page, page_size), total_records, page, page_size);
     }
 
     @GetMapping("/{id}")
