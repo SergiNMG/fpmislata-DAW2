@@ -1,0 +1,18 @@
+#main{
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.c-button{
+    text-align: center;
+}
+
+.c-card{
+    margin: 10px;
+    border: 3px solid darkgray;
+    border-radius: 5px;
+    text-align: center;
+}
+

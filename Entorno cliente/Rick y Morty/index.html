@@ -4,17 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Rick y Morty</title>
 </head>
 
 <body>
     <script src="datos.js"></script>
-    <section>
+    <section class="c-button">
         <button onclick="newCharacter()">Crear Personaje</button>
         <button onclick="allCharacters2()">Crear todos los personajes</button>
+        <button onclick="allCharacters3()">Crear personajes ordenados</button>
+        <button onclick="allCharacters4()">Crear personajes agrupados</button>
     </section>
     <section id="main">
-
+        <div class="c-row c-row__1"> </div>
+        <div class="c-row c-row__2"> </div>
     </section>
 </body>
 <script>
@@ -63,27 +67,76 @@
             species.innerHTML = id.species
             page.appendChild(species)
 
-            count ++
+            count++
         }
     }
 
     function allCharacters2() {
 
-    personajes.results.forEach((character, i) => {
-        let img = document.createElement("img")
-        let name = document.createElement("h3")
-        let species = document.createElement("p")
+        personajes.results.forEach((character, i) => {
+            let img = document.createElement("img")
+            let name = document.createElement("h3")
+            let species = document.createElement("p")
+            
+            img.src = character.image
+            page.appendChild(img)
 
-        img.src = character.image
-        page.appendChild(img)
+            name.innerHTML = character.name
+            page.appendChild(name)
 
-        name.innerHTML = character.name
-        page.appendChild(name)
+            species.innerHTML = character.species
+            page.appendChild(species)
+        });
+    }
 
-        species.innerHTML = character.species
-        page.appendChild(species)
-    });
-}
+    let row1 = document.querySelector(".c-row__1")
+    let row2 = document.querySelector(".c-row__2")
+
+    function allCharacters3() {
+
+        personajes.results.forEach((character, i) => {
+            let img = document.createElement("img")
+            let name = document.createElement("h3")
+            let species = document.createElement("p")
+
+            img.src = character.image
+            name.innerHTML = character.name
+            species.innerHTML = character.species
+
+            if (i % 2 == 0){
+                row1.appendChild(img)
+                row1.appendChild(name)
+                row1.appendChild(species)
+            }
+            else{
+                row2.appendChild(img)
+                row2.appendChild(name)
+                row2.appendChild(species)
+            }
+        });
+    }
+
+    function allCharacters4(){
+        personajes.results.forEach((character, i) => {
+            let img = document.createElement("img")
+            let name = document.createElement("h3")
+            let species = document.createElement("p")
+
+            let characterContainer = document.createElement("div")
+            characterContainer.className = "c-card"
+
+            img.src = character.image
+            characterContainer.appendChild(img)
+
+            name.innerHTML = character.name  
+            characterContainer.appendChild(name)
+
+            species.innerHTML = character.species
+            characterContainer.appendChild(species)
+
+            page.appendChild(characterContainer)
+        });
+    }
 
 
 </script>
