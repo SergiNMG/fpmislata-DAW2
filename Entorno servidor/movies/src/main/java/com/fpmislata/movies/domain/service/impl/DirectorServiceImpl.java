@@ -2,6 +2,7 @@ package com.fpmislata.movies.domain.service.impl;
 
 import com.fpmislata.movies.domain.entity.Director;
 import com.fpmislata.movies.domain.service.DirectorService;
+import com.fpmislata.movies.exception.ResourceNotFoundException;
 import com.fpmislata.movies.persistence.DirectorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,26 @@ public class DirectorServiceImpl implements DirectorService {
     @Autowired
     DirectorRepository directorRepository;
 
-    public void insert(Director director){
-        directorRepository.insert(director);
+    @Override
+    public int create(Director director){
+        return directorRepository.insert(director);
+    }
+
+    @Override
+    public void update(int id, Director director){
+        Director existingDirector = directorRepository.find(director.getId());
+        directorRepository.update(director);
+    }
+
+    @Override
+    public Director find(int id){
+        return directorRepository.find(id);
+    }
+
+    @Override
+    public Director delete(int id){
+        Director deletedDirector = directorRepository.find(id);
+        directorRepository.delete(id);
+        return deletedDirector;
     }
 }

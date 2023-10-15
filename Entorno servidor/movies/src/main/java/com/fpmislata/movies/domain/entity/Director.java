@@ -1,5 +1,12 @@
 package com.fpmislata.movies.domain.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
 public class Director {
 
     private int id;
@@ -20,45 +27,39 @@ public class Director {
         this.deathYear = deathYear;
     }
 
-    public int getId() {
-        return id;
+    public Director(){
+
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getId() {
+        return id;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getBirthYear() {
         return birthYear;
-    }
-
-    public void setBirthYear(int birthYear) {
-        this.birthYear = birthYear;
     }
 
     public Integer getDeathYear() {
         return deathYear;
     }
 
-    public void setDeathYear(Integer deathYear) {
-        this.deathYear = deathYear;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    @Override
-    public String  toString() {
-        return "Director{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", birthYear=" + birthYear +
-                ", deathYear=" + deathYear +
-                '}';
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setBirthYear(int birthYear) {
+        this.birthYear = birthYear;
+    }
+
+    public void setDeathYear(Integer deathYear) {
+        this.deathYear = deathYear;
     }
 }
