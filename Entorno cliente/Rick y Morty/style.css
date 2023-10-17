@@ -1,18 +1,51 @@
+:root{
+    --color-background-button: #cfd73a;
+    --color-button: #0d7301;
+    --color-background-page: #eaeda0;
+    --color-background-characters: #fffbf4;
+
+    --font-type: Arial, Helvetica, sans-serif;
+}
+
 #main{
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: var(--font-type);
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
 }
 
-.c-button{
+body{
+    background-color: var(--color-background-page);
+}
+
+.l-button{
     text-align: center;
 }
 
+.c-button{
+    font-family: var(--font-type);
+    color: var(--color-button);
+    background-color: var(--color-background-button);
+    border: 2px solid var(--color-button);
+    padding: 15px;
+    border-radius: 5px;
+}
+
 .c-card{
+    background-color: var(--color-background-characters);
     margin: 10px;
-    border: 3px solid darkgray;
+    border: 3px solid var(--color-button);
     border-radius: 5px;
     text-align: center;
+}
+
+.c-card-info{
+    background-color: var(--color-background-characters);
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    border: 3px solid var(--color-button)
 }
 

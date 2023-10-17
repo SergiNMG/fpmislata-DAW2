@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Rick y Morty</title>
+</head>
+
+<body>
+    <script src="datos.js"></script>
+    <section class="l-button">
+        <button class="c-button" onclick="allCharacters()"><h1>Crear personajes</h1></button>
+    </section>
+    <section id="character-info">
+
+    </section>
+    <section id="main">
+
+    </section>
+</body>
+<script>
+    "use strict"
+    let page = document.getElementById("main")
+    let info = document.getElementById("character-info")
+
+    function allCharacters() {
+        personajes.results.forEach((character, i) => {
+            let img = document.createElement("img")
+            let name = document.createElement("h3")
+            let species = document.createElement("p")
+            let id = document.createElement("p")
+            let gender = document.createElement("p")
+            let location = document.createElement("p")
+
+            let characterContainer = document.createElement("div")
+            characterContainer.className = "c-card"
+
+            characterContainer.setAttribute("img", character.image)
+            characterContainer.setAttribute("name", character.name)
+            characterContainer.setAttribute("species", character.species)
+            characterContainer.setAttribute("id", character.id)
+            characterContainer.setAttribute("gender", character.gender)
+            characterContainer.setAttribute("location", character.location.name)
+
+            img.src = character.image
+            characterContainer.appendChild(img)
+
+            name.innerHTML = character.name
+            characterContainer.appendChild(name)
+
+            species.innerHTML = character.species
+            characterContainer.appendChild(species)
+
+            page.appendChild(characterContainer)
+
+            characterContainer.addEventListener("click", function () {
+                //0alert(character.id)
+                let imgDialog = document.createElement("img")
+                let nameDialog = document.createElement("h3")
+                let speciesDialog = document.createElement("p")
+                let idDialog = document.createElement("p")
+                let genderDialog = document.createElement("p")
+                let locationDialog = document.createElement("p")
+
+                let characterInfo = document.createElement("dialog")
+                let infoContainer = document.createElement("div")
+                infoContainer.className = "c-card-info"
+
+                imgDialog.src = characterContainer.getAttribute("img")
+                nameDialog.innerHTML = characterContainer.getAttribute("name")
+                speciesDialog.innerHTML = characterContainer.getAttribute("species")
+                idDialog.innerHTML = characterContainer.getAttribute("id")
+                genderDialog.innerHTML = characterContainer.getAttribute("gender")
+                locationDialog.innerHTML = characterContainer.getAttribute("location")
+
+                infoContainer.appendChild(imgDialog)
+                infoContainer.appendChild(nameDialog)
+                infoContainer.appendChild(speciesDialog)
+                infoContainer.appendChild(idDialog)
+                infoContainer.appendChild(genderDialog)
+                infoContainer.appendChild(locationDialog)
+
+                characterInfo.appendChild(infoContainer)
+                info.appendChild(characterInfo)
+
+                characterInfo.show()
+            });
+
+        });
+    }
+
+
+</script>
+
+</html>
