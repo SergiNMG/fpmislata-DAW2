@@ -16,16 +16,17 @@
         <button onclick="allCharacters3()">Crear personajes ordenados</button>
         <button onclick="allCharacters4()">Crear personajes agrupados</button>
     </section>
+    <section id="character-info">
+
+    </section>
     <section id="main">
-        <div class="c-row c-row__1"> </div>
-        <div class="c-row c-row__2"> </div>
+        
     </section>
 </body>
 <script>
     "use strict"
-
     let page = document.getElementById("main")
-
+    let info = document.getElementById("character-info")
 
     function newCharacter() {
         let idPersonaje = prompt("Introduce una id para generar un personaje")
@@ -122,6 +123,9 @@
             let name = document.createElement("h3")
             let species = document.createElement("p")
             let id = document.createElement("p")
+            let gender = document.createElement("p")
+            let location = document.createElement("p")
+
 
             let characterContainer = document.createElement("div")
             characterContainer.className = "c-card"
@@ -136,11 +140,27 @@
             characterContainer.appendChild(species)
 
             id.innerHTML = character.id
+            gender.innerHTML = character.gender
+            location.innerHTML = character.location.name
 
             page.appendChild(characterContainer)
 
             characterContainer.addEventListener("click", function(){
                 alert(character.id)
+
+                let characterInfo = document.createElement("dialog")
+                let infoContainer = document.createElement("div")
+                infoContainer.className = "c-card-info"
+
+                infoContainer.appendChild(character.img)
+                infoContainer.appendChild(character.name)
+                infoContainer.appendChild(character.species)
+                infoContainer.appendChild(character.id)
+                infoContainer.appendChild(character.gender)
+                infoContainer.appendChild(character.location)
+
+                characterInfo.appendChild(infoContainer)
+                info.appendChild(characterInfo)
             });
 
         });
