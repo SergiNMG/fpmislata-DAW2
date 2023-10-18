@@ -58,6 +58,7 @@
             characterContainer.addEventListener("click", function () {
                 //0alert(character.id)
                 let imgDialog = document.createElement("img")
+                imgDialog.className = "c-card-info__img"
                 let nameDialog = document.createElement("h3")
                 let speciesDialog = document.createElement("p")
                 let idDialog = document.createElement("p")
@@ -65,9 +66,10 @@
                 let locationDialog = document.createElement("p")
 
                 let characterInfo = document.createElement("dialog")
+                characterInfo.className = "c-dialog"
                 let infoContainer = document.createElement("div")
                 infoContainer.className = "c-card-info"
-                let closeDialog = document.createElement("a")
+                let closeDialog = document.createElement("button")
                 closeDialog.className = "c-card-info__close"
                 
 
@@ -77,7 +79,11 @@
                 idDialog.innerHTML = characterContainer.getAttribute("id")
                 genderDialog.innerHTML = characterContainer.getAttribute("gender")
                 locationDialog.innerHTML = characterContainer.getAttribute("location")
-                closeDialog.innerHTML = "Close"
+                closeDialog.innerHTML = "X"
+
+                closeDialog.addEventListener("click", function (){
+                    characterInfo.close();
+                });
 
                 infoContainer.appendChild(imgDialog)
                 infoContainer.appendChild(nameDialog)
@@ -91,10 +97,6 @@
                 info.appendChild(characterInfo)
 
                 characterInfo.show()
-
-                closeDialog.addEventListener("click", function (){
-                    characterInfo.close();
-                });
             });
 
         });
