@@ -67,6 +67,9 @@
                 let characterInfo = document.createElement("dialog")
                 let infoContainer = document.createElement("div")
                 infoContainer.className = "c-card-info"
+                let closeDialog = document.createElement("a")
+                closeDialog.className = "c-card-info__close"
+                
 
                 imgDialog.src = characterContainer.getAttribute("img")
                 nameDialog.innerHTML = characterContainer.getAttribute("name")
@@ -74,6 +77,7 @@
                 idDialog.innerHTML = characterContainer.getAttribute("id")
                 genderDialog.innerHTML = characterContainer.getAttribute("gender")
                 locationDialog.innerHTML = characterContainer.getAttribute("location")
+                closeDialog.innerHTML = "Close"
 
                 infoContainer.appendChild(imgDialog)
                 infoContainer.appendChild(nameDialog)
@@ -81,11 +85,16 @@
                 infoContainer.appendChild(idDialog)
                 infoContainer.appendChild(genderDialog)
                 infoContainer.appendChild(locationDialog)
-
+                infoContainer.appendChild(closeDialog)
+                
                 characterInfo.appendChild(infoContainer)
                 info.appendChild(characterInfo)
 
                 characterInfo.show()
+
+                closeDialog.addEventListener("click", function (){
+                    characterInfo.close();
+                });
             });
 
         });

@@ -3,6 +3,7 @@
     --color-button: #0d7301;
     --color-background-page: #eaeda0;
     --color-background-characters: #fffbf4;
+    --color-close-dialog: #8c8b92;
 
     --font-type: Arial, Helvetica, sans-serif;
 }
@@ -37,6 +38,7 @@ body{
     border: 3px solid var(--color-button);
     border-radius: 5px;
     text-align: center;
+    box-shadow: 0px 13px 18px 0px rgba(13,115,1,1);
 }
 
 .c-card-info{
@@ -47,5 +49,14 @@ body{
     align-items: center;
     flex-wrap: wrap;
     border: 3px solid var(--color-button)
+}
+
+.c-card-info__close{
+    font-size: 10px;
+    color: var(--color-close-dialog);
+}
+
+.c-card-info__close:hover{
+    cursor: pointer;
 }
 
