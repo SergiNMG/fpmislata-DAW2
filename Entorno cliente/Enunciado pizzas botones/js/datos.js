@@ -1,4 +1,4 @@
-pizzas = [{
+let pizzas = [{
 	'codigo': 'P1',
 	'nombre': 'Prosciutto',
 	'ingredientes': [{ 'ingrediente': 'salsa de tomate', 'precio': '0.5' },

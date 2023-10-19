@@ -1,32 +1,43 @@
-let buttonsDiv = document.getElementById("botones")
-let pizzaImg = document.getElementById("fotopizza")
-let IngredientsDiv = document.getElementById("ingredientes")
+let buttonSection = document.getElementById("botones")
+let imgPizza = document.getElementById("fotopizza")
+let topingSection = document.getElementById("ingredientes")
+let priceSection = document.getElementById("importe")
 
 pizzas.forEach((pizza, i) => {
+
     let pizzaButton = document.createElement("button")
-    let pizzaId
+    let pizzaId = pizza.codigo
 
     pizzaButton.innerHTML = pizza.nombre
-    pizzaId = pizza.codigo
-    buttonsDiv.appendChild(pizzaButton)
-    
-    //console.log(pizza)
-    //console.log(pizza.codigo)
-    //console.log(pizzaId) 
+    buttonSection.appendChild(pizzaButton)
 
-    pizzaButton.addEventListener("click", function () {
-        let pizzaSelected = pizzas.find(p => p.codigo == pizzaId)
+    pizzaButton.addEventListener("click", function(){
+        topingSection.textContent = null
+        priceSection.textContent = null
+        //let pizzaSelected = pizzas.find(p => p.codigo == pizzaId)
+        let pizzaSelectedImg = document.createElement("img")
+        pizzaSelectedImg.className = "imagencss"
+        pizzaSelectedImg.src = `assets/${pizza.codigo}.jpg`
 
-        let pizzaIdImg = document.createElement("img")
-        pizzaIdImg.className = "imagencss"
-        pizzaIdImg.src = `assets/${pizzaSelected.codigo}.jpg`
-        console.log(pizzaSelected)
-        console.log(pizzaIdImg.src)
+        imgPizza.appendChild(pizzaSelectedImg)
 
-        pizzaImg.append(pizzaIdImg)
+        let ingredients = pizza.ingredientes
+        console.log(ingredients)
+        let pizzaTopping = ingredients.map(p => p.ingrediente)
+        //console.log(pizzaTopping)
 
-        let pizzaToppings = pizzaSelected.map(p => p.ingredientes.ingrediente)
-        console.log(pizzaToppings)
+        let pizzaToppings = document.createElement("p")
+        pizzaToppings.textContent = pizzaTopping.join(", ")
+        topingSection.appendChild(pizzaToppings)
+
+        let prices = ingredients.map(p => parseFloat(p.precio))
+        console.log(prices)
+        let pricePizzaSelected = prices.reduce((a, b) => {
+            return a + b; 
+        },5);
+        
+        let pizzaPrice = document.createElement("p")
+        pizzaPrice.textContent = pricePizzaSelected
+        priceSection.appendChild(pizzaPrice)
     });
 });
-
