@@ -31,7 +31,7 @@ public class DirectorController {
         directorService.update(id, director);
     }
 
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/{id}")
     public Director delete (@PathVariable("id") int id){
         return directorService.delete(id);
