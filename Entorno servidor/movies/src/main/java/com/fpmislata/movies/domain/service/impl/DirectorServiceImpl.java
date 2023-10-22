@@ -26,6 +26,7 @@ public class DirectorServiceImpl implements DirectorService {
 
     @Override
     public Director find(int id){
+
         return directorRepository.find(id);
     }
 

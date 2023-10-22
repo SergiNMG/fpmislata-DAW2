@@ -14,6 +14,12 @@ public class Actor {
         this.deathYear = deathYear;
     }
 
+    public Actor(String name, int birthYear, int deathYear) {
+        this.name = name;
+        this.birthYear = birthYear;
+        this.deathYear = deathYear;
+    }
+
     public int getId() {
         return id;
     }
