@@ -1,0 +1,47 @@
+.c-card{
+    border-radius: 10px;
+    --c-card-border-color:var(--color-text-dark);
+    border: rgba(0,0,0,0.1) solid 1px;
+
+    -webkit-box-shadow: 30px 29px 25px -37px rgba(0,0,0,0.54);
+    -moz-box-shadow: 30px 29px 25px -37px rgba(0,0,0,0.54);
+    box-shadow: 30px 29px 25px -37px rgba(0,0,0,0.54);
+
+    width:auto;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    margin: 10px;
+
+    &__badge{
+        border-radius: 15px;
+        --c-card__badge-background-color:var(--color-blue-2);
+        --c-card__badge-color:var(--color-blue-4);
+        --c-card__badge-font:var(--font-stack);
+    
+        font-family: var(--c-card__badge-font);
+        background-color: var(--c-card__badge-background-color);
+        color: var(--c-card__badge-color);
+        padding: 8px;
+        width: min-content;
+        font-size: 12px;
+        font-weight: bold;
+    
+    }
+    &__description{
+        --c-card__description-font:var(--font-stack);
+        font-weight: bold;
+        font-family: var(--c-card__description-font);
+        padding-top: 20px;
+    }
+    &__image{
+        border-radius: 15px;
+        margin-right: 40px;
+    }
+}
+.c-card:hover{
+    -webkit-box-shadow: 23px 29px 30px -29px rgba(0,0,0,0.54);
+    -moz-box-shadow: 23px 29px 30px -29px rgba(0,0,0,0.54);
+    box-shadow: 23px 29px 30px -29px rgba(0,0,0,0.54);
+}
+

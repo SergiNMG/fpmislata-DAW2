@@ -1,0 +1,53 @@
+$padding-sizes: 0px 4px 6px 8px 10px 12px 16px 20px 24px 32px 40px 48px 64px 80px 96px 128px 160px 192px 224px 256px 320px 480px 640px;
+
+@for $i from 1 through length($padding-sizes) {
+  $padding-value: nth($padding-sizes, $i);
+  .g--padding-#{$i} {
+    padding: $padding-value;
+  }
+}
+
+@for $i from 1 through length($padding-sizes) {
+  $padding-value: nth($padding-sizes, $i);
+  .g--padding-left-#{$i} {
+    padding-left: $padding-value;
+  }
+}
+
+@for $i from 1 through length($padding-sizes) {
+  $padding-value: nth($padding-sizes, $i);
+  .g--padding-right-#{$i} {
+    padding-right: $padding-value;
+  }
+}
+
+@for $i from 1 through length($padding-sizes) {
+  $padding-value: nth($padding-sizes, $i);
+  .g--padding-top-#{$i} {
+    padding-top: $padding-value;
+  }
+}
+
+@for $i from 1 through length($padding-sizes) {
+  $padding-value: nth($padding-sizes, $i);
+  .g--padding-bottom-#{$i} {
+    padding-bottom: $padding-value;
+  }
+}
+
+@for $i from 1 through length($padding-sizes) {
+  $padding-value: nth($padding-sizes, $i);
+  .g--padding-upright-#{$i} {
+    padding-top: $padding-value;
+    padding-bottom: $padding-value;
+  }
+}
+
+@for $i from 1 through length($padding-sizes) {
+  $padding-value: nth($padding-sizes, $i);
+  .g--padding-horizontal-#{$i} {
+    padding-left: $padding-value;
+    padding-right: $padding-value;
+  }
+}
+

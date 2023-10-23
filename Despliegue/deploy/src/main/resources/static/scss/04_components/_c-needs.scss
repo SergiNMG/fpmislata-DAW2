@@ -1,0 +1,42 @@
+.c-needs {
+    padding-left: 220px;
+    padding-right: 220px;
+
+    &__text-container {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    
+    &__text{
+        justify-content: center;
+        font-weight: bolder;
+        margin-bottom: 0;
+        margin-top: 0;
+    }
+    
+    &__img{
+        height: 50px;
+        width: 50px;
+    
+        padding: 10px;
+    }
+    
+    &__card{
+        font-family: var(--font-stack);
+        font-size: 16px;
+    
+        display:flex;
+        align-items: center;
+        width: auto;
+    
+        height: 60px;
+        margin-right: 10px;
+    
+        padding: 10px;
+        border: 1px solid rgba(0,0,0,0.1);
+        border-radius: 6px;
+    }
+}
+

@@ -1,0 +1,19 @@
+.c-card-circle{
+    text-align: center;
+    width: auto;
+    font-family: var(--font-stack);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 30px;
+
+    &__img{
+        border-radius: 50%;
+    }
+    
+    &__text{
+        color: var(--color-text-dark);
+    }
+}
+
