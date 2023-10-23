@@ -12,13 +12,16 @@ fetch("https://www.narutodb.xyz/api/clan?page=1&limit=58")
         allClansButton.addEventListener("click", function () {
             data.clans.forEach(clan => {
                 let clanSection = document.createElement("div")
-                clanSection.className = "clanSection"
+                clanSection.className = "c-clan"
 
                 let clanName = document.createElement("h1")
                 clanName.innerHTML = clan.name
-                clanSection.appendChild(clanName)
+                allClansSection.appendChild(clanName)
 
                 clan.characters.forEach(character => {
+                    let characterInfo = document.createElement("div")
+                    characterInfo.className = "c-clan__character"
+
                     let characterImg = document.createElement("img")
                     characterImg.className = "c-character__image"
                     characterImg.src = character.images
@@ -26,10 +29,12 @@ fetch("https://www.narutodb.xyz/api/clan?page=1&limit=58")
                     let characterName = document.createElement("p")
                     characterName.innerHTML = character.name
 
-                    clanSection.appendChild(characterImg)
-                    clanSection.appendChild(characterName)
-                });
+                    characterInfo.appendChild(characterImg)
+                    characterInfo.appendChild(characterName)
 
+                    clanSection.appendChild(characterInfo)
+                });
+                
                 allClansSection.appendChild(clanSection)
             });
         });
