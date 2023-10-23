@@ -1,0 +1,13 @@
+
+.clanSection{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin: 10px;
+    height: fit-content;
+}
+
+.c-character__image{
+    width: 100px;
+    border-radius: 20px;
+}
