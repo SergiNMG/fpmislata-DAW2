@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>3 CSS</title>
+</head>
+
+<body>
+    <div class="l-border">
+        <div class="l-div-1">
+            Hola
+        </div>
+        <div class="l-div-2">
+            Adios
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="l-border">
+        <span class="l-div-1">
+            Hello
+        </span>
+        <span class="l-div-2">
+            Bye
+        </span>
+    </div>
+    <br>
+    <br>
+    <span class="l-border">
+        <span class="l-div-1">
+            Hello
+        </span>
+        <span class="l-div-2">
+            Bye
+        </span>
+    </span>
+
+    <p>
+        Ramón Melendi Espina, conocido artísticamente como <span class="highlight">Melendi</span>, es <span
+            class="highlight">un cantautor y compositor español de música pop</span>,
+        rock y rumba. De joven sentía atracción por el fútbol, deporte que lo condujo por una corta carrera de
+        futbolista, debutando en varias categorías inferiores en el equipo de su ciudad, el <span class="highlight">Real
+            Oviedo</span>.
+    </p>
+
+    <p>
+        Ramón Melendi Espina, conocido artísticamente como
+    <div class="highlight">Melendi</div>, es <div class="highlight">un cantautor y compositor español de música pop
+    </div>,
+    rock y rumba. De joven sentía atracción por el fútbol, deporte que lo condujo por una corta carrera de
+    futbolista, debutando en varias categorías inferiores en el equipo de su ciudad, el <div class="highlight"> Real
+        Oviedo</div>.
+    </p>
+
+    <p>
+        Ramón Melendi Espina, conocido artísticamente como Melendi, es un cantautor y compositor español de música pop,
+        rock y rumba. De joven sentía atracción por el fútbol, deporte que lo condujo por una corta carrera de
+        futbolista, debutando en varias categorías inferiores en el equipo de su ciudad, el Real Oviedo.
+    </p>
+
+    <h1>Uso de la CPU</h1>
+    <div>
+        <label>Menos del 25%</label>
+        <meter min="0" low="25" optimum="15" high="75" max="100" value="20"></meter>
+    </div>
+    <div>
+        <label>Más del 75%</label>
+        <meter min="0" low="25" optimum="15" high="75" max="100" value="80"></meter>
+    </div>
+
+    <h1>Velocidad de la web</h1>
+    <div>
+        <label>Menos del 25mb/s</label>
+        <meter min="0" low="25" optimum="80" high="75" max="100" value="80"></meter>
+    </div>
+    <div>
+        <label>Más del 25mb/s</label>
+        <meter min="0" low="25" optimum="80" high="75" max="100" value="20"></meter>
+    </div>
+    <h1>Barra de progreso</h1>
+    <div class="p-background">
+        <progress value="0" max="10"></progress><button id="progressBar">Llenar</button>
+    </div>
+</body>
+
+<script>
+    "use strict"
+    let progressButton = document.getElementById("progressBar")
+    
+    progressButton.addEventListener("click", function (){
+        let progress = document.querySelector("progress")
+        progress.className = "c-progress"
+        progress.value = 0
+        let time = 10
+
+        function increment10s() {
+            progress.value += 0.01;
+            if (progress.value < 10) {
+                setTimeout(increment10s, time)
+            }
+        }
+        setTimeout(increment10s, time)
+    });
+
+
+</script>
+
+</html>
