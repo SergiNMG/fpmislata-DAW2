@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email</title>
+</head>
+<body>
+    <h1>Formulario personal</h1>
+    <form id="personalForm">
+        <label for="name">Nombre: </label>
+        <input type="text" id="name" name="name"><br><br>
+
+        <label for="email">Email: </label>
+        <input type="email" name="email" id="email"><br><br>
+
+        <label for="message">Mensaje: </label>
+        <textarea name="message" id="message"></textarea><br><br>
+
+        <input type="button" value="Send" id="sendButton">
+    </form>
+
+    <h2>Información personal: </h2>
+    <div id="personalInfo">
+
+    </div>
+</body>
+<script>
+    "use strict"
+
+    let form = document.getElementById("personalForm")
+    let nameUser = document.getElementById("name")
+    let email = document.getElementById("email")
+    let message = document.getElementById("message")
+    let sendButton = document.getElementById("sendButton")
+    let infoSection = document.getElementById("personalInfo")
+
+    sendButton.addEventListener("click", function(){
+
+        let setName = document.createElement("h3")
+        setName.innerHTML = nameUser.value
+
+        let setEmail = document.createElement("p")
+        setEmail.innerHTML = email.value
+
+        let setMessage = document.createElement("p")
+        setMessage.innerHTML = message.value
+
+        infoSection.appendChild(setName)
+        infoSection.appendChild(setEmail)
+        infoSection.appendChild(setMessage)
+
+    });
+</script>
+</html>

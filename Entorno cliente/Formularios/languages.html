@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de idiomas</title>
+</head>
+<body>
+    <h1>Formulario de idiomas</h1>
+    <form id="languageForm">
+        <label for="country">Selecciona un país: </label>
+        <select name="country" id="country">
+            <option value="EE UU">EE UU</option>
+            <option value="Canadá">Canadá</option>
+            <option value="México">México</option>
+            <option value="Bélgica">Bélgica</option>
+        </select><br><br>
+
+        <label for="languagePreferences">Preferencias de idioma: </label><br>
+        <input type="checkbox" id="english" name="language" value="Inglés">Inglés <br>
+        <input type="checkbox" id="spanish" name="language" value="Español">Español <br>
+        <input type="checkbox" id="french" name="language" value="Francés">Francés <br><br>
+
+        <label for="languageProcedence">Preferencia por idioma local o remoto: </label><br>
+        <input type="radio" name="languagePref" id="local" value="Local">Local <br>
+        <input type="radio" name="languagePref" id="foreign" value="Otro">Otro <br><br>
+
+        <input type="button" value="Enviar" id="send">
+    </form>
+
+    <h2>Resultado: </h2>
+    <div id="countryInfo">
+
+    </div>
+</body>
+<script>
+    let countrySelected = document.getElementById("country")
+    let languageSelected = document.querySelectorAll('input[name="language"]')
+    let procedenceSelected = document.querySelectorAll('input[name="languagePref"]')
+    let sendButton = document.getElementById("send")
+    let countryInfo = document.getElementById("countryInfo")
+
+    sendButton.addEventListener("click", function(){
+        let country = countrySelected.value
+
+        let arrayLanguages = Array.from(languageSelected).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value).join(", ")
+
+        let arrayProcedence = Array.from(procedenceSelected).filter(radio => radio.checked).map(radio => radio.value).join(", ")
+
+        countryInfo.innerHTML = `País: ${country}<br>
+                                Idioma(s): ${arrayLanguages}<br>
+                                Procedencia: ${arrayProcedence}`
+    });
+</script>
+</html>
