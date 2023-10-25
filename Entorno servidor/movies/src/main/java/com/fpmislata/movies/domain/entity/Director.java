@@ -31,35 +31,4 @@ public class Director {
 
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getBirthYear() {
-        return birthYear;
-    }
-
-    public Integer getDeathYear() {
-        return deathYear;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setBirthYear(int birthYear) {
-        this.birthYear = birthYear;
-    }
-
-    public void setDeathYear(Integer deathYear) {
-        this.deathYear = deathYear;
-    }
 }

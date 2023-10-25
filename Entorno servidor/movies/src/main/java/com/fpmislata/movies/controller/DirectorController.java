@@ -36,4 +36,10 @@ public class DirectorController {
     public Director delete (@PathVariable("id") int id){
         return directorService.delete(id);
     }
+
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @GetMapping("/{id}")
+    public Director find(@PathVariable("id") int id){
+        return directorService.find(id);
+    }
 }
