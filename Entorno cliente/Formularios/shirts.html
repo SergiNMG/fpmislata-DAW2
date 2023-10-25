@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title></title>
+</head>
+
+<body>
+    <div class="layout">
+        <div id="view">
+            <img id="setImg" src="img/white.png" width="300px">
+        </div>
+        <div>
+            <img class="getImg" src="img/cami1.png" width="100px"><input type="checkbox" name="shirt" id="betis" value="24">Barça<br>
+            <img class="getImg" src="img/cami2.png" width="100px"><input type="checkbox" name="shirt" id="fcb" value="27">Betis<br>
+            <img class="getImg" src="img/cami3.png" width="100px"><input type="checkbox" name="shirt" id="spain" value="32">España<br>
+        </div>
+    </div>
+    <div>
+        <button id="totalButton">Añadir a cesta</button>
+        <h2 id="setTotal"></h2>
+    </div>
+</body>
+<script>
+"use strict"
+let getImg = document.getElementsByClassName("getImg")
+let setImg = document.getElementById("setImg")
+let allShirts = document.querySelectorAll('input[name="shirt"]')
+let setTotal = document.getElementById("setTotal")
+let totalButton = document.getElementById("totalButton")
+
+Array.from(getImg).forEach(camiseta => {
+    camiseta.addEventListener("mouseover", mouseOver)
+    camiseta.addEventListener("mouseout", mouseOut)
+})
+
+function mouseOver(event){
+    let imgSrc = event.target.src
+    setImg.src = imgSrc
+}
+
+function mouseOut(){
+    setImg.src = "img/white.png"
+}
+
+totalButton.addEventListener("click", function(){
+    let arrayPrices = Array.from(allShirts).filter(checkbox => checkbox.checked).map(checkbox => parseInt(checkbox.value))
+    let priceTotal = arrayPrices.reduce((total, price) => total + price, 0)
+    //console.log(priceTotal)
+    setTotal.textContent = (`Precio total: ${priceTotal}`)
+})
+
+</script>
+</html>

@@ -44,8 +44,9 @@
         let country = countrySelected.value
 
         let arrayLanguages = Array.from(languageSelected).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value).join(", ")
+        //let arrayLanguages = Array.from(languageSelected).map(checkbox => checkbox.checked ? checkbox.value:null).join(", ")
 
-        let arrayProcedence = Array.from(procedenceSelected).filter(radio => radio.checked).map(radio => radio.value).join(", ")
+        let arrayProcedence = Array.from(procedenceSelected).filter(radio => radio.checked).map(radio => radio.value)
 
         countryInfo.innerHTML = `País: ${country}<br>
                                 Idioma(s): ${arrayLanguages}<br>
