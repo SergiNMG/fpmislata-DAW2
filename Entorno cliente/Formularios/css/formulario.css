@@ -1,0 +1,8 @@
+.l-formulario{
+    display: flex;
+    flex-direction: row;
+}
+
+#meses{
+    margin-left: 30px;
+}

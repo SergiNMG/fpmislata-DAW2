@@ -1,35 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/formulario.css">
     <title>Meses</title>
 </head>
+
 <body>
-    <form id="trimestre">
-        <select id="seleccionTrimestre">Selecciona trimestre: 
+    <section class="l-formulario">
+        <form id="trimestre">
+            <label for="trimestre">Selecciona un trimestre: </label><br>
+            <select id="seleccionTrimestre">
 
-        </select>
-    </form>
-    <form id="meses">
+            </select>
+        </form>
+        <form id="meses">
+            <label for="meses">Selecciona un mes: </label><br>
+            <select id="seleccionMes">
 
-    </form>
-    <script src="json/meses.json"></script>
+            </select>
+        </form>
+    </section>
+    <script src="js/meses.js"></script>
 </body>
 <script>
     "use strict"
     let seleccionTrimestre = document.getElementById("seleccionTrimestre")
+    let seleccionMes = document.getElementById("seleccionMes")
 
-    datos.forEach(d => {
-        id = 1
-
-        document.createElement("option")
-        opton.innerHtml = id
-        option.value = id
+    datos.forEach(t => {
+        let option = document.createElement("option")
+        option.textContent = "Trimestre " + t.trimestre
+        option.value = t.trimestre
         seleccionTrimestre.appendChild(option)
-        id ++
-
+        //console.log(trimestre)
     });
-    //let selecTrimestre = document.createElement("select")
+
+    seleccionMes.innerHTML = `<option>${datos[0].meses[0]}</option>
+                                <option>${datos[0].meses[1]}</option>
+                                <option>${datos[0].meses[2]}</option>`
+
+    console.log(datos[0].meses[0])
+
+    seleccionTrimestre.addEventListener("change", function () {
+        let trimestreSeleccionado = seleccionTrimestre.value
+        let mesesSeleccionados = (datos.find(t => t.trimestre == trimestreSeleccionado))
+
+        seleccionMes.textContent = ""
+        mesesSeleccionados.meses.forEach(m => {
+            let option = document.createElement("option")
+            option.textContent = m
+            option.value = m
+            seleccionMes.appendChild(option)
+        })
+    });
 </script>
+
 </html>
