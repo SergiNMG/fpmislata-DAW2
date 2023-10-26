@@ -12,14 +12,14 @@ import java.util.Optional;
 
 @Getter
 @Setter
-@JsonPropertyOrder({"total_records", "pagination", "data"})
-//@JsonPropertyOrder({"total_records", "page", "page_size", "total_pages", "next", "previous", "data"})
+//@JsonPropertyOrder({"total_records", "pagination", "data"})
+@JsonPropertyOrder({"total_records", "page", "page_size", "total_pages", "next", "previous", "data"})
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonRootName("response")
-@Builder
+//@Builder
 public class Response {
 
-    /*
+
     private Object data;
     @JsonProperty("total records")
     private Integer total_records;
@@ -34,7 +34,8 @@ public class Response {
     private String previous;
 
     @JsonIgnore
-    private String url = "http://localhost:3010/movies";
+    @Value("${app.url}")
+    private String url;
 
     @Value("${buildPagination.defaultPageSize}")
     private Integer page_size_default;
@@ -62,8 +63,7 @@ public class Response {
             this.next = url + "?page=" + (page + 1);
         }
     }
-    */
-
+    /*
     private Object data;
 
     private Integer total_records;
@@ -84,6 +84,5 @@ public class Response {
             this.pagination.put("next", url + "/movies?page=" + (page + 1));
         }
     }
-
-
+    */
 }

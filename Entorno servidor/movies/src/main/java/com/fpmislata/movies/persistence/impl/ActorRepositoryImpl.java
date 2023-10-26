@@ -3,6 +3,7 @@ package com.fpmislata.movies.persistence.impl;
 import com.fpmislata.movies.db.DBUtil;
 import com.fpmislata.movies.domain.entity.Actor;
 import com.fpmislata.movies.exception.DBConnectionException;
+import com.fpmislata.movies.exception.ResourceNotFoundException;
 import com.fpmislata.movies.exception.SQLStatmentException;
 import com.fpmislata.movies.persistence.ActorRepository;
 import org.springframework.stereotype.Repository;
@@ -47,10 +48,11 @@ public class ActorRepositoryImpl implements ActorRepository {
                         resultSet.getInt("id"),
                         resultSet.getString("name"),
                         resultSet.getInt("birthYear"),
-                        resultSet.getInt("deathYear")
+                        //resultSet.getInt("deathYear")
+                        (resultSet.getObject("deathYear") != null) ? resultSet.getInt("deathYear"):null
                 );
             }else {
-                return null;
+                throw new ResourceNotFoundException("ID +: " + id);
             }
         }catch (DBConnectionException e){
             throw e;

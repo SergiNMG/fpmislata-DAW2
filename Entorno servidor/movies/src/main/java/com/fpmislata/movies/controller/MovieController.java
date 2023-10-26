@@ -22,18 +22,18 @@ public class MovieController {
     @Value("${buildPagination.defaultPageSize}")
     private Integer page_size_default;
 
-    @Value("${application.url}")
+    @Value("${app.url}")
     private String urlApp;
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("")
     public Response getAll(@RequestParam Optional<Integer> page, Optional<Integer> page_size){
-        /*int total_records = movieService.getTotalNumberOfRecords();
+        int total_records = movieService.getTotalNumberOfRecords();
         if (page_size.isEmpty()) {
             page_size = page_size_default.describeConstable();
         }
-        return new Response(movieService.getAll(page, page_size), total_records, page, page_size);*/
-        page_size = (page_size != null)? page_size : page_size_default;
+        return new Response(movieService.getAll(page, page_size), total_records, page, page_size);
+
     }
 
     @GetMapping("/{id}")

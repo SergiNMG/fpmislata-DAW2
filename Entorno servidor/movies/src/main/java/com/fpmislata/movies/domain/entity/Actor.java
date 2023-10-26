@@ -10,19 +10,22 @@ public class Actor {
     private int id;
     private String name;
     private int birthYear;
-    private int deathYear;
+    private Integer deathYear;
 
-    public Actor(int id, String name, int birthYear, int deathYear) {
+    public Actor(int id, String name, int birthYear, Integer deathYear) {
         this.id = id;
         this.name = name;
         this.birthYear = birthYear;
         this.deathYear = deathYear;
     }
 
-    public Actor(String name, int birthYear, int deathYear) {
+    public Actor(String name, int birthYear, Integer deathYear) {
         this.name = name;
         this.birthYear = birthYear;
         this.deathYear = deathYear;
     }
 
+    public Actor() {
+
+    }
 }

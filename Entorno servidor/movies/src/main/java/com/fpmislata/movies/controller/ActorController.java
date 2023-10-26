@@ -35,4 +35,10 @@ public class ActorController {
     public Actor delete (@PathVariable("id") int id){
         return actorService.delete(id);
     }
+
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @GetMapping("/{id}")
+    public Actor find(@PathVariable("id") int id){
+        return actorService.find(id);
+    }
 }
