@@ -1,10 +1,11 @@
 package com.fpmislata.movies.controller;
 
+import com.fpmislata.movies.controller.model.director.DirectorDetailWeb;
 import com.fpmislata.movies.domain.entity.Director;
 import com.fpmislata.movies.domain.service.DirectorService;
+import com.fpmislata.movies.mapper.DirectorMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/directors")
@@ -13,6 +14,9 @@ public class DirectorController {
 
     @Autowired
     DirectorService directorService;
+
+    @Autowired
+    private DirectorMapper directorMapper;
 
     //Director director = new Director("Sergi Nicolas", 2000, null);
 
@@ -39,7 +43,9 @@ public class DirectorController {
 
     @ResponseStatus(HttpStatus.ACCEPTED)
     @GetMapping("/{id}")
-    public Director find(@PathVariable("id") int id){
-        return directorService.find(id);
+    public DirectorDetailWeb find(@PathVariable("id") int id){
+        //return directorService.find(id);
+        Director director = directorService.find(id);
+        return directorMapper.toDirectorDetailWeb(director);
     }
 }

@@ -34,6 +34,8 @@ public class MovieServiceImpl implements MovieService {
     public Movie findById(int id){
         Movie movie = movieRepository.findById(id);
         List<Actor> actorList = actorRepository.findByMovieId(id);
+        Director director = directorRepository.findByMovieId(id);
+        movie.setDirector(director);
         movie.setActors(actorList);
         return movie;
         //return movieRepository.findById(id);
