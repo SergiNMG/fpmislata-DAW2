@@ -11,4 +11,6 @@ public interface DirectorService {
     Director find(int id);
 
     Director delete(int id);
+
+    Director findByMovieId(int movieId);
 }

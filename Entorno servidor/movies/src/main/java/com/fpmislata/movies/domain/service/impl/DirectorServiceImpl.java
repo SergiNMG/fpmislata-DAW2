@@ -36,4 +36,9 @@ public class DirectorServiceImpl implements DirectorService {
         directorRepository.delete(id);
         return deletedDirector;
     }
+
+    @Override
+    public Director findByMovieId(int movieId){
+        return directorRepository.findByMovieId(movieId);
+    }
 }

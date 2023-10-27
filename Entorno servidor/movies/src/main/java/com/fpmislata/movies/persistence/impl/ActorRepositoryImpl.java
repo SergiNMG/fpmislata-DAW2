@@ -83,6 +83,7 @@ public class ActorRepositoryImpl implements ActorRepository {
         }
     }
 
+    @Override
     public void delete (int id){
         final String SQL = "DELETE FROM actors WHERE id = ?";
         try (Connection connection = DBUtil.open()){
@@ -93,9 +94,38 @@ public class ActorRepositoryImpl implements ActorRepository {
         }catch (SQLStatmentException e){
             throw e;
         }catch (Exception e){
-            throw new RuntimeException("Director no encontrado: " + e.getMessage());
+            throw new RuntimeException("Actor no encontrado: " + e.getMessage());
         }
     }
 
+    @Override
+    public List<Actor> findByMovieId(int movieId){
+        final String SQL = "SELECT a.* from actors a, actors_movies am, movies m WHERE (am.movie_id=m.id) AND (am.actor_id=a.id) AND m.id=?";
+        List<Actor> actorList = new ArrayList<>();
+
+        try(Connection connection = DBUtil.open()){
+            ResultSet resultSet = DBUtil.select(connection, SQL, List.of(movieId));
+            while (resultSet.next()){
+                actorList.add(
+                        new Actor(
+                                resultSet.getInt("id"),
+                                resultSet.getString("name"),
+                                resultSet.getInt("birthYear"),
+                                //resultSet.getInt("deathYear")
+                                (resultSet.getObject("deathYear") != null) ? resultSet.getInt("deathYear"):null
+                        )
+                );
+            }DBUtil.close(connection);
+            return actorList;
+        }catch (DBConnectionException e){
+            throw e;
+        }catch (SQLStatmentException e) {
+            throw e;
+        }catch (Exception e){
+                throw new RuntimeException("Actor no encontrado: " + e.getMessage());
+        }
+
+
+    }
 
 }

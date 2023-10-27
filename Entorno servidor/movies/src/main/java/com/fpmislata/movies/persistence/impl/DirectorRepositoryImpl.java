@@ -84,6 +84,31 @@ public class DirectorRepositoryImpl implements DirectorRepository {
     }
 
     @Override
+    public Director findByMovieId(int movieId){
+        final String SQL = "select d.* from directors d, movies m where (m.director_id=d.id) and m.id= ?";
+        try (Connection connection = DBUtil.open()) {
+            ResultSet resultSet = DBUtil.select(connection, SQL, List.of(movieId));
+            DBUtil.close(connection);
+            if (resultSet.next()) {
+                 return new Director(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getInt("birthYear"),
+                        (resultSet.getObject("deathYear") != null) ? resultSet.getInt("deathYear") : null
+                );
+            }else {
+                return null;
+            }
+        }catch (DBConnectionException e){
+            throw e;
+        }catch (SQLStatmentException e){
+            throw e;
+        }catch (Exception e){
+            throw new RuntimeException("Director no encontrado: " + e.getMessage());
+        }
+    }
+
+    @Override
     public void delete(int id){
         final String SQL = "DELETE FROM directors where id = ?";
         try(Connection connection = DBUtil.open()){

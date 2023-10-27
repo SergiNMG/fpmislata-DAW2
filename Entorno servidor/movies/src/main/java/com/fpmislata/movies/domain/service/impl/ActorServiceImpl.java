@@ -6,6 +6,8 @@ import com.fpmislata.movies.persistence.ActorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ActorServiceImpl implements ActorService {
 
@@ -28,5 +30,9 @@ public class ActorServiceImpl implements ActorService {
         Actor deletedActor = actorRepository.find(id);
         actorRepository.delete(id);
         return deletedActor;
+    }
+
+    public List<Actor> findByMovieId(int movieId){
+        return actorRepository.findByMovieId(movieId);
     }
 }

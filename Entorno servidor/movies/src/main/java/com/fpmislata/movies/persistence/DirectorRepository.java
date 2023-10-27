@@ -10,4 +10,6 @@ public interface DirectorRepository {
     Director find(int id);
 
     void delete(int id);
+
+    Director findByMovieId(int movieId);
 }
