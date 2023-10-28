@@ -1,6 +1,5 @@
 package com.fpmislata.movies.controller.model.director;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,11 +9,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class DirectorDetailWeb {
-    private int id;
+public class DirectorCreateWeb {
     private String name;
     private int birthYear;
     private Integer deathYear;
-
 }

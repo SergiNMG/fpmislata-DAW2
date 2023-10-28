@@ -1,6 +1,8 @@
 package com.fpmislata.movies.controller;
 
+import com.fpmislata.movies.controller.model.director.DirectorCreateWeb;
 import com.fpmislata.movies.controller.model.director.DirectorDetailWeb;
+import com.fpmislata.movies.controller.model.director.DirectorUpdateWeb;
 import com.fpmislata.movies.domain.entity.Director;
 import com.fpmislata.movies.domain.service.DirectorService;
 import com.fpmislata.movies.mapper.DirectorMapper;
@@ -22,17 +24,21 @@ public class DirectorController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("")
-    public Director create(@RequestBody Director director){
-        int id = directorService.create(director);
-        director.setId(id);
-        return director;
+    public DirectorDetailWeb create(@RequestBody DirectorCreateWeb directorCreateWeb){
+        int id = directorService.create(DirectorMapper.mapper.toDirector(directorCreateWeb));
+        return new DirectorDetailWeb(
+          id,
+          directorCreateWeb.getName(),
+          directorCreateWeb.getBirthYear(),
+          directorCreateWeb.getDeathYear()
+        );
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/{id}")
-    public void update (@PathVariable("id") int id, @RequestBody Director director){
-        director.setId(id);
-        directorService.update(id, director);
+    public void update (@PathVariable("id") int id, @RequestBody DirectorUpdateWeb directorUpdateWeb){
+        directorUpdateWeb.setId(id);
+        directorService.update(id, DirectorMapper.mapper.toDirector(directorUpdateWeb));
     }
 
     @ResponseStatus(HttpStatus.OK)
