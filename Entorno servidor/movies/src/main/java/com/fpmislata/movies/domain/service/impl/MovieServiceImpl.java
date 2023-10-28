@@ -4,9 +4,9 @@ import com.fpmislata.movies.domain.entity.Actor;
 import com.fpmislata.movies.domain.entity.Director;
 import com.fpmislata.movies.domain.entity.Movie;
 import com.fpmislata.movies.domain.service.MovieService;
-import com.fpmislata.movies.persistence.ActorRepository;
-import com.fpmislata.movies.persistence.DirectorRepository;
-import com.fpmislata.movies.persistence.MovieRepository;
+import com.fpmislata.movies.domain.repository.ActorRepository;
+import com.fpmislata.movies.domain.repository.DirectorRepository;
+import com.fpmislata.movies.domain.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

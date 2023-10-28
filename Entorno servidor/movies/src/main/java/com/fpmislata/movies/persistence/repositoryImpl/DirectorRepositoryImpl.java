@@ -1,16 +1,14 @@
-package com.fpmislata.movies.persistence.impl;
+package com.fpmislata.movies.persistence.repositoryImpl;
 
 import com.fpmislata.movies.db.DBUtil;
 import com.fpmislata.movies.domain.entity.Director;
 import com.fpmislata.movies.exception.DBConnectionException;
-import com.fpmislata.movies.exception.ResourceNotFoundException;
 import com.fpmislata.movies.exception.SQLStatmentException;
-import com.fpmislata.movies.persistence.DirectorRepository;
+import com.fpmislata.movies.domain.repository.DirectorRepository;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,7 +84,7 @@ public class DirectorRepositoryImpl implements DirectorRepository {
     @Override
     public Director findByMovieId(int movieId){
         final String SQL = "select d.* from directors d, movies m where (m.director_id=d.id) and m.id= ?";
-        try (Connection connection = DBUtil.open()) {
+        try (Connection connection = DBUtil.open(true)) {
             ResultSet resultSet = DBUtil.select(connection, SQL, List.of(movieId));
             DBUtil.close(connection);
             if (resultSet.next()) {
@@ -111,7 +109,7 @@ public class DirectorRepositoryImpl implements DirectorRepository {
     @Override
     public void delete(int id){
         final String SQL = "DELETE FROM directors where id = ?";
-        try(Connection connection = DBUtil.open()){
+        try(Connection connection = DBUtil.open(true)){
             DBUtil.delete(connection, SQL, List.of(id));
             DBUtil.close(connection);
         }catch (DBConnectionException e){

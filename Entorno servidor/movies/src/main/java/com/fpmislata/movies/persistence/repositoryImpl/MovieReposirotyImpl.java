@@ -1,16 +1,14 @@
-package com.fpmislata.movies.persistence.impl;
+package com.fpmislata.movies.persistence.repositoryImpl;
 
 import com.fpmislata.movies.db.DBUtil;
 import com.fpmislata.movies.domain.entity.Movie;
 import com.fpmislata.movies.exception.DBConnectionException;
 import com.fpmislata.movies.exception.ResourceNotFoundException;
 import com.fpmislata.movies.exception.SQLStatmentException;
-import com.fpmislata.movies.persistence.MovieRepository;
+import com.fpmislata.movies.domain.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.amqp.RabbitProperties;
 import org.springframework.stereotype.Repository;
 
-import javax.swing.text.html.Option;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -37,7 +35,7 @@ public class MovieReposirotyImpl implements MovieRepository {
 
         List<Movie> movies = new ArrayList<>();
 
-        try(Connection connection = DBUtil.open()){
+        try(Connection connection = DBUtil.open(true)){
             ResultSet resultSet = DBUtil.select(connection, SQL, null);
             while (resultSet.next()){
                 movies.add(
@@ -61,7 +59,7 @@ public class MovieReposirotyImpl implements MovieRepository {
     @Override
     public Movie findById(int id){
         final String SQL = "SELECT * FROM movies WHERE id = ? LIMIT 1";
-        try(Connection connection = DBUtil.open()){
+        try(Connection connection = DBUtil.open(true)){
             ResultSet resultSet = DBUtil.select(connection, SQL, List.of(id));
             if(resultSet.next()){
                 Movie movie = new Movie(
@@ -85,7 +83,7 @@ public class MovieReposirotyImpl implements MovieRepository {
     @Override
     public int getTotalNumberOfRecords() {
         final String SQL = "SELECT COUNT(*) FROM movies";
-        try(Connection connection = DBUtil.open()){
+        try(Connection connection = DBUtil.open(true)){
             ResultSet resultSet = DBUtil.select(connection, SQL, null);
             DBUtil.close(connection);
             resultSet.next();

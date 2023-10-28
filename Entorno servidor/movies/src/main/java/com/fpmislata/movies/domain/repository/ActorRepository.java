@@ -1,4 +1,4 @@
-package com.fpmislata.movies.persistence;
+package com.fpmislata.movies.domain.repository;
 
 import com.fpmislata.movies.domain.entity.Actor;
 import org.springframework.stereotype.Repository;

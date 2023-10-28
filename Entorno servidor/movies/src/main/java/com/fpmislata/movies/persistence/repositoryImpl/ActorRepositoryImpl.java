@@ -1,16 +1,15 @@
-package com.fpmislata.movies.persistence.impl;
+package com.fpmislata.movies.persistence.repositoryImpl;
 
 import com.fpmislata.movies.db.DBUtil;
 import com.fpmislata.movies.domain.entity.Actor;
 import com.fpmislata.movies.exception.DBConnectionException;
 import com.fpmislata.movies.exception.ResourceNotFoundException;
 import com.fpmislata.movies.exception.SQLStatmentException;
-import com.fpmislata.movies.persistence.ActorRepository;
+import com.fpmislata.movies.domain.repository.ActorRepository;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +23,7 @@ public class ActorRepositoryImpl implements ActorRepository {
         params.add(actor.getName());
         params.add(actor.getBirthYear());
         params.add(actor.getDeathYear());
-        try(Connection connection = DBUtil.open()) {
+        try(Connection connection = DBUtil.open(true)) {
             int id = DBUtil.insert(connection, SQL, params);
             DBUtil.close(connection);
             return id;
@@ -40,7 +39,7 @@ public class ActorRepositoryImpl implements ActorRepository {
     @Override
     public Actor find(int id){
         final String SQL = "SELECT * FROM ACTORS WHERE id = ? LIMIT 1";
-        try (Connection connection = DBUtil.open()){
+        try (Connection connection = DBUtil.open(true)){
             ResultSet resultSet = DBUtil.select(connection, SQL, List.of(id));
             DBUtil.close(connection);
             if (resultSet.next()){
@@ -71,7 +70,7 @@ public class ActorRepositoryImpl implements ActorRepository {
         params.add(actor.getBirthYear());
         params.add(actor.getDeathYear());
         params.add(actor.getId());
-        try (Connection connection = DBUtil.open()){
+        try (Connection connection = DBUtil.open(true)){
             DBUtil.update(connection, SQL, params);
             DBUtil.close(connection);
         }catch (DBConnectionException e){
@@ -86,7 +85,7 @@ public class ActorRepositoryImpl implements ActorRepository {
     @Override
     public void delete (int id){
         final String SQL = "DELETE FROM actors WHERE id = ?";
-        try (Connection connection = DBUtil.open()){
+        try (Connection connection = DBUtil.open(true)){
             DBUtil.delete(connection, SQL, List.of(id));
             DBUtil.close(connection);
         }catch (DBConnectionException e){
@@ -103,7 +102,7 @@ public class ActorRepositoryImpl implements ActorRepository {
         final String SQL = "SELECT a.* from actors a, actors_movies am, movies m WHERE (am.movie_id=m.id) AND (am.actor_id=a.id) AND m.id=?";
         List<Actor> actorList = new ArrayList<>();
 
-        try(Connection connection = DBUtil.open()){
+        try(Connection connection = DBUtil.open(true)){
             ResultSet resultSet = DBUtil.select(connection, SQL, List.of(movieId));
             while (resultSet.next()){
                 actorList.add(
