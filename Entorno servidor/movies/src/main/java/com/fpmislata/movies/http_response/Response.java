@@ -33,7 +33,6 @@ public class Response {
     @JsonProperty("previous")
     private String previous;
 
-    @JsonIgnore
     @Value("${app.url}")
     private String url;
 

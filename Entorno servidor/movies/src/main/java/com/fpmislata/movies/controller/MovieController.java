@@ -29,9 +29,6 @@ public class MovieController {
     @Value("${buildPagination.defaultPageSize}")
     private Integer page_size_default;
 
-    @Value("${app.url}")
-    private String urlApp;
-
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("")
     public Response getAll(@RequestParam Optional<Integer> page, Optional<Integer> page_size){

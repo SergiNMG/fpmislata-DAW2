@@ -6,6 +6,10 @@ import com.fpmislata.movies.exception.DBConnectionException;
 import com.fpmislata.movies.exception.ResourceNotFoundException;
 import com.fpmislata.movies.exception.SQLStatmentException;
 import com.fpmislata.movies.domain.repository.MovieRepository;
+import com.fpmislata.movies.mapper.MovieMapper;
+import com.fpmislata.movies.persistence.dao.MovieDAO;
+import com.fpmislata.movies.persistence.model.MovieEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
@@ -15,81 +19,55 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository
 public class MovieReposirotyImpl implements MovieRepository {
 
     @Value("${buildPagination.defaultPageSize}")
     private int page_size_default;
+
+    @Autowired
+    MovieDAO movieDAO;
+
+    @Autowired
+    MovieMapper movieMapper;
+
     @Override
     public List<Movie> getAll(Optional<Integer> page, Optional<Integer> page_size){
-        String SQL = "SELECT * FROM movies";
-        if(page.isPresent()){
-            int offset = (page.get() - 1) * page_size.get();
-            SQL += String.format(" LIMIT %d, %d", offset, page_size.get());
-        }
-        /*else{
-            int offset = (page.get() - 1) * page_size_default;
-            SQL += String.format(" LIMIT %d, %d", offset, page_size_default);
-        }*/
-
-        List<Movie> movies = new ArrayList<>();
 
         try(Connection connection = DBUtil.open(true)){
-            ResultSet resultSet = DBUtil.select(connection, SQL, null);
-            while (resultSet.next()){
-                movies.add(
-                        new Movie(
-                                resultSet.getInt("id"),
-                                resultSet.getString("title"),
-                                resultSet.getInt("year"),
-                                resultSet.getInt("runtime")
-                        )
-                );
-            }
+            List<MovieEntity> moviesEntities = movieDAO.getAll(connection, page, page_size);
+            List<Movie> movies = moviesEntities
+                    .stream()
+                    .map(movieMapper::toMovie)
+                    .collect(Collectors.toList());
             DBUtil.close(connection);
             return movies;
-        } catch (DBConnectionException e) {
-            throw e;
         } catch (SQLException e){
-            throw new SQLStatmentException("SQL: " + SQL);
+            throw new RuntimeException(e);
         }
     }
 
     @Override
-    public Movie findById(int id){
-        final String SQL = "SELECT * FROM movies WHERE id = ? LIMIT 1";
+    public Optional<Movie> findById(int id){
         try(Connection connection = DBUtil.open(true)){
-            ResultSet resultSet = DBUtil.select(connection, SQL, List.of(id));
-            if(resultSet.next()){
-                Movie movie = new Movie(
-                        resultSet.getInt("id"),
-                        resultSet.getString("title"),
-                        resultSet.getInt("year"),
-                        resultSet.getInt("runtime")
-                );
-                DBUtil.close(connection);
-                return movie;
-            } else {
-                throw new ResourceNotFoundException("Id movie: " + id);
-            }
-        }catch (DBConnectionException e) {
-            throw e;
-        }catch (SQLException e){
-            throw new SQLStatmentException("SQL: " + SQL);
+            MovieEntity movieEntity = movieDAO.findById(connection, id).get();
+
+            return Optional.ofNullable(MovieMapper.mapper.toMovie(movieEntity)) ;
+            // return movieEntity.map(MovieMapper.mapper::toMovie);
+
+        } catch (SQLException e){
+            throw new RuntimeException(e);
         }
     }
 
     @Override
     public int getTotalNumberOfRecords() {
-        final String SQL = "SELECT COUNT(*) FROM movies";
         try(Connection connection = DBUtil.open(true)){
-            ResultSet resultSet = DBUtil.select(connection, SQL, null);
-            DBUtil.close(connection);
-            resultSet.next();
-            return (int) resultSet.getInt(1);
-            } catch (SQLException e){
-            throw new RuntimeException("SQL: " + SQL);
+            return movieDAO.getTotalNumberOfRecords(connection);
+        }catch (SQLException e){
+            throw new RuntimeException(e);
         }
     }
 

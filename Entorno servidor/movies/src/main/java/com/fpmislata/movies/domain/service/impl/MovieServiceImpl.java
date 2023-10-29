@@ -32,7 +32,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie findById(int id){
-        Movie movie = movieRepository.findById(id);
+        Movie movie = movieRepository.findById(id).get();
         List<Actor> actorList = actorRepository.findByMovieId(id);
         Director director = directorRepository.findByMovieId(id);
         movie.setDirector(director);

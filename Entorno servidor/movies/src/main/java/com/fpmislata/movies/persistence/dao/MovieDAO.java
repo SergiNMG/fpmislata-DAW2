@@ -7,6 +7,7 @@ import com.fpmislata.movies.exception.ResourceNotFoundException;
 import com.fpmislata.movies.exception.SQLStatmentException;
 import com.fpmislata.movies.mapper.MovieMapper;
 import com.fpmislata.movies.persistence.model.MovieEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -22,6 +23,7 @@ public class MovieDAO {
 
     @Value("${buildPagination.defaultPageSize}")
     private int page_size_default;
+
     public List<MovieEntity> getAll(Connection connection, Optional<Integer> page, Optional<Integer> page_size){
         String SQL = "SELECT * FROM movies";
         if(page.isPresent()){
@@ -38,7 +40,8 @@ public class MovieDAO {
             }
             return movieEntities;
         } catch (SQLException e){
-            throw new SQLStatmentException("SQL: " + SQL);
+            //throw new SQLStatmentException("SQL: " + SQL);
+            throw new RuntimeException(e);
         }
     }
 
@@ -46,14 +49,14 @@ public class MovieDAO {
         final String SQL = "SELECT * FROM movies WHERE id = ? LIMIT 1";
         try{
             ResultSet resultSet = DBUtil.select(connection, SQL, List.of(id));
-            if(resultSet.next()){
-                MovieEntity movieEntity = MovieMapper.mapper.toMovieEntity(resultSet);
-                return Optional.ofNullable(resultSet.next()?movieEntity:null);
-            } else {
-                throw new ResourceNotFoundException("Id movie: " + id);
-            }
+
+            //MovieEntity movieEntity = MovieMapper.mapper.toMovieEntity(resultSet);
+            //return Optional.ofNullable(resultSet.next() ? movieEntity : null);
+
+            return Optional.ofNullable(resultSet.next()?MovieMapper.mapper.toMovieEntity(resultSet):null);
         }catch (SQLException e){
-            throw new SQLStatmentException("SQL: " + SQL);
+            //throw new SQLStatmentException("SQL: " + SQL);
+            throw new RuntimeException(e);
         }
     }
 
@@ -61,7 +64,6 @@ public class MovieDAO {
         final String SQL = "SELECT COUNT(*) FROM movies";
         try{
             ResultSet resultSet = DBUtil.select(connection, SQL, null);
-            DBUtil.close(connection);
             resultSet.next();
             return (int) resultSet.getInt(1);
         } catch (SQLException e){

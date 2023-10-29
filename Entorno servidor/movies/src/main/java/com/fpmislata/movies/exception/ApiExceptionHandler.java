@@ -34,7 +34,7 @@ public class ApiExceptionHandler {
             SQLStatmentException.class
     })
     @ResponseBody
-    public ErrorMessage SQLexception(Exception exception){
+    public ErrorMessage SQLException(Exception exception){
         return new ErrorMessage(exception.getMessage(), HttpStatus.BAD_REQUEST.value());
     }
 

@@ -22,7 +22,7 @@ public class DirectorRepositoryImpl implements DirectorRepository {
         params.add(director.getName());
         params.add(director.getBirthYear());
         params.add(director.getDeathYear());
-        try(Connection connection = DBUtil.open()){
+        try(Connection connection = DBUtil.open(true)){
             int id = DBUtil.insert(connection, SQL, params);
             DBUtil.close(connection);
             return id;
@@ -43,7 +43,7 @@ public class DirectorRepositoryImpl implements DirectorRepository {
         params.add(director.getBirthYear());
         params.add(director.getDeathYear());
         params.add(director.getId());
-        try(Connection connection = DBUtil.open()){
+        try(Connection connection = DBUtil.open(true)){
             DBUtil.update(connection, SQL, params);
             DBUtil.close(connection);
         }catch (DBConnectionException e){
@@ -58,7 +58,7 @@ public class DirectorRepositoryImpl implements DirectorRepository {
     @Override
     public Director find(int id){
         final String SQL = "SELECT * FROM directors WHERE id = ? LIMIT 1";
-        try(Connection connection = DBUtil.open()){
+        try(Connection connection = DBUtil.open(true)){
             ResultSet resultSet = DBUtil.select(connection, SQL, List.of(id));
             DBUtil.close(connection);
             if (resultSet.next()){
