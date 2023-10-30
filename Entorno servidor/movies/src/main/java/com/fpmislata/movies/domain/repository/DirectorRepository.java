@@ -2,14 +2,16 @@ package com.fpmislata.movies.domain.repository;
 
 import com.fpmislata.movies.domain.entity.Director;
 
+import java.util.Optional;
+
 public interface DirectorRepository {
     int insert(Director director);
 
     void update(Director director);
 
-    Director find(int id);
+    Optional<Director> find(int id);
 
     void delete(int id);
 
-    Director findByMovieId(int movieId);
+    Optional<Director> findByMovieId(int movieId);
 }
