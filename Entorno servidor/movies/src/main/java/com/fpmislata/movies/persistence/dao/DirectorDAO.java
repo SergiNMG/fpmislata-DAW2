@@ -6,6 +6,7 @@ import com.fpmislata.movies.exception.DBConnectionException;
 import com.fpmislata.movies.exception.SQLStatmentException;
 import com.fpmislata.movies.mapper.DirectorMapper;
 import com.fpmislata.movies.persistence.model.DirectorEntity;
+import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class DirectorDAO {
 
     public Optional<DirectorEntity> find(Connection connection, int id){

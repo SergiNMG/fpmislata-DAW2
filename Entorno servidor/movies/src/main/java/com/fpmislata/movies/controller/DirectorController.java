@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RequestMapping("/directors")
 @RestController
 public class DirectorController {
@@ -44,14 +46,14 @@ public class DirectorController {
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/{id}")
     public Director delete (@PathVariable("id") int id){
-        return directorService.delete(id);
+        return directorService.delete(id).get();
     }
 
     @ResponseStatus(HttpStatus.ACCEPTED)
     @GetMapping("/{id}")
     public DirectorDetailWeb find(@PathVariable("id") int id){
         //return directorService.find(id);
-        Director director = directorService.find(id);
+        Director director = directorService.find(id).get();
         return directorMapper.toDirectorDetailWeb(director);
     }
 }

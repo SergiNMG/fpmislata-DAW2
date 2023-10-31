@@ -6,6 +6,8 @@ import com.fpmislata.movies.domain.repository.DirectorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class DirectorServiceImpl implements DirectorService {
 
@@ -19,24 +21,25 @@ public class DirectorServiceImpl implements DirectorService {
 
     @Override
     public void update(int id, Director director){
-        Director existingDirector = directorRepository.find(director.getId());
+        Optional<Director> existingDirector = directorRepository.find(director.getId());
         directorRepository.update(director);
     }
 
     @Override
-    public Director find(int id){
+    public Optional<Director> find(int id){
+
         return directorRepository.find(id);
     }
 
     @Override
-    public Director delete(int id){
-        Director deletedDirector = directorRepository.find(id);
+    public Optional<Director> delete(int id){
+        Optional<Director> deletedDirector = directorRepository.find(id);
         directorRepository.delete(id);
         return deletedDirector;
     }
 
     @Override
-    public Director findByMovieId(int movieId){
+    public Optional<Director> findByMovieId(int movieId){
         return directorRepository.findByMovieId(movieId);
     }
 }
