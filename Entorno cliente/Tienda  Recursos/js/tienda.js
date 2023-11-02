@@ -6,19 +6,20 @@ function creaListaCriterios() {
 	criterios.forEach(c => {
 		let criterio = document.createElement("option")
 		criterio.textContent = c
-		criterio.value = c
+		criterio.id = c
 		criteriosOrdenacion.appendChild(criterio)
 	});
 
-	criteriosOrdenacion.addEventListener("change", pintaArticulos);
+	criteriosOrdenacion.addEventListener("change", function(){
+		pintaArticulos()
+	});
 }
 
-window.onload = () => {
-	creaListaCriterios()
-	let divArriculo = document.getElementById("contenedor")
-	divArriculo.className = "row row-cols-1 row-cols-md-6 g-4"
+function actualizaPagina(){
 
-	let listaProductos = listaArticulos.slice()
+	let divArriculo = document.getElementById("contenedor")
+	divArriculo.textContent = ""
+	divArriculo.className = "row row-cols-1 row-cols-md-6 g-4"
 
 	listaArticulos.forEach(a => {
 
@@ -56,30 +57,59 @@ window.onload = () => {
 		cardBody.appendChild(cardPrice)
 		card.appendChild(cardBody)
 		card.appendChild(btn)
-
 		divArriculo.appendChild(col)
 
-		return listaProductos
-
+		btn.addEventListener("click", function(){
+			ponArticuloEnCarrito(a.codigo)
+		})
 	});
 }
 
-function pintaArticulos(listaProductos) {
-	listaProductos.sort((a, b) => b.precio - a.precio)
+let listaArticulosOriginal = listaArticulos.slice()
+function pintaArticulos() {
+	let criterio = document.getElementById("criteriosOrdenacion").value
 
+	if(criterio == "Ascendente por precio"){
+		listaArticulos.sort((a, b) => a.precio - b.precio)
+	}
+	else if(criterio == "Descendente por precio"){
+		listaArticulos.sort((a, b) => b.precio - a.precio)
+	}
+	else{
+		listaArticulos = listaArticulosOriginal.slice()
+	}
+	
+	actualizaPagina()
 }
 
+let miCarrito;
+function ponArticuloEnCarrito(id) {
+	if(!miCarrito){
+		miCarrito = new Carrito()
+	}
 
-function ponArticuloEnCarrito() {
+	let articulo = listaArticulos.find(a => a.codigo == id)
 
+	miCarrito.anyadeArticulo(articulo)
 }
 
-
-function verCarro() {
-
+window.onload = () => {
+	creaListaCriterios()
+	actualizaPagina()
+	verCarro()
 }
 
-function efectuaPedido() {
+function verCarro(){
+	document.getElementById("carritoImg").addEventListener("click", function(){
+		let carritoDialog = document.getElementById("miDialogo")
+		carritoDialog.showModal()
+		document.getElementById("btnCierraDialog").addEventListener("click", function(){
+			carritoDialog.close()
+		})
+	});
+}
 
+function efectuaPedido(){
+	
 }
 

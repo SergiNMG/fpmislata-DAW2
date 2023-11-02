@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <link rel="stylesheet" href="./css/carrito.css">
  
 </head>
 <script src="./js/datos.js"></script>
@@ -20,8 +21,8 @@
 	
 	     
       <select id="criteriosOrdenacion"></select>
-	
-	  <img src="assets/cart.png" height="60px"> 
+
+	  <img id="carritoImg" src="assets/cart.png" height="60px"> 
 	</nav>
 
 	<br>
@@ -37,6 +38,22 @@
 			<h2> Carrito  <span id="idPedido" class="h5" ></span><h2>
 		</div>
 		<div id="dialogContent">
+			<table id="tablaCarrito" class="table tablaCarrito">
+				<thead>
+					<tr>
+						<th></th>
+						<th>Nombre</th>
+						<th>Descripcion</th>
+						<th>Precio</th>
+						<th>Unidades</th>
+						<th>Total</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+
+				</tbody>
+			</table>
 		</div>
 		<div id="dialogFooter">
 			<h3 class="text-right">Total: <span id="total"></span></h3>
