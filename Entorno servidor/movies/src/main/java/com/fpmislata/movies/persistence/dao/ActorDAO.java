@@ -40,56 +40,30 @@ public class ActorDAO {
         }
     }
 
-    public int insert(Actor actor){
+    public int insert(Connection connection, ActorEntity actorEntity){
         final String SQL = "INSERT INTO ACTORS (name, birthYear, deathYear) VALUES (?, ?, ?)";
         List<Object> params = new ArrayList<>();
-        params.add(actor.getName());
-        params.add(actor.getBirthYear());
-        params.add(actor.getDeathYear());
-        try(Connection connection = DBUtil.open(true)) {
-            int id = DBUtil.insert(connection, SQL, params);
-            DBUtil.close(connection);
-            return id;
-        } catch (DBConnectionException e) {
-            throw e;
-        } catch (SQLStatmentException e) {
-            throw e;
-        } catch (Exception e) {
-            throw new RuntimeException("Error al insertar actor: " + e.getMessage());
-        }
+        params.add(actorEntity.getName());
+        params.add(actorEntity.getBirthYear());
+        params.add(actorEntity.getDeathYear());
+
+        return DBUtil.insert(connection, SQL, List.of(params));
     }
 
-    public void update (Actor actor){
+    public void update (Connection connection ,ActorEntity actorEntity){
         final String SQL = "UPDATE actors SET name = ?, birthYear = ?, deathYear = ? WHERE id = ?";
         List<Object> params = new ArrayList<>();
-        params.add(actor.getName());
-        params.add(actor.getBirthYear());
-        params.add(actor.getDeathYear());
-        params.add(actor.getId());
-        try (Connection connection = DBUtil.open(true)){
-            DBUtil.update(connection, SQL, params);
-            DBUtil.close(connection);
-        }catch (DBConnectionException e){
-            throw e;
-        }catch (SQLStatmentException e){
-            throw e;
-        }catch (Exception e){
-            throw new RuntimeException("Error al actualizar actor: " + e.getMessage());
-        }
+        params.add(actorEntity.getName());
+        params.add(actorEntity.getBirthYear());
+        params.add(actorEntity.getDeathYear());
+        params.add(actorEntity.getId());
+
+        DBUtil.update(connection, SQL, List.of(params));
     }
 
-    public void delete (int id){
+    public void delete (Connection connection, int id){
         final String SQL = "DELETE FROM actors WHERE id = ?";
-        try (Connection connection = DBUtil.open(true)){
-            DBUtil.delete(connection, SQL, List.of(id));
-            DBUtil.close(connection);
-        }catch (DBConnectionException e){
-            throw e;
-        }catch (SQLStatmentException e){
-            throw e;
-        }catch (Exception e){
-            throw new RuntimeException("Actor no encontrado: " + e.getMessage());
-        }
+        DBUtil.delete(connection, SQL, List.of(id));
     }
 
 }
