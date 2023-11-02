@@ -45,11 +45,19 @@ public class MovieController {
         return new Response(movieListWeb, total_records, page, page_size);
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{id}")
     public MovieDetailWeb findById(@PathVariable("id") int id){
             //return movieService.findById(id);
             Movie movieDetailWeb = movieService.findById(id);
             return movieMapper.toMovieDetailWeb(movieDetailWeb);
     }
+
+    /*@ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("")
+    public Response create(){
+
+    }*/
+
 
 }

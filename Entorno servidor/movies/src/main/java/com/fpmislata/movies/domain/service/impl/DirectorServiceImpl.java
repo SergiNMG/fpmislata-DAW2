@@ -21,13 +21,11 @@ public class DirectorServiceImpl implements DirectorService {
 
     @Override
     public void update(int id, Director director){
-        Optional<Director> existingDirector = directorRepository.find(director.getId());
         directorRepository.update(director);
     }
 
     @Override
     public Optional<Director> find(int id){
-
         return directorRepository.find(id);
     }
 
