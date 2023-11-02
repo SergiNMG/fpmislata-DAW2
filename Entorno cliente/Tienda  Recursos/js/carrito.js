@@ -1,28 +1,28 @@
-class Carrito{
-	constructor(id){
-		this.articulos = []						
+class Carrito {
+	constructor(id) {
+		this.articulos = []
+		this.id = id
 	}
-						
-	anyadeArticulo(articulo){		
+
+	anyadeArticulo(articulo) {
 		this.articulos.push(articulo)
 		this.verCarrito(articulo)
 		//console.log(this.articulos)
 	}
-	
+
 	//codigoArticulo = this.articulos.forEach(a => a.codigo)
-				
-	borraArticulo(codigoArticulo){
+
+	borraArticulo(codigoArticulo) {
 
 	}
-	
-	modificaUnidades(codigo,n){		
-	}	
-			
-	verCarrito(articulo){
-		console.log(articulo)
+
+	modificaUnidades(codigo, n) {
+	}
+
+	verCarrito(articulo) {
 		let tabla = document.getElementById("tablaCarrito")
 		let filaProducto = document.createElement("tr")
-		
+
 		let cImagen = document.createElement("td")
 		let imgProducto = document.createElement("img")
 		imgProducto.className = "imgCarrito"
@@ -43,6 +43,23 @@ class Carrito{
 		let cTotal = document.createElement("td")
 
 		let cAcciones = document.createElement("td")
+		//let divAcciones = document.createElement("div")
+		cAcciones.className = "tdAcciones"
+		let aumentarUds = document.createElement("button")
+		aumentarUds.className = "buttonUds buttonAumentar"
+		aumentarUds.textContent = "  +  "
+		cAcciones.appendChild(aumentarUds)
+
+		let disminuirUds = document.createElement("button")
+		disminuirUds.className = "buttonUds buttonDisminuir"
+		disminuirUds.textContent = "  -  "
+		cAcciones.appendChild(disminuirUds)
+
+		let borrarArticulo = document.createElement("button")
+		borrarArticulo.className = "buttonUds buttonBorrar"
+		borrarArticulo.textContent = "Borrar"
+		cAcciones.appendChild(borrarArticulo)
+		//cAcciones.textContent = divAcciones
 
 		filaProducto.appendChild(cImagen)
 		filaProducto.appendChild(cNombre)
@@ -53,5 +70,5 @@ class Carrito{
 		filaProducto.appendChild(cAcciones)
 
 		tabla.getElementsByTagName("tbody")[0].appendChild(filaProducto)
-	}			
+	}
 }

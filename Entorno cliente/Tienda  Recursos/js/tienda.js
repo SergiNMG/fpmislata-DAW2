@@ -1,7 +1,15 @@
 criterios = ["Sin ordenar", "Ascendente por precio", "Descendente por precio"]
 
-function creaListaCriterios() {
+window.onload = () => {
+	let miCarrito = new Carrito()
+	mostrarArticulos(miCarrito)
+	creaListaCriterios(miCarrito)
+	verCarro(miCarrito)
+}
+
+function creaListaCriterios(miCarrito) {
 	let criteriosOrdenacion = document.getElementById("criteriosOrdenacion")
+	let listaArticulosOriginal = listaArticulos.slice()
 
 	criterios.forEach(c => {
 		let criterio = document.createElement("option")
@@ -10,13 +18,24 @@ function creaListaCriterios() {
 		criteriosOrdenacion.appendChild(criterio)
 	});
 
-	criteriosOrdenacion.addEventListener("change", function(){
-		pintaArticulos()
+	criteriosOrdenacion.addEventListener("change", function () {
+		let criterio = document.getElementById("criteriosOrdenacion").value
+
+		if (criterio == "Ascendente por precio") {
+			listaArticulos.sort((a, b) => a.precio - b.precio)
+		}
+		else if (criterio == "Descendente por precio") {
+			listaArticulos.sort((a, b) => b.precio - a.precio)
+		}
+		else {
+			listaArticulos = listaArticulosOriginal.slice()
+		}
+
+		mostrarArticulos(miCarrito)
 	});
 }
 
-function actualizaPagina(){
-
+function mostrarArticulos(miCarrito) {
 	let divArriculo = document.getElementById("contenedor")
 	divArriculo.textContent = ""
 	divArriculo.className = "row row-cols-1 row-cols-md-6 g-4"
@@ -59,57 +78,32 @@ function actualizaPagina(){
 		card.appendChild(btn)
 		divArriculo.appendChild(col)
 
-		btn.addEventListener("click", function(){
-			ponArticuloEnCarrito(a.codigo)
+		btn.addEventListener("click", function () {
+			ponArticuloEnCarrito(miCarrito, a.codigo)
 		})
 	});
 }
 
-let listaArticulosOriginal = listaArticulos.slice()
-function pintaArticulos() {
-	let criterio = document.getElementById("criteriosOrdenacion").value
-
-	if(criterio == "Ascendente por precio"){
-		listaArticulos.sort((a, b) => a.precio - b.precio)
-	}
-	else if(criterio == "Descendente por precio"){
-		listaArticulos.sort((a, b) => b.precio - a.precio)
-	}
-	else{
-		listaArticulos = listaArticulosOriginal.slice()
-	}
-	
-	actualizaPagina()
-}
-
-let miCarrito;
-function ponArticuloEnCarrito(id) {
-	if(!miCarrito){
-		miCarrito = new Carrito()
-	}
-
-	let articulo = listaArticulos.find(a => a.codigo == id)
-
+function ponArticuloEnCarrito(miCarrito, codigo) {
+	let articulo = listaArticulos.find(a => a.codigo == codigo)
 	miCarrito.anyadeArticulo(articulo)
 }
 
-window.onload = () => {
-	creaListaCriterios()
-	actualizaPagina()
-	verCarro()
-}
-
-function verCarro(){
-	document.getElementById("carritoImg").addEventListener("click", function(){
+function verCarro(miCarrito) {
+	document.getElementById("carritoImg").addEventListener("click", function () {
 		let carritoDialog = document.getElementById("miDialogo")
-		carritoDialog.showModal()
-		document.getElementById("btnCierraDialog").addEventListener("click", function(){
+		if (miCarrito.articulos.length === 0) {
+			alert("El carrito está vacío")
+		} else {
+			carritoDialog.showModal()
+		}
+		document.getElementById("btnCierraDialog").addEventListener("click", function () {
 			carritoDialog.close()
 		})
 	});
 }
 
-function efectuaPedido(){
-	
+function efectuaPedido() {
+
 }
 
