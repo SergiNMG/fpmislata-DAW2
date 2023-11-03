@@ -1,22 +1,54 @@
 class Carrito {
 	constructor(id) {
 		this.articulos = []
-		this.id = id
+		this.id = 3047
+		this.unidades = new Map()
 	}
 
 	anyadeArticulo(articulo) {
 		this.articulos.push(articulo)
+		if(!this.unidades.has(articulo.codigo)){
+			this.unidades.set(articulo.codigo, 1)
+		}
 		this.verCarrito(articulo)
 		//console.log(this.articulos)
 	}
 
 	//codigoArticulo = this.articulos.forEach(a => a.codigo)
 
-	borraArticulo(codigoArticulo) {
+	/* modificaUnidades(articulo, unidades){
 
+	}*/
+
+	aumentarUnidades(articulo){
+		let codigoArticulo = articulo.codigo
+		if(this.unidades.has(codigoArticulo)){
+			this.unidades.set(codigoArticulo, this.unidades.get(codigoArticulo) + 1)
+		}
+		console.log(this.unidades)
+		this.verCarrito(articulo)
 	}
 
-	modificaUnidades(codigo, n) {
+	disminuirUnidades(articulo){
+		let codigoArticulo = articulo.codigo
+		if(this.unidades.has(codigoArticulo)){
+			if(this.unidades.get(codigoArticulo) > 1){
+				this.unidades.set(codigoArticulo, this.unidades - 1)
+			}
+		}
+		console.log(this.unidades)
+		this.verCarrito(articulo)
+	}
+
+	borrarArticulo(codigoArticulo){
+		this.articulos = this.articulos.filter(a => a.codigo == codigoArticulo)
+		this.unidades.delete(codigoArticulo)
+		this.verCarrito(articulo)
+	}
+
+	mostrarPrecio(articulo){
+
+
 	}
 
 	verCarrito(articulo) {
@@ -49,16 +81,26 @@ class Carrito {
 		aumentarUds.className = "buttonUds buttonAumentar"
 		aumentarUds.textContent = "  +  "
 		cAcciones.appendChild(aumentarUds)
+		
+		aumentarUds.addEventListener("click", () => {
+			this.aumentarUnidades(articulo)
+		});
 
 		let disminuirUds = document.createElement("button")
 		disminuirUds.className = "buttonUds buttonDisminuir"
 		disminuirUds.textContent = "  -  "
 		cAcciones.appendChild(disminuirUds)
+		disminuirUds.addEventListener("click", () => {
+			this.disminuirUnidades(articulo)
+		});
 
 		let borrarArticulo = document.createElement("button")
 		borrarArticulo.className = "buttonUds buttonBorrar"
 		borrarArticulo.textContent = "Borrar"
 		cAcciones.appendChild(borrarArticulo)
+		borrarArticulo.addEventListener("click", () => {
+			this.borrarArticulo(articulo.codigo)
+		});
 		//cAcciones.textContent = divAcciones
 
 		filaProducto.appendChild(cImagen)
