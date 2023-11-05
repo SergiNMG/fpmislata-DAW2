@@ -100,6 +100,10 @@ function verCarro(miCarrito) {
 		document.getElementById("btnCierraDialog").addEventListener("click", function () {
 			carritoDialog.close()
 		})
+		document.getElementById("btnEfectuaPedido").addEventListener("click", function () {
+			console.log(miCarrito)
+			carritoDialog.close()
+		})
 	});
 }
 
