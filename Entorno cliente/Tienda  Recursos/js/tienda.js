@@ -85,8 +85,14 @@ function mostrarArticulos(miCarrito) {
 }
 
 function ponArticuloEnCarrito(miCarrito, codigo) {
-	let articulo = listaArticulos.find(a => a.codigo == codigo)
-	miCarrito.anyadeArticulo(articulo)
+	let articuloExistente = miCarrito.articulos.find(a => a.codigo == codigo)
+	if(articuloExistente){
+		miCarrito.aumentarUnidades(codigo)
+	}
+	else{
+		let articulo = listaArticulos.find(a => a.codigo == codigo)
+		miCarrito.anyadeArticulo(articulo)
+	}
 }
 
 function verCarro(miCarrito) {
