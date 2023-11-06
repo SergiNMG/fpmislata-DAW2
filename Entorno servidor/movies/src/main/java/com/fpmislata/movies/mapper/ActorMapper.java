@@ -12,6 +12,7 @@ import org.mapstruct.factory.Mappers;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface ActorMapper {
@@ -27,4 +28,8 @@ public interface ActorMapper {
     @Mapping(target = "birthYear", expression = "java(resultSet.getInt(\"birthYear\"))")
     @Mapping(target = "deathYear", expression = "java((resultSet.getObject(\"deathYear\") != null) ? resultSet.getInt(\"deathYear\"):null)")
     ActorEntity toActorEntity(ResultSet resultSet) throws SQLException;
+    ActorEntity toActorEntity(Actor actor);
+
+    Actor toActor(ActorEntity actorEntity);
+    List<Actor> toActorList(List<ActorEntity> actorEntityList);
 }

@@ -7,20 +7,23 @@ import com.fpmislata.movies.exception.ResourceNotFoundException;
 import com.fpmislata.movies.exception.SQLStatmentException;
 import com.fpmislata.movies.mapper.ActorMapper;
 import com.fpmislata.movies.persistence.model.ActorEntity;
+import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+@Component
 public class ActorDAO {
 
-    public ActorEntity find(Connection connection, int id){
+    public Optional<ActorEntity> find(Connection connection, int id){
         final String SQL = "SELECT * FROM ACTORS WHERE id = ? LIMIT 1";
         try {
             ResultSet resultSet = DBUtil.select(connection, SQL, List.of(id));
-            return resultSet.next()? ActorMapper.mapper.toActorEntity(resultSet):null ;
+            return Optional.of(resultSet.next()? ActorMapper.mapper.toActorEntity(resultSet):null);
         }catch (SQLException e){
             throw new RuntimeException(e.getMessage());
         }
