@@ -10,17 +10,37 @@ class Carrito {
 		if(!this.unidades.has(articulo.codigo)){
 			this.unidades.set(articulo.codigo, 1)
 		}
+		// Inicializo las unidades para cada artículo en caso de que se añadan por primera vez
 		this.verCarrito()
 		//console.log(this.articulos)
 	}
 
-	//codigoArticulo = this.articulos.forEach(a => a.codigo)
+	//this.articulos.forEach(a => console.log(a.codigo))
 
-	/* modificaUnidades(articulo, unidades){
+	modificarUnidades(codigoArticulo, cantidad){
+		/*if (this.unidades.has(codigoArticulo)){
+			let unidadesActuales = this.unidades.get(codigoArticulo)
+		}*/
+		/* No es necesario comprobar si el artículo se encuentra en el carrito
+		a la hora de modificar sus unidades, ya que estas mismas no pueden modificarse
+		como tal desde fuera del carrito, es decir, no se podrá acceder a los botones del 
+		carrito desde fuera de él*/ 
+		if (cantidad > 0){
+			this.unidades.set(codigoArticulo, this.unidades.get(codigoArticulo) + cantidad)
+		}
+		else if (this.unidades.get(codigoArticulo) + cantidad > 0){
+			this.unidades.set(codigoArticulo, this.unidades.get(codigoArticulo) + cantidad)
+		}
+		else{
+			this.borrarArticulo(codigoArticulo)
+		}
+		console.log(this.unidades)
+		this.verCarrito()
+	}
 
-	}*/
+	//Realizar la modificación con un solo método
 
-	aumentarUnidades(codigoArticulo){
+	/*aumentarUnidades(codigoArticulo){
 		if(this.unidades.has(codigoArticulo)){
 			this.unidades.set(codigoArticulo, this.unidades.get(codigoArticulo) + 1)
 		}
@@ -38,10 +58,10 @@ class Carrito {
 		}
 		console.log(this.unidades)
 		this.verCarrito()
-	}
+	}*/
 
 	borrarArticulo(codigoArticulo){
-		console.log(codigoArticulo)
+		console.log("Deleted: " + codigoArticulo)
 		this.articulos = this.articulos.filter(a => a.codigo != codigoArticulo)
 		this.unidades.delete(codigoArticulo)
 		this.verCarrito()
@@ -86,7 +106,8 @@ class Carrito {
 			aumentarUds.textContent = "  +  "
 			cAcciones.appendChild(aumentarUds)
 			aumentarUds.addEventListener("click", () => {
-				this.aumentarUnidades(articulo.codigo)
+				//this.aumentarUnidades(articulo.codigo)
+				this.modificarUnidades(articulo.codigo, 1)
 			});
 	
 			let disminuirUds = document.createElement("button")
@@ -94,7 +115,8 @@ class Carrito {
 			disminuirUds.textContent = "  -  "
 			cAcciones.appendChild(disminuirUds)
 			disminuirUds.addEventListener("click", () => {
-				this.disminuirUnidades(articulo.codigo)
+				//this.disminuirUnidades(articulo.codigo)
+				this.modificarUnidades(articulo.codigo, -1)
 			});
 	
 			let borrarArticulo = document.createElement("button")

@@ -87,7 +87,8 @@ function mostrarArticulos(miCarrito) {
 function ponArticuloEnCarrito(miCarrito, codigo) {
 	let articuloExistente = miCarrito.articulos.find(a => a.codigo == codigo)
 	if(articuloExistente){
-		miCarrito.aumentarUnidades(codigo)
+		//miCarrito.aumentarUnidades(codigo)
+		miCarrito.modificarUnidades(codigo, 1)
 	}
 	else{
 		let articulo = listaArticulos.find(a => a.codigo == codigo)
@@ -107,13 +108,13 @@ function verCarro(miCarrito) {
 			carritoDialog.close()
 		})
 		document.getElementById("btnEfectuaPedido").addEventListener("click", function () {
-			console.log(miCarrito)
+			efectuaPedido(miCarrito)
 			carritoDialog.close()
 		})
 	});
 }
 
-function efectuaPedido() {
-
+function efectuaPedido(miCarrito) {
+	console.log(miCarrito)
 }
 
