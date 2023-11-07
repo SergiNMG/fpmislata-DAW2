@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RequestMapping("/actors")
 @RestController
 public class ActorController {
@@ -47,13 +49,13 @@ public class ActorController {
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/{id}")
     public Actor delete (@PathVariable("id") int id){
-        return actorService.delete(id);
+        return actorService.delete(id).get();
     }
 
     @ResponseStatus(HttpStatus.ACCEPTED)
     @GetMapping("/{id}")
     public ActorDetailWeb find(@PathVariable("id") int id){
-        Actor actor = actorService.find(id);
+        Actor actor = actorService.find(id).get();
         return actorMapper.toActorDetailWeb(actor);
     }
 }

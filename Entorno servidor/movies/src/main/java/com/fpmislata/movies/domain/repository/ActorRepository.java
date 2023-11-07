@@ -4,11 +4,12 @@ import com.fpmislata.movies.domain.entity.Actor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ActorRepository {
     public int insert (Actor actor);
 
-    public Actor find(int id);
+    public Optional<Actor> find(int id);
 
     void update (Actor actor);
 

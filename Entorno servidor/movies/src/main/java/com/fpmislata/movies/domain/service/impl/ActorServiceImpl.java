@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ActorServiceImpl implements ActorService {
@@ -17,17 +18,17 @@ public class ActorServiceImpl implements ActorService {
         return actorRepository.insert(actor);
     }
 
-    public Actor find (int id){
+    public Optional<Actor> find (int id){
         return actorRepository.find(id);
     }
 
     public void update(int id, Actor actor){
-        Actor actorUpdated = actorRepository.find(actor.getId());
+        Actor actorUpdated = actorRepository.find(actor.getId()).get();
         actorRepository.update(actor);
     }
 
-    public Actor delete(int id){
-        Actor deletedActor = actorRepository.find(id);
+    public Optional<Actor> delete(int id){
+        Optional<Actor> deletedActor = actorRepository.find(id);
         actorRepository.delete(id);
         return deletedActor;
     }
