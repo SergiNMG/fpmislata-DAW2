@@ -29,6 +29,12 @@
       "title": "The Shawshank Redemption",
       "year": 1994,
       "runtime": 142
+    },
+    {
+      "id": 1,
+      "title": "Madagascar 1",
+      "year": 2005,
+      "runtime": 86
     }
   ]
 }

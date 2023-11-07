@@ -13,6 +13,7 @@
         <button onclick="getPelicula()">Ver Pelicula</button>
         <button onclick="deletePelicula()">Borrar Pelicula</button>
         <button onclick="insertarPelicula()">Insertar Pelicula</button>
+        <button onclick="modificarPelicula()">Modificar Pelicula</button>
     </section>
     <section id="peliculas">
 
@@ -111,6 +112,31 @@
         xhr.onload = () => {
             if (xhr.status == 200 || xhr.status==201) {
                 console.log("Pelicula insertada correctamente")
+            }
+            else {
+                document.body.innerHTML = `ERROR: ${xhr.statusText} CODIGO: ${xhr.satus}`
+            }
+        }
+    }
+
+    function modificarPelicula() {
+        let id = prompt("Introduce un id: ")
+        let xhr = new XMLHttpRequest()
+        let url = `http://localhost:3000/peliculas/${id}`
+        let pelicula = JSON.stringify({
+            "title": "Madagascar 2",
+            "year": 2005,
+            "runtime": 86
+        })
+
+        xhr.open('PUT', url)
+        xhr.responseType = 'json';
+        xhr.setRequestHeader('Content-type','application/json; charset=utf-8')
+        xhr.send(pelicula)
+        xhr.onload = () => {
+            if (xhr.status == 200 || xhr.status==201) {
+                console.log("Pelicula modificada correctamente")
+                console.log(pelicula)
             }
             else {
                 document.body.innerHTML = `ERROR: ${xhr.statusText} CODIGO: ${xhr.satus}`
