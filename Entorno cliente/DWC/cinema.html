@@ -12,6 +12,7 @@
         <button onclick="getPeliculas()">Ver Peliculas</button>
         <button onclick="getPelicula()">Ver Pelicula</button>
         <button onclick="deletePelicula()">Borrar Pelicula</button>
+        <button onclick="insertarPelicula()">Insertar Pelicula</button>
     </section>
     <section id="peliculas">
 
@@ -58,11 +59,15 @@
         xhr.send()
         xhr.onload = () => {
             if (xhr.status == 200) {
-                let peliculaSeleccionada = xhr.response
-                console.log(peliculasSeleccionada)
+                let pelicula = xhr.response
+                console.log(pelicula)
 
-                let titlePelicula = document.createElement("p")
-                titlePelicula.textContent = `Película seleccionada: ${peliculaSeleccionada.title}`
+                let mostrarPeliculas = document.getElementById("peliculas")
+                mostrarPeliculas.textContent = ""
+
+                let titlePelicula = document.createElement("h3")
+                titlePelicula.textContent = `Película seleccionada: ${pelicula.title}`
+                mostrarPeliculas.appendChild(titlePelicula)
             }
             else {
                 document.body.innerHTML = `ERROR: ${xhr.statusText} CODIGO: ${xhr.satus}`
@@ -82,6 +87,30 @@
             if (xhr.status == 200) {
                 let peliculaBorrada = xhr.response
                 console.log("Pelicula borrada correctamente")
+            }
+            else {
+                document.body.innerHTML = `ERROR: ${xhr.statusText} CODIGO: ${xhr.satus}`
+            }
+        }
+    }
+
+    function insertarPelicula() {
+        let xhr = new XMLHttpRequest()
+        let url = `http://localhost:3000/peliculas`
+        let pelicula = JSON.stringify({
+            "id": 1,
+            "title": "Madagascar 1",
+            "year": 2005,
+            "runtime": 86
+        })
+
+        xhr.open('POST', url)
+        xhr.responseType = 'json';
+        xhr.setRequestHeader('Content-type','application/json; charset=utf-8')
+        xhr.send(pelicula)
+        xhr.onload = () => {
+            if (xhr.status == 200 || xhr.status==201) {
+                console.log("Pelicula insertada correctamente")
             }
             else {
                 document.body.innerHTML = `ERROR: ${xhr.statusText} CODIGO: ${xhr.satus}`
