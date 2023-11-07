@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <section>
+        <button onclick="getPeliculas()">Ver Peliculas</button>
+        <button onclick="getPelicula()">Ver Pelicula</button>
+        <button onclick="deletePelicula()">Borrar Pelicula</button>
+    </section>
+    <section id="peliculas">
+
+    </section>
+</body>
+
+<script>
+
+    function getPeliculas() {
+        let xhr = new XMLHttpRequest()
+        let url = "http://localhost:3000/peliculas"
+
+        xhr.open('GET', url)
+        xhr.responseType = 'json';
+        xhr.send()
+        xhr.onload = () => {
+            if (xhr.status == 200) {
+                let peliculas = xhr.response
+                console.log(peliculas)
+
+                let mostrarPeliculas = document.getElementById("peliculas")
+                mostrarPeliculas.textContent = ""
+
+                peliculas.forEach(p => {
+                    let titlePelicula = document.createElement("h3")
+
+                    titlePelicula.textContent = p.title
+                    mostrarPeliculas.appendChild(titlePelicula)
+                })
+            }
+            else {
+                document.body.innerHTML = `ERROR: ${xhr.statusText} CODIGO: ${xhr.satus}`
+            }
+        }
+    }
+
+    function getPelicula() {
+        let id = prompt("Introduce el ID de la pelicula: ")
+        let xhr = new XMLHttpRequest()
+        let url = `http://localhost:3000/peliculas/${id}`
+
+        xhr.open('GET', url)
+        xhr.responseType = 'json';
+        xhr.send()
+        xhr.onload = () => {
+            if (xhr.status == 200) {
+                let peliculaSeleccionada = xhr.response
+                console.log(peliculasSeleccionada)
+
+                let titlePelicula = document.createElement("p")
+                titlePelicula.textContent = `Película seleccionada: ${peliculaSeleccionada.title}`
+            }
+            else {
+                document.body.innerHTML = `ERROR: ${xhr.statusText} CODIGO: ${xhr.satus}`
+            }
+        }
+    }
+
+    function deletePelicula() {
+        let id = prompt("Introduce el ID de la pelicula: ")
+        let xhr = new XMLHttpRequest()
+        let url = `http://localhost:3000/peliculas/${id}`
+
+        xhr.open('DELETE', url)
+        xhr.responseType = 'json';
+        xhr.send()
+        xhr.onload = () => {
+            if (xhr.status == 200) {
+                let peliculaBorrada = xhr.response
+                console.log("Pelicula borrada correctamente")
+            }
+            else {
+                document.body.innerHTML = `ERROR: ${xhr.statusText} CODIGO: ${xhr.satus}`
+            }
+        }
+    }
+
+</script>
+
+</html>
