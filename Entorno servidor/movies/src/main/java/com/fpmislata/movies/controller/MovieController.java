@@ -1,6 +1,7 @@
 package com.fpmislata.movies.controller;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fpmislata.movies.controller.model.movie.MovieCreateWeb;
 import com.fpmislata.movies.controller.model.movie.MovieDetailWeb;
 import com.fpmislata.movies.controller.model.movie.MovieListWeb;
 import com.fpmislata.movies.domain.entity.Movie;
@@ -55,8 +56,8 @@ public class MovieController {
 
     /*@ResponseStatus(HttpStatus.CREATED)
     @PostMapping("")
-    public Response create(){
-
+    public Response create(@RequestBody MovieCreateWeb movieCreateWeb){
+        int id = movieService
     }*/
 
 
