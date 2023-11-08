@@ -1,0 +1,19 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.c-table{
+    width: 50%;
+    border: 1px solid #2c749e;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+.c-table__header{
+    background-color: #5c869b;
+}
+
+.c-table__body{
+    background-color: #87969c;
+}
+
