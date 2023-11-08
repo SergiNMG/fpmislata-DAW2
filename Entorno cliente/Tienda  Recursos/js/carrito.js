@@ -10,7 +10,6 @@ class Carrito {
 		if(!this.unidades.has(articulo.codigo)){
 			this.unidades.set(articulo.codigo, 1)
 		}
-		// Inicializo las unidades para cada artículo en caso de que se añadan por primera vez
 		this.verCarrito()
 		//console.log(this.articulos)
 	}
