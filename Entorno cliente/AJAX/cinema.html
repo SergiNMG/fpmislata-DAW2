@@ -11,6 +11,7 @@
 <body>
     <h1>Peliculas (CRUD)</h1>
     <section>
+        <button id="insertPelicula">Agregar Pelicula</button>
         <!--<button onclick="getPelicula()">Ver Pelicula</button>
         <button onclick="deletePelicula()">Borrar Pelicula</button>
         <button onclick="insertarPelicula()">Insertar Pelicula</button>
@@ -34,12 +35,28 @@
             </tbody>
         </table>
     </section>
+    <section>
+        <dialog id="dialogPelicula">
+            <h3 id="titleDialog"></h3>
+            <form id="formDialog">
+                <label for="idLabel">Id: </label>
+                <label for="titleLabel">Titulo:</label>
+                <label for="yearLabel">Año: </label>
+                <label for="runtimeLabel">Duración: </label>
+            </form>
+        </dialog>
+    </section>
 </body>
 
 <script>
 
     window.onload = () => {
         getPeliculas()
+
+        let buttonInsertar = document.getElementById("insertPelicula")
+        buttonInsertar.addEventListener("click", function(){
+            insertarPelicula()
+        })
     } 
 
     function getPeliculas() {
@@ -103,6 +120,57 @@
         }
     }
 
+    function insertarPelicula() {
+        let xhr = new XMLHttpRequest()
+        let url = `http://localhost:3000/peliculas`
+        /*let pelicula = JSON.stringify({
+            "id": 1,
+            "title": "Madagascar 1",
+            "year": 2005,
+            "runtime": 86
+        })*/
+
+        let insertDialog = document.getElementById("dialogPelicula")
+        let titleDialog = document.getElementById("titleDialog")
+        titleDialog.textContent = "Insertar pelicula: "
+
+        let peliculaId = document.createElement("id")
+        peliculaId.type = "text"
+        peliculaId.pattern = "[0-9]"
+        peliculaId.id = "idPelicula"
+        document.getElementById("idLabel").append(peliculaId)
+
+        let peliculaTitle = document.createElement("input")
+        peliculaTitle.type = "text"
+        peliculaTitle.id = "titlePelicula"
+        document.getElementById("titleLabel").append(peliculaTitle) 
+
+        let peliculaYear = document.createElement("input")
+        peliculaYear.type = "text"
+        peliculaYear.pattern = "[0-9]{4}"
+        peliculaYear.id = "yearPelicula"
+        document.getElementById("yearLabel").append(peliculaYear)
+
+        let peliculaRuntime = document.createElement("input")
+        peliculaRuntime.type = "text"
+        peliculaRuntime.pattern = "[0-9]"
+        peliculaRuntime.id = "runtimePelicula"
+        document.getElementById("runtimeLabel").append(peliculaRuntime)
+
+        xhr.open('POST', url)
+        xhr.responseType = 'json';
+        xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8')
+        xhr.send(pelicula)
+        xhr.onload = () => {
+            if (xhr.status == 200 || xhr.status == 201) {
+                console.log("Pelicula insertada correctamente")
+            }
+            else {
+                document.body.innerHTML = `ERROR: ${xhr.statusText} CODIGO: ${xhr.satus}`
+            }
+        }
+    }
+
     function getPelicula() {
         let id = prompt("Introduce el ID de la pelicula: ")
         let xhr = new XMLHttpRequest()
@@ -140,30 +208,6 @@
             if (xhr.status == 200) {
                 let peliculaBorrada = xhr.response
                 console.log("Pelicula borrada correctamente")
-            }
-            else {
-                document.body.innerHTML = `ERROR: ${xhr.statusText} CODIGO: ${xhr.satus}`
-            }
-        }
-    }
-
-    function insertarPelicula() {
-        let xhr = new XMLHttpRequest()
-        let url = `http://localhost:3000/peliculas`
-        let pelicula = JSON.stringify({
-            "id": 1,
-            "title": "Madagascar 1",
-            "year": 2005,
-            "runtime": 86
-        })
-
-        xhr.open('POST', url)
-        xhr.responseType = 'json';
-        xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8')
-        xhr.send(pelicula)
-        xhr.onload = () => {
-            if (xhr.status == 200 || xhr.status == 201) {
-                console.log("Pelicula insertada correctamente")
             }
             else {
                 document.body.innerHTML = `ERROR: ${xhr.statusText} CODIGO: ${xhr.satus}`
