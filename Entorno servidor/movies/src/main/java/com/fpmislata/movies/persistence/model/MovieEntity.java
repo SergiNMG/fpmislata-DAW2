@@ -18,7 +18,7 @@ public class MovieEntity {
     private String title;
     private int year;
     private int runTime;
-    private Director director;
+    private int directorId;
     private List<Integer> actorIds;
 
     public MovieEntity(int id, String title, int year, int runTime) {

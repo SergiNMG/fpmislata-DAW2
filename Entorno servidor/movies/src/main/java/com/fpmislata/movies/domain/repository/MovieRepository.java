@@ -9,6 +9,7 @@ public interface MovieRepository {
 
     List<Movie> getAll(Optional<Integer> page, Optional<Integer> page_size);
     Optional<Movie> findById(int id);
-
     int getTotalNumberOfRecords();
+
+    Movie create(Movie movie, int directorId, List<Integer> actorIds);
 }

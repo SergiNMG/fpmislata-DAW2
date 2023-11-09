@@ -43,5 +43,12 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public int getTotalNumberOfRecords(){
-        return movieRepository.getTotalNumberOfRecords();}
+        return movieRepository.getTotalNumberOfRecords();
+    }
+
+    @Override
+    public Movie create(Movie movie, int directorId, List<Integer> actorIds){
+
+    }
+
 }

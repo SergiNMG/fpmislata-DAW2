@@ -2,6 +2,7 @@ package com.fpmislata.movies.mapper;
 
 import com.fpmislata.movies.controller.model.actor.ActorListWeb;
 import com.fpmislata.movies.controller.model.director.DirectorListWeb;
+import com.fpmislata.movies.controller.model.movie.MovieCreateWeb;
 import com.fpmislata.movies.controller.model.movie.MovieDetailWeb;
 import com.fpmislata.movies.controller.model.movie.MovieListWeb;
 import com.fpmislata.movies.domain.entity.Actor;
@@ -29,4 +30,5 @@ public interface MovieMapper {
     MovieEntity toMovieEntity(ResultSet resultSet) throws SQLException;
 
     Movie toMovie(MovieEntity movieEntity);
+    Movie toMovie(MovieCreateWeb movieCreateWeb);
 }

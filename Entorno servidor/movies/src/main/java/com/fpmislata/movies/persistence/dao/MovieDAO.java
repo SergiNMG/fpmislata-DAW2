@@ -70,4 +70,17 @@ public class MovieDAO {
             throw new RuntimeException("SQL: " + SQL);
         }
     }
+
+    public int create(Connection connection, MovieEntity movieEntity, int directorId, List<Integer> actorIds){
+        final String SQL = "INSERT INTO movies (title, year, runtime, director_id) VALUES (?, ?, ?, ?)";
+        List<Object> params = new ArrayList<>();
+        params.add(movieEntity.getTitle());
+        params.add(movieEntity.getYear());
+        params.add(movieEntity.getRunTime());
+        params.add(movieEntity.getDirectorId());
+
+        int id = DBUtil.insert(connection, SQL, params);
+        movieEntity.getActorIds().stream()
+                .forEach(actorId -> actorId.addActor(connection, id, actorId));
+    }
 }
