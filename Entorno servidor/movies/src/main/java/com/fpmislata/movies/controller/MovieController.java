@@ -54,11 +54,11 @@ public class MovieController {
             return movieMapper.toMovieDetailWeb(movieDetailWeb);
     }
 
-    @ResponseStatus(HttpStatus.CREATED)
+    /*@ResponseStatus(HttpStatus.CREATED)
     @PostMapping("")
     public Response create(@RequestBody MovieCreateWeb movieCreateWeb){
         int id = movieService.create()
-    }
+    }*/
 
 
 }
