@@ -13,6 +13,6 @@ import lombok.Setter;
 public class CharacterMovieListWeb {
 
     int actorId;
-    String charactersName;
-    String characters;
+    String characterName;
+    String actorName;
 }
