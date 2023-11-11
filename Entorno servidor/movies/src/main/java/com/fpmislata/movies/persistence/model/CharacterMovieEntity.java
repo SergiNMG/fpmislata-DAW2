@@ -1,10 +1,18 @@
 package com.fpmislata.movies.persistence.model;
 
 import com.fpmislata.movies.persistence.dao.ActorDAO;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.sql.Connection;
 import java.util.Optional;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class CharacterMovieEntity {
     private int id;
     private String characterName;

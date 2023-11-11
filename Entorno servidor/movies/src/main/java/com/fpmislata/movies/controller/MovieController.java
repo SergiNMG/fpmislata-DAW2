@@ -30,6 +30,9 @@ public class MovieController {
     @Value("${buildPagination.defaultPageSize}")
     private Integer page_size_default;
 
+    @Value("${app.url}")
+    private String url;
+
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("")
     public Response getAll(@RequestParam Optional<Integer> page, Optional<Integer> page_size){
@@ -43,7 +46,7 @@ public class MovieController {
                 .map(movieMapper::toMovieListWeb) // para transformar cada uno de los objetos del flujo de tipo Movie a MovieListWeb
                 .collect(Collectors.toList()); // para transformar los elementos mapeados de nuevo en una lista
 
-        return new Response(movieListWeb, total_records, page, page_size);
+        return new Response(movieListWeb, total_records, page, page_size, url);
     }
 
     @ResponseStatus(HttpStatus.OK)

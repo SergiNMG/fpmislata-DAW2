@@ -11,5 +11,5 @@ public interface MovieRepository {
     Optional<Movie> findById(int id);
     int getTotalNumberOfRecords();
 
-    Movie create(Movie movie, int directorId, List<Integer> actorIds);
+    //Movie create(Movie movie, int directorId, List<Integer> actorIds);
 }

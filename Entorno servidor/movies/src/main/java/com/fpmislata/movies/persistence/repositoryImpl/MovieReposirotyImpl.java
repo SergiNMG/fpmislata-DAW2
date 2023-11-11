@@ -1,13 +1,19 @@
 package com.fpmislata.movies.persistence.repositoryImpl;
 
 import com.fpmislata.movies.db.DBUtil;
+import com.fpmislata.movies.domain.entity.Director;
 import com.fpmislata.movies.domain.entity.Movie;
 import com.fpmislata.movies.exception.DBConnectionException;
 import com.fpmislata.movies.exception.ResourceNotFoundException;
 import com.fpmislata.movies.exception.SQLStatmentException;
 import com.fpmislata.movies.domain.repository.MovieRepository;
 import com.fpmislata.movies.mapper.MovieMapper;
+import com.fpmislata.movies.persistence.dao.ActorDAO;
+import com.fpmislata.movies.persistence.dao.CharacterMovieDAO;
+import com.fpmislata.movies.persistence.dao.DirectorDAO;
 import com.fpmislata.movies.persistence.dao.MovieDAO;
+import com.fpmislata.movies.persistence.model.CharacterMovieEntity;
+import com.fpmislata.movies.persistence.model.DirectorEntity;
 import com.fpmislata.movies.persistence.model.MovieEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,7 +37,18 @@ public class MovieReposirotyImpl implements MovieRepository {
     MovieDAO movieDAO;
 
     @Autowired
+    DirectorDAO directorDAO;
+
+    @Autowired
+    ActorDAO actorDAO;
+
+    @Autowired
+    CharacterMovieDAO characterMovieDAO;
+
+    @Autowired
     MovieMapper movieMapper;
+
+
 
     @Override
     public List<Movie> getAll(Optional<Integer> page, Optional<Integer> page_size){
@@ -53,12 +70,15 @@ public class MovieReposirotyImpl implements MovieRepository {
     public Optional<Movie> findById(int id){
         try(Connection connection = DBUtil.open(true)){
             MovieEntity movieEntity = movieDAO.findById(connection, id).get();
-
+            movieEntity.getDirectorEntity(connection, directorDAO);
+            movieEntity.getCharacterMovieEntityList(connection, characterMovieDAO).forEach(CharacterMovieEntity -> CharacterMovieEntity.getActorEntity(connection, actorDAO));
             return Optional.ofNullable(MovieMapper.mapper.toMovie(movieEntity)) ;
             // return movieEntity.map(MovieMapper.mapper::toMovie);
 
         } catch (SQLException e){
             throw new RuntimeException(e);
+        } catch (ResourceNotFoundException e){
+            throw new ResourceNotFoundException("No se encontro la pelicula con id: " + id);
         }
     }
 
@@ -71,10 +91,10 @@ public class MovieReposirotyImpl implements MovieRepository {
         }
     }
 
-    @Override
+    /*@Override
     public Movie create(Movie movie, int directorId, List<Integer> acorIds){
 
-    }
+    }*/
 
 }
 

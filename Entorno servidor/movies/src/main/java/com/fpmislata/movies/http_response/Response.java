@@ -39,16 +39,17 @@ public class Response {
     @Value("${buildPagination.defaultPageSize}")
     private Integer page_size_default;
 
-    public Response(Object data, int total_records, Optional<Integer> page, Optional<Integer> page_size) {
+    public Response(Object data, int total_records, Optional<Integer> page, Optional<Integer> page_size, String url) {
         this.data = data;
         this.total_records = total_records;
+        this.url = url;
         if (page.isPresent()){
-            buildPaginationMetaData(total_records, page_size.get(), page.get());
+            buildPaginationMetaData(total_records, page_size.get(), page.get(), url);
         }
 
     }
 
-        private void buildPaginationMetaData(int total_records, int page_size, int page){
+        private void buildPaginationMetaData(int total_records, int page_size, int page, String url){
 
         this.page = page;
         this.page_size = page_size;
