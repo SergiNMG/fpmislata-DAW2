@@ -12,7 +12,7 @@ import lombok.Setter;
 
 public class CharacterMovieListWeb {
 
-    int actorId;
-    String characterName;
-    String actorName;
+    private int actorId;
+    private String characterName;
+    private String actorName;
 }

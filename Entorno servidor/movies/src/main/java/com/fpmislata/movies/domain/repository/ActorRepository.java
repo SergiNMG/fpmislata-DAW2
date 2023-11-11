@@ -11,6 +11,8 @@ public interface ActorRepository {
 
     public Optional<Actor> find(int id);
 
+    Optional<Actor> findByCharacterId(int characterId);
+
     void update (Actor actor);
 
     void delete (int id);

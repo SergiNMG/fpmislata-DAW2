@@ -43,6 +43,16 @@ public class ActorDAO {
         }
     }
 
+    public Optional<ActorEntity> findByCharacterId(Connection connection, int CharacterId){
+        final String SQL = "SELECT a.* from actors a, actors_movies am WHERE (a.id=am.actor_id) AND (a.id=?)";
+        try {
+            ResultSet resultSet = DBUtil.select(connection, SQL, List.of(CharacterId));
+            return Optional.of(resultSet.next()? ActorMapper.mapper.toActorEntity(resultSet):null);
+        } catch (SQLException e){
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
     public int insert(Connection connection, ActorEntity actorEntity){
         final String SQL = "INSERT INTO ACTORS (name, birthYear, deathYear) VALUES (?, ?, ?)";
         List<Object> params = new ArrayList<>();

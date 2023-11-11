@@ -10,7 +10,12 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CharacterMovie {
-    int id;
-    Actor actor;
-    String characters;
+    private int id;
+    private Actor actor;
+    private String characters;
+
+    public CharacterMovie(Actor actor, String characters){
+        this.actor = actor;
+        this.characters = characters;
+    }
 }

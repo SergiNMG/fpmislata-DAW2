@@ -22,6 +22,10 @@ public class ActorServiceImpl implements ActorService {
         return actorRepository.find(id);
     }
 
+    public Optional<Actor> findByCharacterId(int characterId){
+        return actorRepository.findByCharacterId(characterId);
+    }
+
     public void update(int id, Actor actor){
         Actor actorUpdated = actorRepository.find(actor.getId()).get();
         actorRepository.update(actor);

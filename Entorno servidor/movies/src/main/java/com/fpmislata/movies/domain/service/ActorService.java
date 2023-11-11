@@ -14,5 +14,7 @@ public interface ActorService {
 
     Optional<Actor> delete(int id);
 
+    Optional<Actor> findByCharacterId(int characterId);
+
     List<Actor> findByMovieId(int movieId);
 }
