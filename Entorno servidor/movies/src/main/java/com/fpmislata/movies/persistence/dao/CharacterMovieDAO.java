@@ -15,13 +15,13 @@ import java.util.List;
 public class CharacterMovieDAO {
     public List<CharacterMovieEntity> findByMovieId(Connection connection, int movieId){
         final String SQL = "SELECT am.* from actors_movies am, movies m WHERE (am.movie_id=m.id) AND m.id = ?";
-        List <CharacterMovieEntity> characterList = new ArrayList<>();
+        List <CharacterMovieEntity> characterMovieEntityList = new ArrayList<>();
         try {
             ResultSet resultSet = DBUtil.select(connection, SQL, List.of(movieId));
             while (resultSet.next()){
-                characterList.add(CharacterMapper.mapper.toCharacterMovieEntity(resultSet));
+                characterMovieEntityList.add(CharacterMapper.mapper.toCharacterMovieEntity(resultSet));
             }
-            return characterList;
+            return characterMovieEntityList;
         }catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         }

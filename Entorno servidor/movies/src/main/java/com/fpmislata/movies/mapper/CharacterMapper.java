@@ -1,12 +1,18 @@
 package com.fpmislata.movies.mapper;
 
+import com.fpmislata.movies.controller.model.character.CharacterMovieListWeb;
+import com.fpmislata.movies.domain.entity.Actor;
+import com.fpmislata.movies.domain.entity.CharacterMovie;
+import com.fpmislata.movies.persistence.model.ActorEntity;
 import com.fpmislata.movies.persistence.model.CharacterMovieEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface CharacterMapper {
@@ -16,4 +22,16 @@ public interface CharacterMapper {
     @Mapping(target = "id", expression = "java(resultSet.getInt(\"id\"))")
     @Mapping(target = "characterName", expression = "java(resultSet.getString(\"characters\"))")
     CharacterMovieEntity toCharacterMovieEntity(ResultSet resultSet) throws SQLException;
+
+    @Mapping(target = "actor", expression = "java(mapActorEntityToActor(characterMovieEntity.getActorEntity()))")
+    CharacterMovie toCharacterMovie(CharacterMovieEntity characterMovieEntity);
+
+    @Named("actorEntityToActor")
+    default Actor mapActorEntityToActor(ActorEntity actorEntity){
+        return ActorMapper.mapper.toActor(actorEntity);
+    }
+
+    @Mapping(target = "actorId", expression = "java(characterMovie.getActor().getId())")
+    @Mapping(target = "actorName", expression = "java(characterMovie.getActor().getName())")
+    CharacterMovieListWeb toCharacterMovieListWeb(CharacterMovie characterMovie);
 }

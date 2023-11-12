@@ -65,7 +65,7 @@ public class MovieReposirotyImpl implements MovieRepository {
         try(Connection connection = DBUtil.open(true)){
             MovieEntity movieEntity = movieDAO.findById(connection, id).get();
             movieEntity.getDirectorEntity(connection, directorDAO);
-            movieEntity.getCharacterMovieEntityList(connection, characterMovieDAO).forEach(CharacterMovieEntity -> CharacterMovieEntity.getActorEntity(connection, actorDAO));
+            movieEntity.getCharacterMovieEntityList(connection, characterMovieDAO).forEach(character -> character.getActorEntity(connection, actorDAO));
             return Optional.ofNullable(MovieMapper.mapper.toMovie(movieEntity));
             // return movieEntity.map(MovieMapper.mapper::toMovie);
 
