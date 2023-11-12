@@ -29,10 +29,6 @@ import java.util.stream.Collectors;
 
 @Repository
 public class MovieReposirotyImpl implements MovieRepository {
-
-    @Value("${buildPagination.defaultPageSize}")
-    private int page_size_default;
-
     @Autowired
     MovieDAO movieDAO;
 
@@ -47,8 +43,6 @@ public class MovieReposirotyImpl implements MovieRepository {
 
     @Autowired
     MovieMapper movieMapper;
-
-
 
     @Override
     public List<Movie> getAll(Optional<Integer> page, Optional<Integer> page_size){
@@ -72,7 +66,7 @@ public class MovieReposirotyImpl implements MovieRepository {
             MovieEntity movieEntity = movieDAO.findById(connection, id).get();
             movieEntity.getDirectorEntity(connection, directorDAO);
             movieEntity.getCharacterMovieEntityList(connection, characterMovieDAO).forEach(CharacterMovieEntity -> CharacterMovieEntity.getActorEntity(connection, actorDAO));
-            return Optional.ofNullable(MovieMapper.mapper.toMovie(movieEntity)) ;
+            return Optional.ofNullable(MovieMapper.mapper.toMovie(movieEntity));
             // return movieEntity.map(MovieMapper.mapper::toMovie);
 
         } catch (SQLException e){

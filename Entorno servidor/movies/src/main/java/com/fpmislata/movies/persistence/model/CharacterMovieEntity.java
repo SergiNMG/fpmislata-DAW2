@@ -16,7 +16,8 @@ import java.util.Optional;
 public class CharacterMovieEntity {
     private int id;
     private String characterName;
-    private ActorEntity actorEntity;
+
+    ActorEntity actorEntity; //Lazy loading, no es un atributo
 
     public CharacterMovieEntity(int id, String characterName) {
         this.id = id;

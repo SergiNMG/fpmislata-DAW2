@@ -21,8 +21,10 @@ public class MovieEntity {
     private String title;
     private int year;
     private int runTime;
-    private DirectorEntity directorEntity;
-    private List<CharacterMovieEntity> characterMovieEntityList;
+
+    DirectorEntity directorEntity;
+    List<CharacterMovieEntity> characterMovieEntityList;
+
 
     public DirectorEntity getDirectorEntity(Connection connection, DirectorDAO directorDAO){
         if (this.directorEntity == null){
