@@ -51,8 +51,8 @@ public interface MovieMapper {
                 .map(CharacterMapper.mapper::toCharacterMovie)
                 .collect(Collectors.toList());
     }
-    Movie toMovie(MovieCreateWeb movieCreateWeb);
-    MovieEntity toMovieEntity(Movie movie);
+    //Movie toMovie(MovieCreateWeb movieCreateWeb);
+    //MovieEntity toMovieEntity(Movie movie);
 
     @Named("actorToActorIds")
     default List<Integer> mapActorToActorIds(List<Actor> actors){

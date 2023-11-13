@@ -17,7 +17,7 @@ public class CharacterMovieEntity {
     private int id;
     private String characterName;
 
-    ActorEntity actorEntity; //Lazy loading, no es un atributo
+    ActorEntity actorEntity; //Lazy loading
 
     public CharacterMovieEntity(int id, String characterName) {
         this.id = id;
