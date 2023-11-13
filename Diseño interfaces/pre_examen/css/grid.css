@@ -1,0 +1,53 @@
+:root{
+    --color-normal: #ff9aca;
+    --color-alternativo: #ffbf8a;
+    --color-peligroso: #ca0266;
+}
+
+.c-card {
+    display: grid;
+    width: 700px;
+    height: 500px;
+    grid-template-areas: 
+        "a . b"
+        ". c ."
+        "d . e";
+        
+}
+
+.c-cube {
+    --c-cube-strong-color:var(--color-normal);
+    --c-cube-weak-color:var(--color-alternativo);
+
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    padding: 20px;
+
+    background-color: var(--c-cube-strong-color);
+    border: 1px solid var(--c-cube-weak-color);
+}
+
+.c-cube-primary{
+    grid-area: a;
+}
+
+.c-cube-secondary{
+    grid-area: c;
+    --c-cube-strong-color: var(--color-alternativo);
+    --c-cube-weak-color: var(--color-normal);
+}
+
+.c-cube-alternative{
+    grid-area: e;
+    --c-cube-strong-color: var(--color-peligroso);
+}
+
+.c-cube-alternative-d{
+    grid-area: d;
+}
+
+.c-cube-primary-b{
+    grid-area: b;
+}
+

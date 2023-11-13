@@ -1,0 +1,51 @@
+:root{
+    --color-normal: #0056b8;
+    --color-alternativo: #ed8936;
+    --color-peligroso: #c53030;
+    --color-blanco: #ffffff;
+    --color-borde-tabla: #cccccc;
+}
+
+.c-table{
+    width: auto;
+    border-collapse: collapse;
+}
+
+.c-table th, .c-table td{
+    padding: 20px;
+    border: 1px solid var(--color-borde-tabla);
+}
+
+.c-button{
+    --c-button-strong-color: var(--color-normal);
+    --c-button-weak-color: var(--color-blanco);
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+
+    background-color: var(--c-button-strong-color);
+    border: 1px solid var(--c-button-strong-color);
+    color: var(--c-button-weak-color);
+}
+
+.c-button--alternativo{
+    --c-button-strong-color: var(--color-alternativo)
+}
+
+.c-button--peligroso{
+    --c-button-strong-color: var(--color-peligroso)
+}
+
+.c-button-secundario{
+    background-color: var(--color-blanco);
+    color: var(--c-button-strong-color);
+}
+
+.c-button-terciario{
+    border-style: none;
+}
