@@ -1,0 +1,27 @@
+.c-card {
+    display: grid;
+    grid-template-areas:
+        "h . . h"
+        ". b b ."
+        "f . f .";
+}
+
+.c-cube {
+    width: 100px;
+    background-color: aqua;
+    border: 1px solid darkcyan;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.c-cube {
+    grid-area: h;
+}
+
+.c-cube {
+    grid-area: b;
+}
+
+.c-cube {
+    grid-area: f;
+}
