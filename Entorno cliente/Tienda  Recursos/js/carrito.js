@@ -1,13 +1,13 @@
 class Carrito {
 	constructor(id) {
+		this.id = id
 		this.articulos = []
-		this.id = 3047
 		this.unidades = new Map()
 	}
 
 	anyadeArticulo(articulo) {
 		this.articulos.push(articulo)
-		if(!this.unidades.has(articulo.codigo)){
+		if (!this.unidades.has(articulo.codigo)) {
 			this.unidades.set(articulo.codigo, 1)
 		}
 		this.verCarrito()
@@ -16,28 +16,24 @@ class Carrito {
 
 	//this.articulos.forEach(a => console.log(a.codigo))
 
-	modificarUnidades(codigoArticulo, cantidad){
+	modificarUnidades(codigoArticulo, cantidad) {
 		/*if (this.unidades.has(codigoArticulo)){
 			let unidadesActuales = this.unidades.get(codigoArticulo)
 		}*/
-		/* No es necesario comprobar si el artículo se encuentra en el carrito
-		a la hora de modificar sus unidades, ya que estas mismas no pueden modificarse
-		como tal desde fuera del carrito, es decir, no se podrá acceder a los botones del 
-		carrito desde fuera de él*/ 
-		if (cantidad > 0){
+		if (cantidad > 0) {
 			this.unidades.set(codigoArticulo, this.unidades.get(codigoArticulo) + cantidad)
 		}
-		else if (this.unidades.get(codigoArticulo) + cantidad > 0){
+		else if (this.unidades.get(codigoArticulo) + cantidad > 0) {
 			this.unidades.set(codigoArticulo, this.unidades.get(codigoArticulo) + cantidad)
 		}
-		else{
+		else {
 			this.borrarArticulo(codigoArticulo)
 		}
 		console.log(this.unidades)
 		this.verCarrito()
 	}
 
-	//Realizar la modificación con un solo método
+	//Modificación de unidades con varios métodos: 
 
 	/*aumentarUnidades(codigoArticulo){
 		if(this.unidades.has(codigoArticulo)){
@@ -59,7 +55,7 @@ class Carrito {
 		this.verCarrito()
 	}*/
 
-	borrarArticulo(codigoArticulo){
+	borrarArticulo(codigoArticulo) {
 		console.log("Deleted: " + codigoArticulo)
 		this.articulos = this.articulos.filter(a => a.codigo != codigoArticulo)
 		this.unidades.delete(codigoArticulo)
@@ -69,6 +65,8 @@ class Carrito {
 	verCarrito() {
 		let tabla = document.getElementById("tablaCarrito")
 		let totalCarrito = document.getElementById("total")
+		let idCarrito = document.getElementById("idPedido")
+		idCarrito.textContent = this.id
 		let sumaTotal = 0
 		tabla.getElementsByTagName("tbody")[0].innerHTML = ""
 
@@ -79,24 +77,25 @@ class Carrito {
 			imgProducto.className = "imgCarrito"
 			imgProducto.src = `./assets/${articulo.codigo}.jpg`
 			cImagen.appendChild(imgProducto)
-	
+
 			let cNombre = document.createElement("td")
 			cNombre.textContent = articulo.nombre
-	
+
 			let cDescripcion = document.createElement("td")
 			cDescripcion.textContent = articulo.descripcion
-	
+
 			let cPrecio = document.createElement("td")
 			cPrecio.textContent = articulo.precio
-	
+
 			let cUnidades = document.createElement("td")
 			cUnidades.textContent = this.unidades.get(articulo.codigo)
-	
+
 			let cTotal = document.createElement("td")
 			let precioTotal = this.unidades.get(articulo.codigo) * articulo.precio
 			cTotal.textContent = precioTotal
 			sumaTotal += precioTotal
-	
+			totalCarrito.textContent = sumaTotal
+
 			let cAcciones = document.createElement("td")
 			cAcciones.className = "tdAcciones"
 
@@ -108,7 +107,7 @@ class Carrito {
 				//this.aumentarUnidades(articulo.codigo)
 				this.modificarUnidades(articulo.codigo, 1)
 			});
-	
+
 			let disminuirUds = document.createElement("button")
 			disminuirUds.className = "buttonUds buttonDisminuir"
 			disminuirUds.textContent = "  -  "
@@ -117,7 +116,7 @@ class Carrito {
 				//this.disminuirUnidades(articulo.codigo)
 				this.modificarUnidades(articulo.codigo, -1)
 			});
-	
+
 			let borrarArticulo = document.createElement("button")
 			borrarArticulo.className = "buttonUds buttonBorrar"
 			borrarArticulo.textContent = "Borrar"
@@ -126,7 +125,7 @@ class Carrito {
 				this.borrarArticulo(articulo.codigo)
 			});
 			//cAcciones.textContent = divAcciones
-	
+
 			filaProducto.appendChild(cImagen)
 			filaProducto.appendChild(cNombre)
 			filaProducto.appendChild(cDescripcion)
@@ -136,7 +135,16 @@ class Carrito {
 			filaProducto.appendChild(cAcciones)
 
 			tabla.getElementsByTagName("tbody")[0].appendChild(filaProducto)
-			totalCarrito.textContent = sumaTotal
+			//totalCarrito.textContent = sumaTotal
 		});
+		
+		/*
+		if (this.articulos.length == 0){
+			totalCarrito.textContent = 0
+		}else{
+			totalCarrito.textContent == sumaTotal
+		}*/
+		
+		totalCarrito.textContent = this.articulos.length == 0 ? 0 : sumaTotal
 	}
 }

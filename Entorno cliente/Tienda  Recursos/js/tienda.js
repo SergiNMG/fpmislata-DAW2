@@ -1,7 +1,7 @@
 criterios = ["Sin ordenar", "Ascendente por precio", "Descendente por precio"]
 
 window.onload = () => {
-	let miCarrito = new Carrito()
+	let miCarrito = new Carrito(207)
 	mostrarArticulos(miCarrito)
 	creaListaCriterios(miCarrito)
 	verCarro(miCarrito)
@@ -109,6 +109,7 @@ function verCarro(miCarrito) {
 		})
 		document.getElementById("btnEfectuaPedido").addEventListener("click", function () {
 			efectuaPedido(miCarrito)
+			miCarrito = new Carrito(208)
 			carritoDialog.close()
 		})
 	});
