@@ -10,12 +10,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
 public class MovieEntity {
     private int id;
     private String title;
@@ -25,6 +25,9 @@ public class MovieEntity {
     DirectorEntity directorEntity;
     List<CharacterMovieEntity> characterMovieEntityList;
 
+    public MovieEntity(){
+        this.characterMovieEntityList = new ArrayList<>();
+    }
 
     public DirectorEntity getDirectorEntity(Connection connection, DirectorDAO directorDAO){
         if (this.directorEntity == null){

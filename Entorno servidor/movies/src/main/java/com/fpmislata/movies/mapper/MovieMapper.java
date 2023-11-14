@@ -26,14 +26,22 @@ import java.util.stream.Collectors;
 public interface MovieMapper {
     MovieMapper mapper = Mappers.getMapper(MovieMapper.class);
     MovieListWeb toMovieListWeb(Movie movie);
-    @Mapping(target = "characters", expression = "java(mapCharacterMovieEntityToCharacterMovieListWeb(movie.getCharacters()))")
+
+    @Mapping(target = "characters", expression = "java(mapCharacterMovieToCharacterMovieListWeb(movie.getCharacters()))")
     MovieDetailWeb toMovieDetailWeb(Movie movie);
-    @Named("characterMovieEntityToCharacterMovieListWeb")
-    default List<CharacterMovieListWeb> mapCharacterMovieEntityToCharacterMovieListWeb(List<CharacterMovie> characterMovieList){
+
+    @Named("characterMovieToCharacterMovieListWeb")
+    default List<CharacterMovieListWeb> mapCharacterMovieToCharacterMovieListWeb(List<CharacterMovie> characterMovieList){
         return characterMovieList.stream()
-                .map(CharacterMapper.mapper::toCharacterMovieListWeb)
+                .map(characterMovie -> {
+                    CharacterMovieListWeb characterMovieListWeb = CharacterMapper.mapper.toCharacterMovieListWeb(characterMovie);
+                    characterMovieListWeb.setCharacterName(characterMovie.getCharacters());
+                    return characterMovieListWeb;
+                })
                 .collect(Collectors.toList());
     }
+
+
     @Mapping(target = "id", expression = "java(resultSet.getInt(\"id\"))")
     @Mapping(target = "title", expression = "java(resultSet.getString(\"title\"))")
     @Mapping(target = "year", expression = "java(resultSet.getInt(\"year\"))")
@@ -44,13 +52,14 @@ public interface MovieMapper {
     @Mapping(target = "characters", expression = "java(mapCharacterMovieEntityToCharacterMovie(movieEntity.getCharacterMovieEntityList()))")
     Movie toMovie(MovieEntity movieEntity);
 
-    @Mapping(target = "characters", expression = "java(mapCharacterMovieEntityToCharacterMovie(movie.getCharacters()))")
     @Named("characterMovieEntityToCharacterMovie")
     default List<CharacterMovie> mapCharacterMovieEntityToCharacterMovie(List<CharacterMovieEntity> characterMovieEntityList){
         return characterMovieEntityList.stream()
                 .map(CharacterMapper.mapper::toCharacterMovie)
                 .collect(Collectors.toList());
     }
+
+
     //Movie toMovie(MovieCreateWeb movieCreateWeb);
     //MovieEntity toMovieEntity(Movie movie);
 
@@ -60,4 +69,19 @@ public interface MovieMapper {
                 .map(Actor::getId)
                 .collect(Collectors.toList());
     }
+
+    /*
+    @Named("characterMovieEntityToCharacterMovieListWeb")
+    default List<CharacterMovieListWeb> mapCharacterMovieEntityToCharacterMovieListWeb(List<CharacterMovie> characterMovieList){
+        return characterMovieList.stream()
+                .map(CharacterMapper.mapper::toCharacterMovieListWeb)
+                .collect(Collectors.toList());
+    }
+    @Named("characterMovieToCharacterMovieListWeb")
+    default List<CharacterMovieListWeb> mapCharacterMovieToCharacterMovieListWeb(List<CharacterMovie> characterMovieList){
+        return characterMovieList.stream()
+                .map(CharacterMapper.mapper::toCharacterMovieListWeb)
+                .collect(Collectors.toList());
+    }
+     */
 }

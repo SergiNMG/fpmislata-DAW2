@@ -54,6 +54,7 @@ public class MovieController {
     public MovieDetailWeb findById(@PathVariable("id") int id){
             //return movieService.findById(id);
             Movie movieDetailWeb = movieService.findById(id);
+            System.out.println(movieDetailWeb);
             return movieMapper.toMovieDetailWeb(movieDetailWeb);
     }
 
