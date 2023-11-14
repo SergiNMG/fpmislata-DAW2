@@ -51,3 +51,30 @@
     grid-area: b;
 }
 
+.c-table-fr{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr))
+}
+
+.c-table-fr1{
+    display: grid;
+    grid-template-columns:repeat(4, 100px);
+}
+
+.c-table-fr2{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 100px)
+}
+ 
+.item{
+    border:1px solid var(--color-alternativo);
+}
+
+.item-fr1{
+    border:1px solid var(--color-peligroso);
+}
+
+.item-fr2{
+    border:1px solid var(--color-normal);
+}
+
