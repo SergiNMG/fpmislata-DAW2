@@ -88,10 +88,10 @@ public class MovieReposirotyImpl implements MovieRepository {
         }
     }
 
-    /*@Override
+    @Override
     public Movie create(Movie movie, int directorId, List<Integer> acorIds){
 
-    }*/
+    }
 
 }
 

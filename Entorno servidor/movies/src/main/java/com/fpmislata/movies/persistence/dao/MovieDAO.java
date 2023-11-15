@@ -71,16 +71,32 @@ public class MovieDAO {
         }
     }
 
-    /*public int create(Connection connection, MovieEntity movieEntity, int directorId, List<Integer> actorIds){
+    public int create(Connection connection, MovieEntity movieEntity, int directorId, List<Integer> actorIds){
         final String SQL = "INSERT INTO movies (title, year, runtime, director_id) VALUES (?, ?, ?, ?)";
         List<Object> params = new ArrayList<>();
         params.add(movieEntity.getTitle());
         params.add(movieEntity.getYear());
         params.add(movieEntity.getRunTime());
-        params.add(movieEntity.getDirectorId());
+        params.add(movieEntity.getDirectorEntity().getId());
 
-        int id = DBUtil.insert(connection, SQL, params);
-        movieEntity.getActorIds().stream()
-                .forEach(actorId -> actorId.addActor(connection, id, actorId));
-    }*/
+        int movieId = DBUtil.insert(connection, SQL, List.of(params));
+
+        return movieId;
+    }
+
+    private void createCharacters(Connection connection, int movieId, List<Integer> actorsIds){
+        final String SQL = "INSERT INTO actors_movies (movie_id, actor_id, characters) VALUES (?, ?, ?)";
+
+        for (Integer actorId : actorsIds){
+
+            List<Object> params = new ArrayList<>();
+            params.add(movieId);
+            params.add(actorId);
+            params.add();
+        }
+
+
+    }
+
+
 }
