@@ -1,6 +1,7 @@
 package com.fpmislata.movies.domain.repository;
 
 import com.fpmislata.movies.domain.entity.Movie;
+import com.fpmislata.movies.persistence.model.MovieEntity;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,5 +12,5 @@ public interface MovieRepository {
     Optional<Movie> findById(int id);
     int getTotalNumberOfRecords();
 
-    //Movie create(Movie movie, int directorId, List<Integer> actorIds);
+    int create(Movie movie);
 }

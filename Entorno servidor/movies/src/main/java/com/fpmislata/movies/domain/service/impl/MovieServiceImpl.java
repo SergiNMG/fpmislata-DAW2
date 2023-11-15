@@ -1,5 +1,6 @@
 package com.fpmislata.movies.domain.service.impl;
 
+import com.fpmislata.movies.controller.model.movie.MovieCreateWeb;
 import com.fpmislata.movies.domain.entity.Actor;
 import com.fpmislata.movies.domain.entity.Director;
 import com.fpmislata.movies.domain.entity.Movie;
@@ -7,6 +8,7 @@ import com.fpmislata.movies.domain.service.MovieService;
 import com.fpmislata.movies.domain.repository.ActorRepository;
 import com.fpmislata.movies.domain.repository.DirectorRepository;
 import com.fpmislata.movies.domain.repository.MovieRepository;
+import com.fpmislata.movies.mapper.MovieMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,9 +50,9 @@ public class MovieServiceImpl implements MovieService {
         return movieRepository.getTotalNumberOfRecords();
     }
 
-    /*@Override
-    public Movie create(Movie movie, int directorId, List<Integer> characterIds){
-
-    }*/
+    @Override
+    public int create(Movie movie){
+        return movieRepository.create(movie);
+    }
 
 }

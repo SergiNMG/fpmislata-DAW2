@@ -6,6 +6,7 @@ import com.fpmislata.movies.exception.DBConnectionException;
 import com.fpmislata.movies.exception.ResourceNotFoundException;
 import com.fpmislata.movies.exception.SQLStatmentException;
 import com.fpmislata.movies.mapper.MovieMapper;
+import com.fpmislata.movies.persistence.model.CharacterMovieEntity;
 import com.fpmislata.movies.persistence.model.MovieEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -71,7 +72,7 @@ public class MovieDAO {
         }
     }
 
-    public int create(Connection connection, MovieEntity movieEntity, int directorId, List<Integer> actorIds){
+    public int create(Connection connection, MovieEntity movieEntity){
         final String SQL = "INSERT INTO movies (title, year, runtime, director_id) VALUES (?, ?, ?, ?)";
         List<Object> params = new ArrayList<>();
         params.add(movieEntity.getTitle());
@@ -80,21 +81,25 @@ public class MovieDAO {
         params.add(movieEntity.getDirectorEntity().getId());
 
         int movieId = DBUtil.insert(connection, SQL, List.of(params));
+        createCharacters(connection, movieId, movieEntity.getCharacterMovieEntityList());
 
         return movieId;
     }
 
-    private void createCharacters(Connection connection, int movieId, List<Integer> actorsIds){
+    private void createCharacters(Connection connection, int movieId, List<CharacterMovieEntity> characterMovieEntityList){
         final String SQL = "INSERT INTO actors_movies (movie_id, actor_id, characters) VALUES (?, ?, ?)";
+        List<Object> params = new ArrayList<>();
 
-        for (Integer actorId : actorsIds){
+        for (CharacterMovieEntity characterMovieEntity : characterMovieEntityList){
+            String characterName = characterMovieEntity.getCharacterName();
+            int actorId = characterMovieEntity.getActorEntity().getId();
 
-            List<Object> params = new ArrayList<>();
             params.add(movieId);
             params.add(actorId);
-            params.add();
+            params.add(characterName);
         }
 
+        DBUtil.insert(connection, SQL, List.of(params));
 
     }
 

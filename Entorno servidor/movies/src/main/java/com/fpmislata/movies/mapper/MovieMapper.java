@@ -52,6 +52,10 @@ public interface MovieMapper {
     @Mapping(target = "characters", expression = "java(mapCharacterMovieEntityToCharacterMovie(movieEntity.getCharacterMovieEntityList()))")
     Movie toMovie(MovieEntity movieEntity);
 
+    @Mapping(target = "director", expression = "java(DirectorMapper.mapper.toDirector(movieCreateWeb.getDirectorCreateWeb()))")
+    //@Mapping(target = "characters", expression = "java(mapCharacterMovieEntityToCharacterMovie(movieCreateWeb.getCharacterMovieCreateWebList()))")
+    Movie toMovie(MovieCreateWeb movieCreateWeb);
+
     @Named("characterMovieEntityToCharacterMovie")
     default List<CharacterMovie> mapCharacterMovieEntityToCharacterMovie(List<CharacterMovieEntity> characterMovieEntityList){
         return characterMovieEntityList.stream()
@@ -59,9 +63,7 @@ public interface MovieMapper {
                 .collect(Collectors.toList());
     }
 
-
-    //Movie toMovie(MovieCreateWeb movieCreateWeb);
-    //MovieEntity toMovieEntity(Movie movie);
+    MovieEntity toMovieEntity(Movie movie);
 
     @Named("actorToActorIds")
     default List<Integer> mapActorToActorIds(List<Actor> actors){
