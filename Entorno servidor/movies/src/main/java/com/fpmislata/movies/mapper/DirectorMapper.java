@@ -20,6 +20,10 @@ public interface DirectorMapper {
 
     DirectorListWeb toDirectorListWeb(Director director);
     DirectorDetailWeb toDirectorDetailWeb(Director director);
+
+    Director toDirector(DirectorListWeb directorListWeb);
+
+    @Mapping(target = "id", ignore = true)
     Director toDirector(DirectorCreateWeb directorCreateWeb);
     Director toDirector(DirectorUpdateWeb directorUpdateWeb);
     @Mapping(target = "id", expression = "java(resultSet.getInt(\"id\"))")

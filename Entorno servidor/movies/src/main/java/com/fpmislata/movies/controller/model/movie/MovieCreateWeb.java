@@ -2,6 +2,7 @@ package com.fpmislata.movies.controller.model.movie;
 
 import com.fpmislata.movies.controller.model.character.CharacterMovieCreateWeb;
 import com.fpmislata.movies.controller.model.director.DirectorCreateWeb;
+import com.fpmislata.movies.controller.model.director.DirectorListWeb;
 import com.fpmislata.movies.domain.entity.Director;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,6 +20,6 @@ public class MovieCreateWeb {
     private String title;
     private int year;
     private int runtime;
-    private DirectorCreateWeb directorCreateWeb;
+    private DirectorListWeb directorListWeb;
     //private List<CharacterMovieCreateWeb> characterMovieCreateWebList;
 }
