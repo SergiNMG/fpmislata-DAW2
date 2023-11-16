@@ -24,18 +24,6 @@ public class DirectorController {
 
     //Director director = new Director("Sergi Nicolas", 2000, null);
 
-    @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("")
-    public DirectorDetailWeb create(@RequestBody DirectorCreateWeb directorCreateWeb){
-        int id = directorService.create(DirectorMapper.mapper.toDirector(directorCreateWeb));
-        return new DirectorDetailWeb(
-          id,
-          directorCreateWeb.getName(),
-          directorCreateWeb.getBirthYear(),
-          directorCreateWeb.getDeathYear()
-        );
-    }
-
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/{id}")
     public void update (@PathVariable("id") int id, @RequestBody DirectorUpdateWeb directorUpdateWeb){
@@ -56,4 +44,18 @@ public class DirectorController {
         Director director = directorService.find(id).get();
         return directorMapper.toDirectorDetailWeb(director);
     }
+
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("")
+    public DirectorDetailWeb create(@RequestBody DirectorCreateWeb directorCreateWeb){
+        int id = directorService.create(DirectorMapper.mapper.toDirector(directorCreateWeb));
+        return new DirectorDetailWeb(
+                id,
+                directorCreateWeb.getName(),
+                directorCreateWeb.getBirthYear(),
+                directorCreateWeb.getDeathYear()
+        );
+    }
+
 }

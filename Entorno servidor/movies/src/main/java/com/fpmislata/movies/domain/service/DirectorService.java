@@ -4,7 +4,8 @@ import com.fpmislata.movies.domain.entity.Director;
 
 import java.util.Optional;
 
-public interface DirectorService {
+public interface
+DirectorService {
 
     int create(Director director);
 

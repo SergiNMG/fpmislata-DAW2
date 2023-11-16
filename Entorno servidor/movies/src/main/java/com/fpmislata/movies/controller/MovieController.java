@@ -60,12 +60,14 @@ public class MovieController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("")
-    public int create(@RequestBody MovieCreateWeb movieCreateWeb){
+    public MovieListWeb create(@RequestBody MovieCreateWeb movieCreateWeb){
         int directorId = movieCreateWeb.getDirectorId();
-        return movieService.create((MovieMapper.mapper.toMovie(movieCreateWeb)), directorId);
-        /*Movie movieCreated = movieService.findById(id);
-        return movieMapper.toMovieDetailWeb(movieCreated);*/
+        int id = movieService.create((MovieMapper.mapper.toMovie(movieCreateWeb)), directorId);
 
+        MovieListWeb movieCreated = new MovieListWeb();
+        movieCreated.setTitle(movieCreateWeb.getTitle());
+        movieCreated.setId(id);
+        return movieCreated;
     }
 
 
