@@ -4,37 +4,69 @@
       "id": 1,
       "title": "Madagascar 1",
       "year": 2005,
-      "runtime": 86
+      "runtime": 86,
+      "actorId": 1
     },
     {
       "id": 2,
       "title": "Titanic",
       "year": 1997,
-      "runtime": 195
+      "runtime": 195,
+      "actorId": 2
     },
     {
       "id": 3,
       "title": "Avatar",
       "year": 2009,
-      "runtime": 162
+      "runtime": 162,
+      "actorId": 3
     },
     {
       "id": 4,
       "title": "Forrest Gump",
       "year": 1994,
-      "runtime": 142
+      "runtime": 142,
+      "actorId": 4
     },
     {
       "id": 5,
       "title": "Pulp Fiction",
       "year": 1994,
-      "runtime": 154
+      "runtime": 154,
+      "actorId": 5
     },
     {
       "id": 6,
       "title": "The Shawshank Redemption",
       "year": 1994,
-      "runtime": 142
+      "runtime": 142,
+      "actorId": 6
+    }
+  ],
+  "actores": [
+    {
+      "id": 1,
+      "name": "Santiago Segura"
+    },
+    {
+      "id": 2,
+      "name": "Ben Stiller"
+    },
+    {
+      "id": 3,
+      "name": "Chris Rock"
+    },
+    {
+      "id": 4,
+      "name": "Leonardo DiCaprio"
+    },
+    {
+      "id": 5,
+      "name": "Kate Winslet"
+    },
+    {
+      "id": 6,
+      "name": "Billy Zane"
     }
   ]
 }

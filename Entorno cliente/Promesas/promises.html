@@ -6,7 +6,7 @@
         return new Promise(function (resolve, reject) {
             // Do the usual XHR stuff
             var req = new XMLHttpRequest();
-            req.open('GET', url + entidad);
+            req.open('GET', url);
             req.responseType = "json"
             req.onload = function () {
                 if (req.status == 200) {
@@ -24,10 +24,33 @@
         });
     }
 
-    let entidad = prompt("Introduce una entidad")
+    let peliculasUrl = url + "peliculas"
+    let actoresUrl = url + "actores"
+    let id = prompt("Introduce un id: ")
 
-    get(url).then(response => {
+    get(peliculasUrl, id).then(peliculas => {
+        let pelicula = peliculas.find(p => p.id == this.id)
+        
+        if (pelicula) {
+            let actorId = pelicula.actorId
+            return get(actoresUrl + "/" + actorId)
+        } else {
+            console.log("No existe la película con id: " + id)
+        } 
+    })
+    /*.get(actoresUrl, actorId).then(actores => {
+        let actor = actores.find(a => a.id == actorId)
+    })*/
+    .then (actor => 
+        console.log(actor))
+    .catch(error => console.log(error))
+
+    /*let entidad = prompt("Introduce una entidad")
+
+    get(url + peliculas).then(response => {
         response.forEach(r => console.log(r))
     })
-    .catch(error => console.log(error))
+    .catch(error => console.log(error))*/
+
+ 
 </script>
