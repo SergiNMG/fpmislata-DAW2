@@ -45,7 +45,6 @@ public class DirectorController {
         return directorMapper.toDirectorDetailWeb(director);
     }
 
-
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("")
     public DirectorDetailWeb create(@RequestBody DirectorCreateWeb directorCreateWeb){

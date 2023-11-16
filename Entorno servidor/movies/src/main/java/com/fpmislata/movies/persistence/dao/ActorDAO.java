@@ -60,7 +60,7 @@ public class ActorDAO {
         params.add(actorEntity.getBirthYear());
         params.add(actorEntity.getDeathYear());
 
-        return DBUtil.insert(connection, SQL, List.of(params));
+        return DBUtil.insert(connection, SQL, params);
     }
 
     public void update (Connection connection ,ActorEntity actorEntity){

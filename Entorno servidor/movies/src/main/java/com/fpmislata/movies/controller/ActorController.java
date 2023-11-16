@@ -27,9 +27,6 @@ public class ActorController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("")
     public ActorDetailWeb create(@RequestBody ActorCreateWeb actorCreateWeb){
-        /*int id = actorService.create(actor);
-        actor.setId(id);
-        return actor;*/
         int id = actorService.create(actorMapper.mapper.toActor(actorCreateWeb));
         return new ActorDetailWeb(
                 id,
