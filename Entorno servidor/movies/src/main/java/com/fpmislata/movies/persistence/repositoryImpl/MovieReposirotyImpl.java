@@ -86,9 +86,10 @@ public class MovieReposirotyImpl implements MovieRepository {
             MovieEntity movieEntity = MovieMapper.mapper.toMovieEntity(movie);
 
             int movieId = movieDAO.create(connection, movieEntity);
-            MovieEntity createdMovieEntity = movieDAO.findById(connection, movieId).get();
+            //MovieEntity createdMovieEntity = movieDAO.findById(connection, movieId).get();
 
-            return (MovieMapper.mapper.toMovie(createdMovieEntity).getId());
+            //return (MovieMapper.mapper.toMovie(createdMovieEntity).getId());
+            return movieId;
         } catch (SQLException e){
             throw new RuntimeException(e);
         }

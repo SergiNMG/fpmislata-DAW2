@@ -3,6 +3,7 @@ package com.fpmislata.movies.persistence.repositoryImpl;
 import com.fpmislata.movies.db.DBUtil;
 import com.fpmislata.movies.domain.entity.Director;
 import com.fpmislata.movies.exception.DBConnectionException;
+import com.fpmislata.movies.exception.ResourceNotFoundException;
 import com.fpmislata.movies.exception.SQLStatmentException;
 import com.fpmislata.movies.domain.repository.DirectorRepository;
 import com.fpmislata.movies.mapper.DirectorMapper;
@@ -32,6 +33,8 @@ public class DirectorRepositoryImpl implements DirectorRepository {
             return Optional.ofNullable(DirectorMapper.mapper.toDirector(directorEntity));
         }catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
+        }catch (ResourceNotFoundException e){
+            throw new RuntimeException("No existe el director con id: " + id);
         }
     }
 

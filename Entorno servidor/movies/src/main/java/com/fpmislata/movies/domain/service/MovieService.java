@@ -12,6 +12,6 @@ import java.util.Optional;
 public interface MovieService {
     List<Movie> getAll(Optional <Integer> page, Optional<Integer> page_size);
     Movie findById(int id);
-    int create(Movie movie);
+    int create(Movie movie, int directorId);
     int getTotalNumberOfRecords();
 }

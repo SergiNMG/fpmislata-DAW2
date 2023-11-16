@@ -20,6 +20,6 @@ public class MovieCreateWeb {
     private String title;
     private int year;
     private int runtime;
-    private DirectorListWeb directorListWeb;
+    private int directorId;
     //private List<CharacterMovieCreateWeb> characterMovieCreateWebList;
 }

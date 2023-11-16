@@ -51,7 +51,9 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public int create(Movie movie){
+    public int create(Movie movie, int directorId){
+        Director director = directorRepository.find(directorId).get();
+        movie.setDirector(director);
         return movieRepository.create(movie);
     }
 

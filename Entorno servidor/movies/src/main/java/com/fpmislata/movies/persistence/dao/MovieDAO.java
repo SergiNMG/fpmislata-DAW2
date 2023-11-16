@@ -80,8 +80,8 @@ public class MovieDAO {
         params.add(movieEntity.getRunTime());
         params.add(movieEntity.getDirectorEntity().getId());
 
-        int movieId = DBUtil.insert(connection, SQL, List.of(params));
-        createCharacters(connection, movieId, movieEntity.getCharacterMovieEntityList());
+        int movieId = DBUtil.insert(connection, SQL, params);
+       //createCharacters(connection, movieId, movieEntity.getCharacterMovieEntityList());
 
         return movieId;
     }

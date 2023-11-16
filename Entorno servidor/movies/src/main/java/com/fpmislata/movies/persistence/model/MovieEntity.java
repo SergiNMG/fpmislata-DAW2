@@ -21,7 +21,7 @@ public class MovieEntity {
     private String title;
     private int year;
     private int runTime;
-    private int directorId;
+    //private int directorId;
 
     DirectorEntity directorEntity;
     List<CharacterMovieEntity> characterMovieEntityList;
