@@ -32,13 +32,20 @@ public interface CharacterMapper {
     @Mapping(target = "id", expression = "java(characterMovieEntity.getId())")
     @Mapping(target = "characters", expression = "java(characterMovieEntity.getCharacterName())")
     CharacterMovie toCharacterMovie(CharacterMovieEntity characterMovieEntity);
-    CharacterMovie toCharacterMovie(CharacterMovieCreateWeb characterMovieCreateWeb);
-
-    CharacterMovieEntity toCharacterMovieEntity(CharacterMovie characterMovie);
-
     @Named("actorEntityToActor")
     default Actor mapActorEntityToActor(ActorEntity actorEntity){
         return ActorMapper.mapper.toActor(actorEntity);
     }
+    @Mapping(target = "characters", expression = "java(characterMovieCreateWeb.getCharacterName())")
+    CharacterMovie toCharacterMovie(CharacterMovieCreateWeb characterMovieCreateWeb);
+
+    @Mapping(target = "characterName", expression = "java(characterMovie.getCharacters())")
+    @Mapping(target = "actorEntity", expression = "java(mapActorToActorEntity(characterMovie.getActor()))")
+    CharacterMovieEntity toCharacterMovieEntity(CharacterMovie characterMovie);
+    @Named("actorToActorEntity")
+    default ActorEntity mapActorToActorEntity(Actor actor){
+        return ActorMapper.mapper.toActorEntity(actor);
+    }
+
 
 }

@@ -19,7 +19,7 @@ import java.util.List;
 public class MovieCreateWeb {
     private String title;
     private int year;
-    private int runtime;
+    private int runTime;
     private int directorId;
     //private List<CharacterMovieCreateWeb> characterMovieCreateWebList;
 }

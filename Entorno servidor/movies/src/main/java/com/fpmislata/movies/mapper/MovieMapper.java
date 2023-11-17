@@ -69,12 +69,12 @@ public interface MovieMapper {
     @Mapping(target = "directorEntity", expression = "java(DirectorMapper.mapper.toDirectorEntity(movie.getDirector()))")
     MovieEntity toMovieEntity(Movie movie);
 
-    @Named("actorToActorIds")
+    /*@Named("actorToActorIds")
     default List<Integer> mapActorToActorIds(List<Actor> actors){
         return actors.stream()
                 .map(Actor::getId)
                 .collect(Collectors.toList());
-    }
+    }*/
 
     /*
     @Named("characterMovieEntityToCharacterMovieListWeb")
