@@ -2,6 +2,7 @@ package com.fpmislata.movies.domain.service.impl;
 
 import com.fpmislata.movies.controller.model.movie.MovieCreateWeb;
 import com.fpmislata.movies.domain.entity.Actor;
+import com.fpmislata.movies.domain.entity.CharacterMovie;
 import com.fpmislata.movies.domain.entity.Director;
 import com.fpmislata.movies.domain.entity.Movie;
 import com.fpmislata.movies.domain.service.MovieService;
@@ -55,6 +56,17 @@ public class MovieServiceImpl implements MovieService {
         Director director = directorRepository.find(directorId).get();
         movie.setDirector(director);
         return movieRepository.create(movie);
+    }
+
+    @Override
+    public int createCharacter(CharacterMovie characterMovie, int movieId, int actorId){
+        CharacterMovie characterMovieCreated = new CharacterMovie();
+        characterMovieCreated.setActor(actorRepository.find(actorId).get());
+        characterMovieCreated.setCharacters(characterMovie.getCharacters());
+
+        //Movie movie = movieRepository.findById(movieId).get();
+
+        return movieRepository.createCharacter(characterMovie, movieId);
     }
 
 }

@@ -86,21 +86,15 @@ public class MovieDAO {
         return movieId;
     }
 
-    private void createCharacters(Connection connection, int movieId, List<CharacterMovieEntity> characterMovieEntityList){
+    public int createCharacter(Connection connection, int movieId, CharacterMovieEntity characterMovieEntity){
         final String SQL = "INSERT INTO actors_movies (movie_id, actor_id, characters) VALUES (?, ?, ?)";
         List<Object> params = new ArrayList<>();
 
-        for (CharacterMovieEntity characterMovieEntity : characterMovieEntityList){
-            String characterName = characterMovieEntity.getCharacterName();
-            int actorId = characterMovieEntity.getActorEntity().getId();
+        params.add(movieId);
+        params.add(characterMovieEntity.getActorEntity().getId());
+        params.add(characterMovieEntity.getCharacterName());
 
-            params.add(movieId);
-            params.add(actorId);
-            params.add(characterName);
-        }
-
-        DBUtil.insert(connection, SQL, List.of(params));
-
+        return DBUtil.insert(connection, SQL, params);
     }
 
 

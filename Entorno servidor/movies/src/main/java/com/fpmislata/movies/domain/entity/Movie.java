@@ -11,7 +11,6 @@ public class Movie {
     private int runTime;
     private Director director;
     private List<CharacterMovie> characters;
-
     public Movie(){
 
     }

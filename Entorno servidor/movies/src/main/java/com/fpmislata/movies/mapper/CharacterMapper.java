@@ -1,5 +1,6 @@
 package com.fpmislata.movies.mapper;
 
+import com.fpmislata.movies.controller.model.character.CharacterMovieCreateWeb;
 import com.fpmislata.movies.controller.model.character.CharacterMovieListWeb;
 import com.fpmislata.movies.domain.entity.Actor;
 import com.fpmislata.movies.domain.entity.CharacterMovie;
@@ -31,6 +32,9 @@ public interface CharacterMapper {
     @Mapping(target = "id", expression = "java(characterMovieEntity.getId())")
     @Mapping(target = "characters", expression = "java(characterMovieEntity.getCharacterName())")
     CharacterMovie toCharacterMovie(CharacterMovieEntity characterMovieEntity);
+    CharacterMovie toCharacterMovie(CharacterMovieCreateWeb characterMovieCreateWeb);
+
+    CharacterMovieEntity toCharacterMovieEntity(CharacterMovie characterMovie);
 
     @Named("actorEntityToActor")
     default Actor mapActorEntityToActor(ActorEntity actorEntity){

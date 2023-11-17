@@ -1,14 +1,17 @@
 package com.fpmislata.movies.persistence.repositoryImpl;
 
 import com.fpmislata.movies.db.DBUtil;
+import com.fpmislata.movies.domain.entity.CharacterMovie;
 import com.fpmislata.movies.domain.entity.Movie;
 import com.fpmislata.movies.exception.ResourceNotFoundException;
 import com.fpmislata.movies.domain.repository.MovieRepository;
+import com.fpmislata.movies.mapper.CharacterMapper;
 import com.fpmislata.movies.mapper.MovieMapper;
 import com.fpmislata.movies.persistence.dao.ActorDAO;
 import com.fpmislata.movies.persistence.dao.CharacterMovieDAO;
 import com.fpmislata.movies.persistence.dao.DirectorDAO;
 import com.fpmislata.movies.persistence.dao.MovieDAO;
+import com.fpmislata.movies.persistence.model.CharacterMovieEntity;
 import com.fpmislata.movies.persistence.model.MovieEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -90,6 +93,18 @@ public class MovieReposirotyImpl implements MovieRepository {
 
             //return (MovieMapper.mapper.toMovie(createdMovieEntity).getId());
             return movieId;
+        } catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public int createCharacter(CharacterMovie characterMovie, int movieId){
+        try(Connection connection = DBUtil.open(true)){
+            CharacterMovieEntity characterMovieEntity = CharacterMapper.mapper.toCharacterMovieEntity(characterMovie);
+
+            int movieCreateCharacterId = movieDAO.createCharacter(connection, movieId, characterMovieEntity);
+            return movieCreateCharacterId;
         } catch (SQLException e){
             throw new RuntimeException(e);
         }

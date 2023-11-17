@@ -1,12 +1,14 @@
 package com.fpmislata.movies.controller;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fpmislata.movies.controller.model.character.CharacterMovieCreateWeb;
 import com.fpmislata.movies.controller.model.movie.MovieCreateWeb;
 import com.fpmislata.movies.controller.model.movie.MovieDetailWeb;
 import com.fpmislata.movies.controller.model.movie.MovieListWeb;
 import com.fpmislata.movies.domain.entity.Movie;
 import com.fpmislata.movies.domain.service.MovieService;
 import com.fpmislata.movies.http_response.Response;
+import com.fpmislata.movies.mapper.CharacterMapper;
 import com.fpmislata.movies.mapper.MovieMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -68,6 +70,17 @@ public class MovieController {
         movieCreated.setTitle(movieCreateWeb.getTitle());
         movieCreated.setId(id);
         return movieCreated;
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/{id}/characters")
+    public MovieDetailWeb create(@PathVariable("id") int movieId, @RequestBody CharacterMovieCreateWeb characterMovieCreateWeb){
+
+        int actorId = characterMovieCreateWeb.getActorId();
+        movieService.createCharacter((CharacterMapper.mapper.toCharacterMovie(characterMovieCreateWeb)), movieId, actorId);
+
+        Movie movieCharacterInserted = movieService.findById(movieId);
+        return MovieMapper.mapper.toMovieDetailWeb(movieCharacterInserted);
     }
 
 
