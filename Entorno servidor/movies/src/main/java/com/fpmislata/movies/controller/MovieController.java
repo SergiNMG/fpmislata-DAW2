@@ -26,9 +26,9 @@ import java.util.stream.Collectors;
 public class MovieController {
 
     @Autowired
-    private MovieService movieService;
+    MovieService movieService;
     @Autowired
-    private MovieMapper movieMapper;
+    MovieMapper movieMapper;
     @Value("${buildPagination.defaultPageSize}")
     private Integer page_size_default;
 
@@ -81,6 +81,18 @@ public class MovieController {
 
         Movie movieCharacterInserted = movieService.findById(movieId);
         return MovieMapper.mapper.toMovieDetailWeb(movieCharacterInserted);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @DeleteMapping("/{id}")
+    public MovieListWeb delete(@PathVariable("id") int movieId){
+        MovieListWeb movieDeletedWeb = new MovieListWeb();
+
+        movieDeletedWeb.setId(movieId);
+        movieDeletedWeb.setTitle(movieService.findById(movieId).getTitle());
+        movieService.delete(movieId);
+
+        return movieDeletedWeb;
     }
 
 

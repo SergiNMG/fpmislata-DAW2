@@ -51,7 +51,7 @@ public class MovieReposirotyImpl implements MovieRepository {
             DBUtil.close(connection);
             return movies;
         } catch (SQLException e){
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -68,7 +68,7 @@ public class MovieReposirotyImpl implements MovieRepository {
             // return movieEntity.map(MovieMapper.mapper::toMovie);
 
         } catch (SQLException e){
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         } catch (ResourceNotFoundException e){
             throw new ResourceNotFoundException("No se encontro la pelicula con id: " + id);
         }
@@ -79,7 +79,7 @@ public class MovieReposirotyImpl implements MovieRepository {
         try(Connection connection = DBUtil.open(true)){
             return movieDAO.getTotalNumberOfRecords(connection);
         }catch (SQLException e){
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -94,7 +94,7 @@ public class MovieReposirotyImpl implements MovieRepository {
             //return (MovieMapper.mapper.toMovie(createdMovieEntity).getId());
             return movieId;
         } catch (SQLException e){
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -106,7 +106,16 @@ public class MovieReposirotyImpl implements MovieRepository {
             int movieCreateCharacterId = movieDAO.createCharacter(connection, movieId, characterMovieEntity);
             return movieCreateCharacterId;
         } catch (SQLException e){
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    @Override
+    public void delete(int movieId){
+        try(Connection connection = DBUtil.open(true)){
+            movieDAO.delete(connection, movieId);
+        } catch (SQLException e){
+            throw new RuntimeException(e.getMessage());
         }
     }
 

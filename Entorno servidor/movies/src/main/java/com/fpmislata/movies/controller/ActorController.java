@@ -45,8 +45,13 @@ public class ActorController {
 
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/{id}")
-    public Actor delete (@PathVariable("id") int id){
-        return actorService.delete(id).get();
+    public ActorDetailWeb delete (@PathVariable("id") int id){
+        ActorDetailWeb actorDeletedWeb = new ActorDetailWeb();
+        actorDeletedWeb.setId(id);
+        actorDeletedWeb.setName(actorService.find(id).get().getName());
+        actorService.delete(id);
+
+        return actorDeletedWeb;
     }
 
     @ResponseStatus(HttpStatus.ACCEPTED)

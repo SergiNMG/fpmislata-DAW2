@@ -14,4 +14,5 @@ public interface MovieRepository {
     int getTotalNumberOfRecords();
     int create(Movie movie);
     int createCharacter(CharacterMovie characterMovie, int movieId);
+    void delete(int movieId);
 }

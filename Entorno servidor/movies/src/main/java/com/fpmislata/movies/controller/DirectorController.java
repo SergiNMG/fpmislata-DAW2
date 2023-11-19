@@ -20,7 +20,7 @@ public class DirectorController {
     DirectorService directorService;
 
     @Autowired
-    private DirectorMapper directorMapper;
+    DirectorMapper directorMapper;
 
     //Director director = new Director("Sergi Nicolas", 2000, null);
 
@@ -33,8 +33,8 @@ public class DirectorController {
 
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/{id}")
-    public Director delete (@PathVariable("id") int id){
-        return directorService.delete(id).get();
+    public DirectorDetailWeb delete (@PathVariable("id") int id){
+        return directorMapper.toDirectorDetailWeb(directorService.delete(id).get());
     }
 
     @ResponseStatus(HttpStatus.ACCEPTED)

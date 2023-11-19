@@ -60,12 +60,19 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public int createCharacter(CharacterMovie characterMovie, int movieId, int actorId){
         CharacterMovie characterMovieCreated = new CharacterMovie();
-        System.out.println(actorId);
+        //System.out.println(actorId);
         characterMovieCreated.setActor(actorRepository.find(actorId).get());
         characterMovieCreated.setCharacters(characterMovie.getCharacters());
         //Movie movie = movieRepository.findById(movieId).get();
 
         return movieRepository.createCharacter(characterMovieCreated, movieId);
+    }
+
+    @Override
+    public Movie delete(int movieId){
+        Movie movieDeleted = movieRepository.findById(movieId).get();
+        movieRepository.delete(movieId);
+        return movieDeleted;
     }
 
 }
