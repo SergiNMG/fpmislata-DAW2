@@ -1,0 +1,28 @@
+.l-extreme{
+    display: flex;
+
+    &__left-area{
+        margin-left: auto;
+    }
+
+    &__right-area{
+        margin-right: auto;
+    }
+
+    &__top-area{
+        margin-top: auto;
+    }
+
+    &__bottom-area{
+        margin-bottom: auto;
+    }
+
+    &__border-area{
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    &__center-area{
+        margin: auto;
+    }
+}

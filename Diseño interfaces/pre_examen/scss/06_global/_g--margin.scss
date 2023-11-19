@@ -1,0 +1,60 @@
+$margins: 0px, 4px, 6px, 8px, 10px, 12px, 16px, 20px, 24px, 32px, 40px, 48px, 64px, 80px, 96px, 128px, 160px, 192px, 224px, 256px, 320px, 480px, 640px;
+
+:root{
+    @each $margin in $margins{
+        $i: index($margins , $margin);
+        --margin-#{$i}: #{$margin};
+    }
+}
+
+$index: 0;
+@each $margin in $margins{
+    .g--margin-#{$index}{
+        margin: $margin;
+    }
+    $index: $index + 1;
+}
+
+@each $margin in $margins{
+    $i: index($margins , $margin);
+    .g--margin-top-#{$index}{
+        margin-top: $margin;
+    }
+}
+
+@each $margin in $margins{
+    $i: index($margins , $margin);
+    .g--margin-bottom-#{$index}{
+        margin-bottom: $margin;
+    }
+}
+
+@each $margin in $margins{
+    $i: index($margins , $margin);
+    .g--margin-left-#{$index}{
+        margin-left: $margin;
+    }
+}
+
+@each $margin in $margins{
+    $i: index($margins , $margin);
+    .g--margin-right-#{$index}{
+        margin-right: $margin;
+    }
+}
+
+@each $margin in $margins{
+    $i: index($margins , $margin);
+    .g--margin-vertical-#{$index}{
+        margin-top: $margin;
+        margin-bottom: $margin;
+    }
+}
+
+@each $margin in $margins{
+    $i: index($margins , $margin);
+    .g--margin-horizontal-#{$index}{
+        margin-left: $margin;
+        margin-right: $margin;
+    }
+}

@@ -1,0 +1,40 @@
+@mixin box-shadow($box-shadow) {
+    -webkit-box-shadow: $box-shadow;
+    -moz-box-shadow: $box-shadow;
+    box-shadow: $box-shadow;
+}
+
+$box-shadows: (
+    "none" : none,
+    "1": 0 1px 3px hsl(0, 0%, 0%),
+    "2": 0 4px 6px hsl(0, 0%, 0%),
+    "": 0 5px 15px hsl(0, 0%, 0%),
+    "3": 0 10px 24px hsl(0, 0%, 0%),
+    "4": 0 15px 35px hsl(0, 0%, 0%),
+);
+
+@each $shadow, $value in $box-shadows{
+    $separator: "-";
+
+    @if $shadow =="" {
+        $separator: "";
+    }
+
+    .g--box-shadow#{$separator}#{$shadow}{
+        @include box-shadow($value)
+    }
+}
+
+@each $shadow in map-keys($box-shadows) {
+    $box-shadow: map-get($box-shadows, $shadow);
+
+    $separator: "-";
+
+    @if $shadow =="" {
+        $separator: "";
+    }
+
+    .g--box-shadow#{$separator}#{$shadow} {
+        @include box-shadow($box-shadow)
+    }
+}

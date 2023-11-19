@@ -1,0 +1,44 @@
+$colors:  (
+    "white": (#FFFFFF, #FCFCFC, #FAFAFA, #F7F7F7, #F5F5F5, #F2F2F2, #F0F0F0, #EBEBEB),
+    "blue": (#BDDCFF, #8AC0FF, #52A3FF, #1F87FF, #006DEB, #0056B8, #003B80, #00244D),
+    "grey": (#d9d9d9, #c2c2c2, #ababab, #949494, #7d7d7d, #666666, #4f4f4f, #383838),
+    "red": (#fed7d7, #feb2b2, #fc8181, #f56565, #e53e3e, #c53030, #9b2c2c, #742a2a),
+    "green": (#c6f6d5, #9ae6b4, #68d391, #48bb78, #38a169, #2f855a, #276749, #22543d),
+    "yellow": (#fefcbf, #faf089, #f6e05e, #ecc94b, #d69e2e, #b7791f, #975a16, #744210),
+);
+
+:root{
+    @each $color, $values in $colors{
+        @each $value in $values{
+            $i: index($values , $value );
+            --color-#{$color}-#{$i}: #{$value};
+        }
+    }
+}
+
+@each $color, $values in $colors{
+    @each $value in $values{
+        $i: index($values, $value);
+        .g--color-#{$color}-#{$i}{
+            color: var(--color-#{$color}-#{$i});
+        }
+    }
+}
+
+@each $color, $values in $colors{
+    @each $value in $values{
+        $i: index($values, $value);
+        .g--background-color-#{$color}-#{$i}{
+            background-color: var(--color-#{$color}-#{$i});
+        }
+    }
+}
+
+@each $color, $values in $colors{
+    @each $value in $values{
+        $i: index($values, $value);
+        .g--border-color-#{$color}-#{$i}{
+            border-color: var(--color-#{$color}-#{$i});
+        }
+    }
+}
