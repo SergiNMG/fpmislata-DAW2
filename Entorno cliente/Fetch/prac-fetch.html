@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch</title>
+</head>
+
+<body>
+    <h2>Peticiones fetch</h2>
+</body>
+<script>
+    "Use strict"
+
+    let url = "http://localhost:3000/peliculas/1"
+
+    /*fetch(url)
+        .then(response => {
+        if (!response.ok) {
+            throw new Error(`Error de red: ${response.status}`);
+        }
+            const contentType = response.headers.get('content-type');
+            return response.json()
+        })
+        .then(data => {
+            data.forEach(p => {
+                console.log(p.title)
+            })
+        })
+        .catch(error => {
+            console.log("Error: " + error.message)
+        })
+        */
+    
+    let actorsUrl = "http://localhost:3000/actores/"
+
+    async function getActor(url){
+        try{
+            let response = await fetch(url)
+            if(!response.ok){
+                throw new Error(`Error de red: ${response.status}`)
+            }
+            let data = await response.json()
+            console.log(data)
+
+            let response2 = await fetch(actorsUrl + data.actorId)
+            if(!response2.ok){
+                throw new Error(`Error de red: ${response.status}`)
+            }
+            let data2 = await response2.json()
+            console.log(data2)
+        }catch(error){
+            console.log(error.message)
+        }
+    }
+
+    getActor(url)
+</script>
+
+</html>

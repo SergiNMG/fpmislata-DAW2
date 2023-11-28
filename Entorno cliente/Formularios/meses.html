@@ -48,6 +48,7 @@
         let trimestreSeleccionado = seleccionTrimestre.value
         let mesesSeleccionados = (datos.find(t => t.trimestre == trimestreSeleccionado))
 
+        console.log(mesesSeleccionados)
         seleccionMes.textContent = ""
         mesesSeleccionados.meses.forEach(m => {
             let option = document.createElement("option")

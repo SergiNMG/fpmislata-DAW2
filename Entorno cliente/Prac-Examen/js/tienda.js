@@ -102,7 +102,7 @@ function verCarro() {
 }
 
 function efectuaPedido() {
-	console.log(miCarrito)
+	console.log(JSON.stringify(miCarrito))
 }
 
 

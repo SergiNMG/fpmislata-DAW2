@@ -15,7 +15,8 @@ class Carrito{
 	}			
 				
 	borraArticulo(codigo){	
-		//let articulo = this.articulo.
+		this.articulos = this.articulos.filter(a => a.codigo != codigo)
+		this.verCarrito()
 	}
 	
 	modificaUnidades(codigo,n){
@@ -24,7 +25,7 @@ class Carrito{
 			articulo.unidades += 1
 		}
 		else {
-			articulo.unidades >= 1 ? articulo.unidades -= 1 : this.borraArticulo(codigo)
+			articulo.unidades > 1 ? articulo.unidades -= 1 : this.borraArticulo(codigo)
 		}		
 		this.verCarrito()
 	}	
