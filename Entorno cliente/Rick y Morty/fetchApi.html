@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <section id="character-info">
+
+    </section>
+    <section id="main">
+
+    </section>
+</body>
+<script>
+    let url = 'https://rickandmortyapi.com/api/character/'
+    let url2 = 'https://rickandmortyapi.com/api/location/'
+
+    async function getAllCharacters(url) {
+        try {
+            let response = await fetch(url)
+            if (!response.ok) {
+                throw new Error(`Error de red: ${response.status}`)
+            }
+
+            let data = await response.json()
+            console.log(data)
+            allCharacters(data)
+
+            let response2 = await fetch(url + '5')
+            if (!response2.ok) {
+                throw new Error(`Error de red: ${response.status}`)
+            }
+
+            let data2 = await response2.json()
+            console.log(data2)
+
+        } catch (error) {
+            console.error('Error: ', error.message)
+        }
+    }
+    getAllCharacters(url)
+
+    function allCharacters(data) {
+        let page = document.getElementById("main")
+        let info = document.getElementById("character-info")
+
+        data.results.forEach((character, i) => {
+            let img = document.createElement("img")
+            let name = document.createElement("h3")
+            let species = document.createElement("p")
+            let id = document.createElement("p")
+            let gender = document.createElement("p")
+            let location = document.createElement("p")
+
+            let characterContainer = document.createElement("div")
+            characterContainer.className = "c-card"
+
+            characterContainer.setAttribute("img", character.image)
+            characterContainer.setAttribute("name", character.name)
+            characterContainer.setAttribute("species", character.species)
+            characterContainer.setAttribute("id", character.id)
+            characterContainer.setAttribute("gender", character.gender)
+            characterContainer.setAttribute("location", character.location.name)
+
+            img.src = character.image
+            characterContainer.appendChild(img)
+
+            name.innerHTML = character.name
+            characterContainer.appendChild(name)
+
+            species.innerHTML = character.species
+            characterContainer.appendChild(species)
+
+            page.appendChild(characterContainer)
+
+            characterContainer.addEventListener("click", function () {
+                //0alert(character.id)
+                let imgDialog = document.createElement("img")
+                imgDialog.className = "c-card-info__img"
+                let nameDialog = document.createElement("h3")
+                let speciesDialog = document.createElement("p")
+                let idDialog = document.createElement("p")
+                let genderDialog = document.createElement("p")
+                let locationDialog = document.createElement("p")
+
+                let characterInfo = document.createElement("dialog")
+                characterInfo.className = "c-dialog"
+                let infoContainer = document.createElement("div")
+                infoContainer.className = "c-card-info"
+                let closeDialog = document.createElement("button")
+                closeDialog.className = "c-card-info__close"
+
+
+                imgDialog.src = characterContainer.getAttribute("img")
+                nameDialog.innerHTML = characterContainer.getAttribute("name")
+                speciesDialog.innerHTML = characterContainer.getAttribute("species")
+                idDialog.innerHTML = characterContainer.getAttribute("id")
+                genderDialog.innerHTML = characterContainer.getAttribute("gender")
+                locationDialog.innerHTML = characterContainer.getAttribute("location")
+                closeDialog.innerHTML = "X"
+
+                closeDialog.addEventListener("click", function () {
+                    characterInfo.close();
+                });
+
+                infoContainer.appendChild(imgDialog)
+                infoContainer.appendChild(nameDialog)
+                infoContainer.appendChild(speciesDialog)
+                infoContainer.appendChild(idDialog)
+                infoContainer.appendChild(genderDialog)
+                infoContainer.appendChild(locationDialog)
+                infoContainer.appendChild(closeDialog)
+
+                characterInfo.appendChild(infoContainer)
+                info.appendChild(characterInfo)
+
+                characterInfo.show()
+            });
+
+        });
+    }
+</script>
+
+</html>
