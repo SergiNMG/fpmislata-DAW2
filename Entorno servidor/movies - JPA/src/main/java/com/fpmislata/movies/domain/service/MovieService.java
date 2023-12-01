@@ -11,10 +11,10 @@ import java.util.Map;
 import java.util.Optional;
 
 public interface MovieService {
-    List<Movie> getAll(Optional <Integer> page, Optional<Integer> page_size);
+    List<Movie> getAll(Integer page, Integer page_size);
     Movie findById(int id);
     int create(Movie movie, int directorId);
     int createCharacter(CharacterMovie characterMovie, int movieId, int actorId);
-    int getTotalNumberOfRecords();
+    long getTotalNumberOfRecords();
     Movie delete(int movieId);
 }

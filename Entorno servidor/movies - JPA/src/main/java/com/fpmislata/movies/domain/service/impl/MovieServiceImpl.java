@@ -29,24 +29,24 @@ public class MovieServiceImpl implements MovieService {
     private DirectorRepository directorRepository;
 
     @Override
-    public List<Movie> getAll(Optional<Integer> page, Optional<Integer> page_size){
+    public List<Movie> getAll(Integer page, Integer page_size){
         return movieRepository.getAll(page, page_size);
     }
 
     @Override
     public Movie findById(int id){
         Movie movie = movieRepository.findById(id).get();
+        return movie;
         /*
         List<Actor> actorList = actorRepository.findByMovieId(id);
         Optional<Director> director = directorRepository.findByMovieId(id);
         movie.setDirector(director.get());
         movie.setActors(actorList);*/
-        return movie;
         //return movieRepository.findById(id);
     }
 
     @Override
-    public int getTotalNumberOfRecords(){
+    public long getTotalNumberOfRecords(){
         return movieRepository.getTotalNumberOfRecords();
     }
 

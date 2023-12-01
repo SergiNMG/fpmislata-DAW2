@@ -24,7 +24,19 @@ import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
 public interface MovieMapper {
+
     MovieMapper mapper = Mappers.getMapper(MovieMapper.class);
+    @Mapping(target = "director", ignore = true)
+    @Mapping(target = "characters", ignore = true)
+    Movie toMovie(MovieEntity movieEntity);
+
+    @Mapping(target = "director", ignore = true)
+    @Mapping(target = "characters", ignore = true)
+    List<Movie> toMovieList(List<MovieEntity> movieEntityList);
+    MovieListWeb toMovieListWeb(Movie movie);
+
+    /*
+
     MovieListWeb toMovieListWeb(Movie movie);
 
     @Mapping(target = "characters", expression = "java(mapCharacterMovieToCharacterMovieListWeb(movie.getCharacters()))")
@@ -89,5 +101,5 @@ public interface MovieMapper {
                 .map(CharacterMapper.mapper::toCharacterMovieListWeb)
                 .collect(Collectors.toList());
     }
-     */
+    */
 }

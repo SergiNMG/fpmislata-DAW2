@@ -14,6 +14,8 @@ import com.fpmislata.movies.persistence.dao.MovieDAO;
 import com.fpmislata.movies.persistence.model.CharacterMovieEntity;
 import com.fpmislata.movies.persistence.model.MovieEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
@@ -40,16 +42,20 @@ public class MovieReposirotyImpl implements MovieRepository {
     MovieMapper movieMapper;
 
     @Override
-    public List<Movie> getAll(Optional<Integer> page, Optional<Integer> page_size){
+    public List<Movie> getAll(Integer page, Integer page_size){
 
         try(Connection connection = DBUtil.open(true)){
-            List<MovieEntity> moviesEntities = movieDAO.getAll(connection, page, page_size);
-            List<Movie> movies = moviesEntities
-                    .stream()
-                    .map(movieMapper::toMovie)
-                    .collect(Collectors.toList());
-            DBUtil.close(connection);
-            return movies;
+
+            List<MovieEntity> movieEntityList;
+            if (page != null && page > 0){
+                Pageable pageable = PageRequest.of(page - 1, page_size);
+                movieEntityList = movieDAO.findAll(pageable).stream().toList();
+            } else {
+                movieEntityList = movieDAO.findAll();
+            }
+
+            return movieMapper.mapper.toMovieList(movieEntityList);
+
         } catch (SQLException e){
             throw new RuntimeException(e.getMessage());
         }
@@ -58,14 +64,12 @@ public class MovieReposirotyImpl implements MovieRepository {
     @Override
     public Optional<Movie> findById(int id){
         try(Connection connection = DBUtil.open(true)){
-            MovieEntity movieEntity = movieDAO.findById(connection, id).get();
+            /*MovieEntity movieEntity = movieDAO.findById(connection, id).get();
             movieEntity.setDirectorEntity(directorDAO.findByMovieId(connection, id).get());
             movieEntity.setCharacterMovieEntityList(characterMovieDAO.findByMovieId(connection, id));
-            //movieEntity.getDirectorEntity(connection, directorDAO);
-            //System.out.println(movieEntity.getCharacterMovieEntityList().get(1).getCharacterName());
             movieEntity.getCharacterMovieEntityList(connection, characterMovieDAO).forEach(character -> character.getActorEntity(connection, actorDAO));
-            return Optional.ofNullable(MovieMapper.mapper.toMovie(movieEntity));
-            // return movieEntity.map(MovieMapper.mapper::toMovie);
+            return Optional.ofNullable(MovieMapper.mapper.toMovie(movieEntity));*/
+            return null;
 
         } catch (SQLException e){
             throw new RuntimeException(e.getMessage());
@@ -75,9 +79,10 @@ public class MovieReposirotyImpl implements MovieRepository {
     }
 
     @Override
-    public int getTotalNumberOfRecords() {
+    public long getTotalNumberOfRecords() {
         try(Connection connection = DBUtil.open(true)){
-            return movieDAO.getTotalNumberOfRecords(connection);
+            //return movieDAO.getTotalNumberOfRecords(connection);
+            return movieDAO.count();
         }catch (SQLException e){
             throw new RuntimeException(e.getMessage());
         }
@@ -86,13 +91,10 @@ public class MovieReposirotyImpl implements MovieRepository {
     @Override
     public int create(Movie movie){
         try (Connection connection = DBUtil.open(true)){
-            MovieEntity movieEntity = MovieMapper.mapper.toMovieEntity(movie);
-
+            /*MovieEntity movieEntity = MovieMapper.mapper.toMovieEntity(movie);
             int movieId = movieDAO.create(connection, movieEntity);
-            //MovieEntity createdMovieEntity = movieDAO.findById(connection, movieId).get();
-
-            //return (MovieMapper.mapper.toMovie(createdMovieEntity).getId());
-            return movieId;
+            return movieId;*/
+            return 0;
         } catch (SQLException e){
             throw new RuntimeException(e.getMessage());
         }
@@ -101,10 +103,10 @@ public class MovieReposirotyImpl implements MovieRepository {
     @Override
     public int createCharacter(CharacterMovie characterMovie, int movieId){
         try(Connection connection = DBUtil.open(true)){
-            CharacterMovieEntity characterMovieEntity = CharacterMapper.mapper.toCharacterMovieEntity(characterMovie);
-
+            /*CharacterMovieEntity characterMovieEntity = CharacterMapper.mapper.toCharacterMovieEntity(characterMovie);
             int movieCreateCharacterId = movieDAO.createCharacter(connection, movieId, characterMovieEntity);
-            return movieCreateCharacterId;
+            return movieCreateCharacterId;*/
+            return 0;
         } catch (SQLException e){
             throw new RuntimeException(e.getMessage());
         }
@@ -113,7 +115,7 @@ public class MovieReposirotyImpl implements MovieRepository {
     @Override
     public void delete(int movieId){
         try(Connection connection = DBUtil.open(true)){
-            movieDAO.delete(connection, movieId);
+            //movieDAO.delete(connection, movieId);
         } catch (SQLException e){
             throw new RuntimeException(e.getMessage());
         }

@@ -22,7 +22,7 @@ public class Response {
 
     private Object data;
     @JsonProperty("total records")
-    private Integer total_records;
+    private long total_records;
     private Integer page;
     @JsonProperty("page size")
     private Integer page_size;
@@ -39,17 +39,17 @@ public class Response {
     @Value("${buildPagination.defaultPageSize}")
     private Integer page_size_default;
 
-    public Response(Object data, int total_records, Optional<Integer> page, Optional<Integer> page_size, String url) {
+    public Response(Object data, long total_records, Integer page, Integer page_size, String url) {
         this.data = data;
         this.total_records = total_records;
         this.url = url;
-        if (page.isPresent()){
-            buildPaginationMetaData(total_records, page_size.get(), page.get(), url);
+        if (page != null){
+            buildPaginationMetaData(total_records, page_size, page, url);
         }
 
     }
 
-        private void buildPaginationMetaData(int total_records, int page_size, int page, String url){
+        private void buildPaginationMetaData(long total_records, int page_size, int page, String url){
 
         this.page = page;
         this.page_size = page_size;

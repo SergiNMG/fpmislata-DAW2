@@ -9,9 +9,9 @@ import java.util.Optional;
 
 public interface MovieRepository {
 
-    List<Movie> getAll(Optional<Integer> page, Optional<Integer> page_size);
+    List<Movie> getAll(Integer page, Integer page_size);
     Optional<Movie> findById(int id);
-    int getTotalNumberOfRecords();
+    long getTotalNumberOfRecords();
     int create(Movie movie);
     int createCharacter(CharacterMovie characterMovie, int movieId);
     void delete(int movieId);
