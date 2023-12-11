@@ -1,0 +1,15 @@
+body{
+    font-family: 'Courier New', Courier, monospace;
+}
+
+h1{
+    font-size: 10vw;
+}
+
+.l-background{
+    background-image: url(../img/rickYmorty.jpg);
+    width: 50vw;
+    height: 99vh;
+    background-size: cover;
+    overflow: hidden;
+}
