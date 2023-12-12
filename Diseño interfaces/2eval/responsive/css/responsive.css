@@ -1,0 +1,28 @@
+body{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 10px;
+}
+
+h1{
+    font-size: 10vw;
+}
+
+.l-background{
+    background-image: url(../img/rickYmorty.jpg);
+    width: 50vw;
+    height: 99vh;
+    background-size: cover;
+    overflow: hidden;
+}
+
+.c-title-max{
+    font-size: max(60px, 10vw);
+}
+
+.c-title-min{
+    font-size: min(80px, 10vw);
+}
+
+.c-title-minmax{
+    font-size: clamp(60px, 10vw, 80px);
+}
