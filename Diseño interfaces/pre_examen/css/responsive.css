@@ -14,3 +14,11 @@ h1{
     background-size: cover;
     overflow: hidden;
 }
+
+.c-title-max{
+    font-size: max(60px, 10vw);
+}
+
+.c-title-min{
+    font-size: min(80px, 10vw);
+}
