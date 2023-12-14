@@ -6,7 +6,6 @@ import lombok.*;
 @Entity
 @Data
 @Table(name = "actors")
-@AllArgsConstructor
 @NoArgsConstructor
 
 public class ActorEntity {

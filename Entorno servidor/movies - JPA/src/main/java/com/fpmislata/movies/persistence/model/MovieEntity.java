@@ -14,13 +14,14 @@ import java.util.List;
 @Entity
 @Table(name = "movies")
 @Data
-@AllArgsConstructor
+@NoArgsConstructor
 public class MovieEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String title;
     private int year;
+    @Column(name = "runtime")
     private int runTime;
 
     @ManyToOne(fetch = FetchType.LAZY)

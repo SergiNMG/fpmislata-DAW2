@@ -38,7 +38,7 @@ public class MovieController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("")
-    public Response getAll(@RequestParam Integer page, Integer page_size){
+    public Response getAll(@RequestParam(required = false) Integer page, @RequestParam(required = false) Integer page_size){
         long total_records = movieService.getTotalNumberOfRecords();
         if (page_size == null) {
             page_size = page_size_default;

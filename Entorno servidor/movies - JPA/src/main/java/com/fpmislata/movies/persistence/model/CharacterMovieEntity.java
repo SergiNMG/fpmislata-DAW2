@@ -2,17 +2,13 @@ package com.fpmislata.movies.persistence.model;
 
 import com.fpmislata.movies.persistence.dao.ActorDAO;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.sql.Connection;
 import java.util.Optional;
 
-@Getter
-@Setter
-@AllArgsConstructor
+@Entity
+@Data
 @NoArgsConstructor
 public class CharacterMovieEntity {
 
