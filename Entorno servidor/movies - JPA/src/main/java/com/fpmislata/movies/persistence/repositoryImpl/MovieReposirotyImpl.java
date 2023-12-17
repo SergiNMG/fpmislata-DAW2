@@ -63,7 +63,7 @@ public class MovieReposirotyImpl implements MovieRepository {
             return Optional.empty();
         }
         else {
-            return Optional.ofNullable(MovieMapper.mapper.toMovie(movieEntity));
+            return Optional.ofNullable(MovieMapper.mapper.toMovieWithDirectorAndCharacters(movieEntity));
         }
     }
 

@@ -12,6 +12,7 @@ import com.fpmislata.movies.domain.entity.Director;
 import com.fpmislata.movies.domain.entity.Movie;
 import com.fpmislata.movies.persistence.model.CharacterMovieEntity;
 import com.fpmislata.movies.persistence.model.MovieEntity;
+import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
@@ -26,20 +27,33 @@ import java.util.stream.Collectors;
 public interface MovieMapper {
 
     MovieMapper mapper = Mappers.getMapper(MovieMapper.class);
-
     @Mapping(target = "director", ignore = true)
     @Mapping(target = "characters", ignore = true)
+    @Named("toMovie")
+    Movie toMovie(MovieEntity movieEntity);
+    @Mapping(target = "director", ignore = true)
+    @Mapping(target = "characters", ignore = true)
+    @IterableMapping(qualifiedByName = "toMovie")
+    @Named("toMovieList")
     List<Movie> toMovieList(List<MovieEntity> movieEntityList);
+
+    @Mapping(target = "director", expression = "java(DirectorMapper.mapper.toDirector(movieEntity.getDirectorEntity()))")
+    @Mapping(target = "characters", expression = "java(CharacterMapper.mapper.toCharacterMovieList(movieEntity.getCharacterMovieEntityList()))")
+    @Named("toMovieWithDirectorAndCharacters")
+    Movie toMovieWithDirectorAndCharacters(MovieEntity movieEntity);
+
+    @Mapping(target = "characters", expression = "java(CharacterMapper.mapper.toCharacterMovieListWeb(movie.getCharacters()))")
+    @IterableMapping(qualifiedByName = "toMovieWithDirectorAndCharacters")
+    MovieDetailWeb toMovieDetailWeb(Movie movie);
+
+    @IterableMapping(qualifiedByName = "toMovieList")
     MovieListWeb toMovieListWeb(Movie movie);
 
+    /*
     @Mapping(target = "director", expression = "java(DirectorMapper.mapper.toDirector(movieEntity.getDirectorEntity()))")
     @Mapping(target = "characters", expression = "java(CharacterMapper.mapper.toCharacterMovieList(movieEntity.getCharacterMovieEntityList()))")
     Movie toMovie(MovieEntity movieEntity);
 
-    @Mapping(target = "characters", expression = "java(CharacterMapper.mapper.toCharacterMovieListWeb(movie.getCharacters()))")
-    MovieDetailWeb toMovieDetailWeb(Movie movie);
-
-    /*
 
     MovieListWeb toMovieListWeb(Movie movie);
 
