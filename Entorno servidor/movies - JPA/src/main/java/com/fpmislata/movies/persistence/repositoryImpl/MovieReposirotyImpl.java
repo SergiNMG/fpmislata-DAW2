@@ -44,37 +44,26 @@ public class MovieReposirotyImpl implements MovieRepository {
     @Override
     public List<Movie> getAll(Integer page, Integer page_size){
 
-        try(Connection connection = DBUtil.open(true)){
-
-            List<MovieEntity> movieEntityList;
-            if (page != null && page > 0){
-                Pageable pageable = PageRequest.of(page - 1, page_size);
-                movieEntityList = movieDAO.findAll(pageable).stream().toList();
-            } else {
-                movieEntityList = movieDAO.findAll();
-            }
-
-            return movieMapper.mapper.toMovieList(movieEntityList);
-
-        } catch (SQLException e){
-            throw new RuntimeException(e.getMessage());
+        List<MovieEntity> movieEntityList;
+        if (page != null && page > 0){
+            Pageable pageable = PageRequest.of(page - 1, page_size);
+            movieEntityList = movieDAO.findAll(pageable).stream().toList();
+        } else {
+            movieEntityList = movieDAO.findAll();
         }
+        return movieMapper.mapper.toMovieList(movieEntityList);
+
     }
 
     @Override
     public Optional<Movie> findById(int id){
-        try(Connection connection = DBUtil.open(true)){
-            /*MovieEntity movieEntity = movieDAO.findById(connection, id).get();
-            movieEntity.setDirectorEntity(directorDAO.findByMovieId(connection, id).get());
-            movieEntity.setCharacterMovieEntityList(characterMovieDAO.findByMovieId(connection, id));
-            movieEntity.getCharacterMovieEntityList(connection, characterMovieDAO).forEach(character -> character.getActorEntity(connection, actorDAO));
-            return Optional.ofNullable(MovieMapper.mapper.toMovie(movieEntity));*/
-            return null;
 
-        } catch (SQLException e){
-            throw new RuntimeException(e.getMessage());
-        } catch (ResourceNotFoundException e){
-            throw new ResourceNotFoundException("No se encontro la pelicula con id: " + id);
+        MovieEntity movieEntity = movieDAO.findById(id).get();
+        if(movieEntity == null){
+            return Optional.empty();
+        }
+        else {
+            return Optional.ofNullable(MovieMapper.mapper.toMovie(movieEntity));
         }
     }
 

@@ -13,6 +13,8 @@ public class DirectorEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String name;
+    @Column(name = "birthyear")
     private int birthYear;
+    @Column(name = "deathyear", nullable = true)
     private Integer deathYear;
 }

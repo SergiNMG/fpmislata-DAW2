@@ -26,12 +26,16 @@ public interface CharacterMapper {
 
     @Mapping(target = "actorId", expression = "java(characterMovie.getActor().getId())")
     @Mapping(target = "actorName", expression = "java(characterMovie.getActor().getName())")
+    @Mapping(target = "characterName", expression = "java(characterMovie.getCharacters())")
     CharacterMovieListWeb toCharacterMovieListWeb(CharacterMovie characterMovie);
 
     @Mapping(target = "actor", expression = "java(mapActorEntityToActor(characterMovieEntity.getActorEntity()))")
     @Mapping(target = "id", expression = "java(characterMovieEntity.getId())")
     @Mapping(target = "characters", expression = "java(characterMovieEntity.getCharacterName())")
     CharacterMovie toCharacterMovie(CharacterMovieEntity characterMovieEntity);
+    List<CharacterMovie> toCharacterMovieList(List<CharacterMovieEntity> characterMovieEntityList);
+    List<CharacterMovieListWeb> toCharacterMovieListWeb(List<CharacterMovie> characterMovieList);
+
     @Named("actorEntityToActor")
     default Actor mapActorEntityToActor(ActorEntity actorEntity){
         return ActorMapper.mapper.toActor(actorEntity);

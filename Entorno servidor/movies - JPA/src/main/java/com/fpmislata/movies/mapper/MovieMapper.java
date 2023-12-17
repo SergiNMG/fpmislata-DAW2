@@ -26,14 +26,18 @@ import java.util.stream.Collectors;
 public interface MovieMapper {
 
     MovieMapper mapper = Mappers.getMapper(MovieMapper.class);
-    @Mapping(target = "director", ignore = true)
-    @Mapping(target = "characters", ignore = true)
-    Movie toMovie(MovieEntity movieEntity);
 
     @Mapping(target = "director", ignore = true)
     @Mapping(target = "characters", ignore = true)
     List<Movie> toMovieList(List<MovieEntity> movieEntityList);
     MovieListWeb toMovieListWeb(Movie movie);
+
+    @Mapping(target = "director", expression = "java(DirectorMapper.mapper.toDirector(movieEntity.getDirectorEntity()))")
+    @Mapping(target = "characters", expression = "java(CharacterMapper.mapper.toCharacterMovieList(movieEntity.getCharacterMovieEntityList()))")
+    Movie toMovie(MovieEntity movieEntity);
+
+    @Mapping(target = "characters", expression = "java(CharacterMapper.mapper.toCharacterMovieListWeb(movie.getCharacters()))")
+    MovieDetailWeb toMovieDetailWeb(Movie movie);
 
     /*
 
@@ -59,10 +63,6 @@ public interface MovieMapper {
     @Mapping(target = "year", expression = "java(resultSet.getInt(\"year\"))")
     @Mapping(target = "runTime", expression = "java(resultSet.getInt(\"runTime\"))")
     MovieEntity toMovieEntity(ResultSet resultSet) throws SQLException;
-
-    @Mapping(target = "director", expression = "java(DirectorMapper.mapper.toDirector(movieEntity.getDirectorEntity()))")
-    @Mapping(target = "characters", expression = "java(mapCharacterMovieEntityToCharacterMovie(movieEntity.getCharacterMovieEntityList()))")
-    Movie toMovie(MovieEntity movieEntity);
 
     //@Mapping(target = "director", expression = "java(DirectorMapper.mapper.toDirector(movieCreateWeb.getDirectorCreateWeb()))")
     //@Mapping(target = "characters", expression = "java(mapCharacterMovieEntityToCharacterMovie(movieCreateWeb.getCharacterMovieCreateWebList()))")

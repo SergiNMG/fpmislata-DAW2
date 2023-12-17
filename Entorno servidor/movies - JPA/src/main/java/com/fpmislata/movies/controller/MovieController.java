@@ -55,12 +55,9 @@ public class MovieController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{id}")
     public MovieDetailWeb findById(@PathVariable("id") int id){
-            /*
             Movie movieDetailWeb = movieService.findById(id);
             System.out.println(movieDetailWeb);
             return movieMapper.toMovieDetailWeb(movieDetailWeb);
-            */
-        return null;
     }
 
     @ResponseStatus(HttpStatus.CREATED)
