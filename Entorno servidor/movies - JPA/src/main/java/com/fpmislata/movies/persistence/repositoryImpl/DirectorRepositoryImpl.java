@@ -26,34 +26,24 @@ public class DirectorRepositoryImpl implements DirectorRepository {
     DirectorDAO directorDAO;
 
     @Override
-    public Optional<Director> find(int id){
-        final String SQL = "SELECT * FROM directors WHERE id = ? LIMIT 1";
-        try(Connection connection = DBUtil.open(true)){
-            DirectorEntity directorEntity = directorDAO.find(connection, id).get();
-            return Optional.ofNullable(DirectorMapper.mapper.toDirector(directorEntity));
-        }catch (SQLException e) {
-            throw new RuntimeException(e.getMessage());
-        }catch (ResourceNotFoundException e){
-            throw new RuntimeException("No existe el director con id: " + id);
-        }
+    public Optional<Director> findById(int id){
+
+        DirectorEntity directorEntity = directorDAO.findById(id).get();
+        return Optional.ofNullable(DirectorMapper.mapper.toDirector(directorEntity));
     }
 
     @Override
-    public Optional<Director> findByMovieId(int movieId){
-        final String SQL = "select d.* from directors d, movies m where (m.director_id=d.id) and m.id= ?";
-        try (Connection connection = DBUtil.open(true)) {
-            DirectorEntity directorEntity = directorDAO.findByMovieId(connection, movieId).get();
-            return Optional.ofNullable(DirectorMapper.mapper.toDirector(directorEntity));
-        }catch (SQLException e){
-            throw new RuntimeException(e.getMessage());
-        }
+    public Optional<Director> findByMovies_Id(int movieId){
+        DirectorEntity directorEntity = directorDAO.findByMovies_Id(movieId).get();
+        return Optional.ofNullable(DirectorMapper.mapper.toDirector(directorEntity));
     }
 
     @Override
     public int insert(Director director){
         final String SQL = "INSERT INTO directors (name, birthYear, deathYear) VALUES (?, ?, ?)";
         try(Connection connection = DBUtil.open(true)){
-            return directorDAO.insert(connection, DirectorMapper.mapper.toDirectorEntity(director));
+            //return directorDAO.insert(connection, DirectorMapper.mapper.toDirectorEntity(director));
+            return 0;
         }catch (SQLException e){
             throw new RuntimeException(e.getMessage());
         }
@@ -63,7 +53,7 @@ public class DirectorRepositoryImpl implements DirectorRepository {
     public void update(Director director){
         final String SQL = "UPDATE directors SET name = ?, birthYear = ?, deathYear = ? WHERE id = ?";
         try(Connection connection = DBUtil.open(true)){
-            directorDAO.update(connection, DirectorMapper.mapper.toDirectorEntity(director));
+            //directorDAO.update(connection, DirectorMapper.mapper.toDirectorEntity(director));
         }catch (SQLException e){
             throw new RuntimeException(e.getMessage());
         }
@@ -73,7 +63,7 @@ public class DirectorRepositoryImpl implements DirectorRepository {
     public void delete(int id){
         final String SQL = "DELETE FROM directors where id = ?";
         try(Connection connection = DBUtil.open(true)){
-            directorDAO.delete(connection, id);
+            //directorDAO.delete(connection, id);
         }catch (SQLException e){
             throw new RuntimeException(e.getMessage());
         }

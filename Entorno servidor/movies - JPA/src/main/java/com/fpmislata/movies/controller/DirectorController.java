@@ -41,7 +41,7 @@ public class DirectorController {
     @GetMapping("/{id}")
     public DirectorDetailWeb find(@PathVariable("id") int id){
         //return directorService.find(id);
-        Director director = directorService.find(id).get();
+        Director director = directorService.findById(id).get();
         return directorMapper.toDirectorDetailWeb(director);
     }
 

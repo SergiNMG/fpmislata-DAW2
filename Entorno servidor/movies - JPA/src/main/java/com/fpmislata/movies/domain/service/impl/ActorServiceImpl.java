@@ -14,30 +14,33 @@ public class ActorServiceImpl implements ActorService {
 
     @Autowired
     ActorRepository actorRepository;
+
+    public Optional<Actor> findById(int id){
+        return actorRepository.findById(id);
+    }
+
+    public Optional<Actor> findByCharacters_Id(int characterId){
+        return actorRepository.findByCharacters_Id(characterId);
+    }
+
+    public List<Actor> findByMovies_Id(int movieId){
+        return actorRepository.findByMovies_Id(movieId);
+    }
+
     public int create (Actor actor){
         return actorRepository.insert(actor);
     }
 
-    public Optional<Actor> find (int id){
-        return actorRepository.find(id);
-    }
-
-    public Optional<Actor> findByCharacterId(int characterId){
-        return actorRepository.findByCharacterId(characterId);
-    }
-
     public void update(int id, Actor actor){
-        Actor actorUpdated = actorRepository.find(actor.getId()).get();
+        Actor actorUpdated = actorRepository.findById(actor.getId()).get();
         actorRepository.update(actor);
     }
 
     public Optional<Actor> delete(int id){
-        Optional<Actor> deletedActor = actorRepository.find(id);
+        Optional<Actor> deletedActor = actorRepository.findById(id);
         actorRepository.delete(id);
         return deletedActor;
     }
 
-    public List<Actor> findByMovieId(int movieId){
-        return actorRepository.findByMovieId(movieId);
-    }
+
 }

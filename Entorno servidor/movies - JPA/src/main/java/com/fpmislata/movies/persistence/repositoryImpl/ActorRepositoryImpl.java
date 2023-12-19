@@ -23,47 +23,30 @@ public class ActorRepositoryImpl implements ActorRepository {
     ActorMapper actorMapper;
 
     @Override
-    public Optional<Actor> find(int id){
-        //final String SQL = "SELECT * FROM ACTORS WHERE id = ? LIMIT 1";
-        try (Connection connection = DBUtil.open(true)){
-            ActorEntity actorEntity = actorDAO.find(connection, id).get();
-            return Optional.of(ActorMapper.mapper.toActor(actorEntity));
-        }catch (SQLException e) {
-            throw new RuntimeException(e.getMessage());
-        }
+    public Optional<Actor> findById(int id){
+        ActorEntity actorEntity = actorDAO.findById(id).get();
+        return Optional.ofNullable(ActorMapper.mapper.toActor(actorEntity));
     }
 
     @Override
-    public List<Actor> findByMovieId(int movieId){
-        //final String SQL = "SELECT a.* from actors a, actors_movies am, movies m WHERE (am.movie_id=m.id) AND (am.actor_id=a.id) AND m.id=?";
+    public List<Actor> findByMovies_Id(int movieId){
 
-        try(Connection connection = DBUtil.open(true)){
-            //List<ActorEntity> actorEntitiesList = actorDAO.findByMovieId(connection, movieId);
-            List<Actor> actorList = actorDAO.findByMovieId(connection, movieId)
-                    .stream()
-                    .map(actorMapper::toActor)
-                    .collect(Collectors.toList());
-            return actorList;
-        }catch (SQLException e){
-            throw new RuntimeException(e.getMessage());
-        }
+        List<ActorEntity> actorEntityList = actorDAO.findByMovies_Id(movieId).stream().toList();
+        return ActorMapper.mapper.toActorList(actorEntityList);
+
     }
 
     @Override
-    public Optional<Actor> findByCharacterId(int characterId){
-        try(Connection connection = DBUtil.open(true)){
-            ActorEntity actorEntity = actorDAO.findByCharacterId(connection, characterId).get();
-            return Optional.of(ActorMapper.mapper.toActor(actorEntity));
-        }catch (SQLException e){
-            throw new RuntimeException(e.getMessage());
-        }
+    public Optional<Actor> findByCharacters_Id(int characterId){
+        ActorEntity actorEntity = actorDAO.findByCharacters_Id(characterId).get();
+        return Optional.ofNullable(ActorMapper.mapper.toActor(actorEntity));
     }
 
     @Override
     public int insert(Actor actor){
-        //final String SQL = "INSERT INTO ACTORS (name, birthYear, deathYear) VALUES (?, ?, ?)";
         try(Connection connection = DBUtil.open(true)) {
-            return actorDAO.insert(connection, ActorMapper.mapper.toActorEntity(actor));
+            //return actorDAO.insert(connection, ActorMapper.mapper.toActorEntity(actor));
+            return 0;
         } catch (SQLException e){
             throw new RuntimeException(e.getMessage());
         }
@@ -71,9 +54,8 @@ public class ActorRepositoryImpl implements ActorRepository {
 
     @Override
     public void update (Actor actor){
-        //final String SQL = "UPDATE actors SET name = ?, birthYear = ?, deathYear = ? WHERE id = ?";
         try (Connection connection = DBUtil.open(true)){
-            actorDAO.update(connection, ActorMapper.mapper.toActorEntity(actor));
+            //actorDAO.update(connection, ActorMapper.mapper.toActorEntity(actor));
         }catch (SQLException e){
             throw new RuntimeException(e.getMessage());
         }
@@ -83,7 +65,7 @@ public class ActorRepositoryImpl implements ActorRepository {
     public void delete (int id){
         //final String SQL = "DELETE FROM actors WHERE id = ?";
         try (Connection connection = DBUtil.open(true)){
-            actorDAO.delete(connection, id);
+            //actorDAO.delete(connection, id);
         }catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         }

@@ -45,7 +45,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public int create(Movie movie, int directorId){
-        Director director = directorRepository.find(directorId).get();
+        Director director = directorRepository.findById(directorId).get();
         movie.setDirector(director);
         return movieRepository.create(movie);
     }
@@ -54,7 +54,7 @@ public class MovieServiceImpl implements MovieService {
     public int createCharacter(CharacterMovie characterMovie, int movieId, int actorId){
         CharacterMovie characterMovieCreated = new CharacterMovie();
         //System.out.println(actorId);
-        characterMovieCreated.setActor(actorRepository.find(actorId).get());
+        characterMovieCreated.setActor(actorRepository.findById(actorId).get());
         characterMovieCreated.setCharacters(characterMovie.getCharacters());
         //Movie movie = movieRepository.findById(movieId).get();
 

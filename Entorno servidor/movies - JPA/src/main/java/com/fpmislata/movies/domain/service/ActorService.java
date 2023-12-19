@@ -6,15 +6,12 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ActorService {
+
+    Optional<Actor> findById(int id);
+    Optional<Actor> findByCharacters_Id(int characterId);
+    List<Actor> findByMovies_Id(int movieId);
     int create (Actor actor);
-
-    Optional<Actor> find (int id);
-
     void update(int id, Actor actor);
-
     Optional<Actor> delete(int id);
 
-    Optional<Actor> findByCharacterId(int characterId);
-
-    List<Actor> findByMovieId(int movieId);
 }

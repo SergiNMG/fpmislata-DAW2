@@ -24,9 +24,17 @@ public class ActorController {
     @Autowired
     ActorMapper actorMapper;
 
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @GetMapping("/{id}")
+    public ActorDetailWeb find(@PathVariable("id") int id){
+        Actor actor = actorService.findById(id).get();
+        return actorMapper.toActorDetailWeb(actor);
+    }
+
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("")
     public ActorDetailWeb create(@RequestBody ActorCreateWeb actorCreateWeb){
+        /*
         int id = actorService.create(actorMapper.mapper.toActor(actorCreateWeb));
         return new ActorDetailWeb(
                 id,
@@ -34,13 +42,15 @@ public class ActorController {
                 actorCreateWeb.getBirthYear(),
                 actorCreateWeb.getDeathYear()
         );
+         */
+        return null;
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/{id}")
     public void update (@PathVariable("id") int id, @RequestBody ActorUpdateWeb actorUpdateWeb){
-        actorUpdateWeb.setId(id);
-        actorService.update(id, actorMapper.mapper.toActor(actorUpdateWeb));
+       /* actorUpdateWeb.setId(id);
+        actorService.update(id, actorMapper.mapper.toActor(actorUpdateWeb)); */
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -48,16 +58,11 @@ public class ActorController {
     public ActorDetailWeb delete (@PathVariable("id") int id){
         ActorDetailWeb actorDeletedWeb = new ActorDetailWeb();
         actorDeletedWeb.setId(id);
-        actorDeletedWeb.setName(actorService.find(id).get().getName());
+        actorDeletedWeb.setName(actorService.findById(id).get().getName());
         actorService.delete(id);
 
         return actorDeletedWeb;
     }
 
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    @GetMapping("/{id}")
-    public ActorDetailWeb find(@PathVariable("id") int id){
-        Actor actor = actorService.find(id).get();
-        return actorMapper.toActorDetailWeb(actor);
-    }
+
 }

@@ -7,16 +7,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ActorRepository {
+
+    Optional<Actor> findById(int id);
+    Optional<Actor> findByCharacters_Id(int characterId);
+    List<Actor> findByMovies_Id(int movieId);
     public int insert (Actor actor);
-
-    public Optional<Actor> find(int id);
-
-    Optional<Actor> findByCharacterId(int characterId);
-
     void update (Actor actor);
 
     void delete (int id);
-
-    List<Actor> findByMovieId(int movieId);
 
 }

@@ -59,12 +59,7 @@ public class MovieReposirotyImpl implements MovieRepository {
     public Optional<Movie> findById(int id){
 
         MovieEntity movieEntity = movieDAO.findById(id).get();
-        if(movieEntity == null){
-            return Optional.empty();
-        }
-        else {
-            return Optional.ofNullable(MovieMapper.mapper.toMovieWithDirectorAndCharacters(movieEntity));
-        }
+        return Optional.ofNullable(MovieMapper.mapper.toMovieWithDirectorAndCharacters(movieEntity));
     }
 
     @Override

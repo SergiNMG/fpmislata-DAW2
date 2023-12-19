@@ -15,6 +15,15 @@ public class DirectorServiceImpl implements DirectorService {
     DirectorRepository directorRepository;
 
     @Override
+    public Optional<Director> findById(int id){
+        return directorRepository.findById(id);
+    }
+    @Override
+    public Optional<Director> findByMovies_Id(int movieId){
+        return directorRepository.findByMovies_Id(movieId);
+    }
+
+    @Override
     public int create(Director director){
         return directorRepository.insert(director);
     }
@@ -25,19 +34,11 @@ public class DirectorServiceImpl implements DirectorService {
     }
 
     @Override
-    public Optional<Director> find(int id){
-        return directorRepository.find(id);
-    }
-
-    @Override
     public Optional<Director> delete(int id){
-        Optional<Director> deletedDirector = directorRepository.find(id);
+        Optional<Director> deletedDirector = directorRepository.findById(id);
         directorRepository.delete(id);
         return deletedDirector;
     }
 
-    @Override
-    public Optional<Director> findByMovieId(int movieId){
-        return directorRepository.findByMovieId(movieId);
-    }
+
 }

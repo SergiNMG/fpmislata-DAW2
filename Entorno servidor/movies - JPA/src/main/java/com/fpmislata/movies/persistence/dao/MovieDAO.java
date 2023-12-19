@@ -22,5 +22,4 @@ import java.util.Optional;
 
 @Component
 public interface MovieDAO extends JpaRepository<MovieEntity, Integer> {
-    List<MovieEntity> findByTitle(String title);
 }
