@@ -1,0 +1,30 @@
+$font-sizes: (
+    "1": 40px,
+    "2": 50px,
+    "3": 55px,
+    "4":70px
+);
+
+$breakpoints: (
+    "movil": 567px,
+    "tablet": 768px,
+    "desktop": 992px
+);
+
+@each $size in map-keys($font-sizes){
+    $value: map-get($font-sizes , $size);
+
+    .g--font-size-#{$size}{
+        font-size: $value;
+    }
+}
+
+@each $breakpoint, $width in $breakpoints{
+    @media (min-width: $width){
+        @each $size, $value in $font-sizes{
+            .g--font-size-#{$size}\@#{$breakpoint} {
+                font-size: $value;
+            }
+        }
+    }
+}

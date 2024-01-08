@@ -1112,6 +1112,64 @@ html {
   border-color: var(--color-yellow-8);
 }
 
+.g--font-size-1 {
+  font-size: 40px;
+}
+
+.g--font-size-2 {
+  font-size: 50px;
+}
+
+.g--font-size-3 {
+  font-size: 55px;
+}
+
+.g--font-size-4 {
+  font-size: 70px;
+}
+
+@media (min-width: 567px) {
+  .g--font-size-1\@movil {
+    font-size: 40px;
+  }
+  .g--font-size-2\@movil {
+    font-size: 50px;
+  }
+  .g--font-size-3\@movil {
+    font-size: 55px;
+  }
+  .g--font-size-4\@movil {
+    font-size: 70px;
+  }
+}
+@media (min-width: 768px) {
+  .g--font-size-1\@tablet {
+    font-size: 40px;
+  }
+  .g--font-size-2\@tablet {
+    font-size: 50px;
+  }
+  .g--font-size-3\@tablet {
+    font-size: 55px;
+  }
+  .g--font-size-4\@tablet {
+    font-size: 70px;
+  }
+}
+@media (min-width: 992px) {
+  .g--font-size-1\@desktop {
+    font-size: 40px;
+  }
+  .g--font-size-2\@desktop {
+    font-size: 50px;
+  }
+  .g--font-size-3\@desktop {
+    font-size: 55px;
+  }
+  .g--font-size-4\@desktop {
+    font-size: 70px;
+  }
+}
 .g--opacity-0 {
   opacity: 0;
 }
