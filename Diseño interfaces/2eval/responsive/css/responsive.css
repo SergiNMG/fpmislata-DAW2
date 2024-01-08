@@ -1,13 +1,13 @@
-html{
+html {
     font-family: 'Courier New', Courier, monospace;
     font-size: 10px;
 }
 
-h1{
+h1 {
     font-size: 10vw;
 }
 
-.l-background{
+.l-background {
     background-image: url(../img/rickYmorty.jpg);
     width: 50vw;
     height: 99vh;
@@ -15,14 +15,20 @@ h1{
     overflow: hidden;
 }
 
-.c-title-max{
+.c-title-max {
     font-size: max(60px, 10vw);
 }
 
-.c-title-min{
+.c-title-min {
     font-size: min(80px, 10vw);
 }
 
-.c-title-minmax{
+.c-title-minmax {
     font-size: clamp(60px, 10vw, 80px);
+}
+
+.c-card {
+    background-color: aqua;
+    width: clamp(201px, 67vw, 469px);
+    height: 100px;
 }
