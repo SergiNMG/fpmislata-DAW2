@@ -5,25 +5,55 @@ $font-sizes: (
     "4":70px
 );
 
+$colors: (
+    "red": red,
+    "green": green,
+    "blue": blue,
+    "orange": orange
+);
+
 $breakpoints: (
+    "": 0px,
     "movil": 567px,
     "tablet": 768px,
     "desktop": 992px
 );
 
-@each $size in map-keys($font-sizes){
-    $value: map-get($font-sizes , $size);
+//@each $size in map-keys($font-sizes) {
+//$value: map-get($font-sizes , $size);
 
-    .g--font-size-#{$size}{
-        font-size: $value;
+//    .g--font-size-#{$size} {
+//        font-size: $value;
+//    }
+//}
+
+@each $breakpoint, $width in $breakpoints {
+    @media (min-width: $width) {
+        @each $size, $value in $font-sizes {
+            $separator: \@;
+
+            @if $breakpoint =="" {
+                $separator: "";
+            }
+
+            .g--font-size-#{$size}#{$separator}#{$breakpoint} {
+                font-size: $value;
+            }
+        }
     }
 }
 
-@each $breakpoint, $width in $breakpoints{
-    @media (min-width: $width){
-        @each $size, $value in $font-sizes{
-            .g--font-size-#{$size}\@#{$breakpoint} {
-                font-size: $value;
+@each $breakpoint, $width in $breakpoints {
+    @media (min-width: $width) {
+        @each $color, $value in $colors {
+            $separator: \@;
+
+            @if $breakpoint =="" {
+                $separator: "";
+            }
+
+            .g--color-#{$color}#{$separator}#{$breakpoint} {
+                color: $value;
             }
         }
     }
